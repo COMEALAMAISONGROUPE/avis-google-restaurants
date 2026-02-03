@@ -60,6 +60,20 @@
             align-items: center;
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .group-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border);
+        }
+
         .logo {
             font-family: 'Crimson Text', serif;
             font-size: 1.8rem;
@@ -293,10 +307,25 @@
             padding: 35px;
             background: var(--white);
             transition: background 0.3s ease;
+            position: relative;
         }
 
         .restaurant-card:hover .restaurant-info {
             background: var(--gray-light);
+        }
+
+        .restaurant-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border);
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .restaurant-card:hover .restaurant-logo {
+            transform: scale(1.1);
         }
 
         .restaurant-name {
@@ -409,6 +438,11 @@
                 padding: 0 20px;
             }
 
+            .header-left {
+                flex-direction: column;
+                gap: 10px;
+            }
+
             nav ul {
                 gap: 25px;
                 flex-wrap: wrap;
@@ -419,7 +453,6 @@
                 margin-top: 120px;
             }
 
-            /* FIX MOBILE: Retirer background-attachment fixed */
             .hero::before {
                 background-attachment: scroll;
                 background-position: center center;
@@ -481,7 +514,10 @@
 <body>
     <header id="header">
         <div class="header-content">
-            <a href="#" class="logo">Come à la maison & co</a>
+            <div class="header-left">
+                <img src="come-group-logo.jpg" alt="Come à la maison Group" class="group-logo">
+                <a href="#" class="logo">Come à la maison & co</a>
+            </div>
             <nav>
                 <ul>
                     <li><a href="#restaurants">Restaurants</a></li>
@@ -508,6 +544,7 @@
             <div class="restaurant-card">
                 <img src="come-a-la-maison.jpg" alt="Come à la maison" class="restaurant-image">
                 <div class="restaurant-info">
+                    <img src="come-logo.jpg" alt="Come à la maison" class="restaurant-logo">
                     <h3 class="restaurant-name">Come à la maison</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">L'authenticité italienne au cœur de la ville. Saveurs méditerranéennes et accueil chaleureux vous attendent.</p>
@@ -518,6 +555,7 @@
             <div class="restaurant-card">
                 <img src="brasserie-des-nations.jpg" alt="Brasserie des Nations" class="restaurant-image">
                 <div class="restaurant-info">
+                    <img src="brasserie-nations-logo.jpg" alt="Brasserie des Nations" class="restaurant-logo">
                     <h3 class="restaurant-name">Brasserie des Nations</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">Une atmosphère conviviale, une cuisine généreuse et un service impeccable. Découvrez l'excellence.</p>
@@ -528,6 +566,7 @@
             <div class="restaurant-card">
                 <img src="Ceruzzi.jpg" alt="Ceruzzi" class="restaurant-image">
                 <div class="restaurant-info">
+                    <img src="ceruzzi-logo.jpg" alt="Ceruzzi" class="restaurant-logo">
                     <h3 class="restaurant-name">Ceruzzi</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">Délices italiens revisités avec passion. Un voyage culinaire authentique à chaque bouchée.</p>
@@ -538,6 +577,7 @@
             <div class="restaurant-card">
                 <img src="mercato.jpg" alt="Il Mercato" class="restaurant-image">
                 <div class="restaurant-info">
+                    <img src="mercato-logo.jpg" alt="Il Mercato" class="restaurant-logo">
                     <h3 class="restaurant-name">Il Mercato</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">Marché urbain à l'italienne. Fraîcheur, qualité et authenticité pour une expérience inoubliable.</p>
@@ -548,6 +588,7 @@
             <div class="restaurant-card">
                 <img src="Rotisserie.jpg" alt="La Rôtisserie Ardennaise" class="restaurant-image">
                 <div class="restaurant-info">
+                    <img src="rotisserie-logo.jpg" alt="La Rôtisserie Ardennaise" class="restaurant-logo">
                     <h3 class="restaurant-name">La Rôtisserie Ardennaise</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">Traditions des Ardennes, excellence gastronomique. Viandes sélectionnées et préparées avec soin.</p>
