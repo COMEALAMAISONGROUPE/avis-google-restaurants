@@ -125,7 +125,7 @@
             background-image: url('Severin.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-repeat: no-repeat;
             z-index: 0;
             filter: brightness(0.5);
         }
@@ -417,6 +417,12 @@
 
             .hero {
                 margin-top: 120px;
+            }
+
+            /* FIX MOBILE: Retirer background-attachment fixed */
+            .hero::before {
+                background-attachment: scroll;
+                background-position: center center;
             }
 
             .hero-content {
