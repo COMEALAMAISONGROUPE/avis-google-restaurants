@@ -201,7 +201,7 @@
             color: var(--black);
         }
 
-        /* HEADER */
+        /* HEADER - OPTIMISÉ POUR LOGO NOIR */
         header {
             position: fixed;
             top: 0;
@@ -209,12 +209,12 @@
             z-index: 1000;
             background: var(--white);
             border-bottom: 1px solid var(--border);
-            padding: 15px 0;
+            padding: 10px 0;
             transition: all 0.3s ease;
         }
 
         header.scrolled {
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .header-content {
@@ -227,16 +227,18 @@
         }
 
         .logo {
-            height: 50px;
+            height: 70px;
             display: flex;
             align-items: center;
             text-decoration: none;
+            padding: 5px 0;
         }
 
         .logo img {
             max-height: 100%;
             width: auto;
             object-fit: contain;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.05));
         }
 
         nav ul {
@@ -274,9 +276,9 @@
             width: 100%;
         }
 
-        /* HERO - OPTIMISÉ MOBILE */
+        /* HERO */
         .hero {
-            margin-top: 70px;
+            margin-top: 80px;
             min-height: 65vh;
             display: flex;
             align-items: center;
@@ -318,17 +320,6 @@
             padding: 0 20px;
             position: relative;
             z-index: 2;
-        }
-
-        .hero h1 {
-            font-family: 'Crimson Text', serif;
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 600;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            letter-spacing: -0.5px;
-            color: var(--white);
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .hero-tagline {
@@ -415,7 +406,7 @@
             max-width: 800px;
         }
 
-        /* RESTAURANTS GRID - OPTIMISÉ MOBILE */
+        /* RESTAURANTS GRID */
         .restaurants-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -598,7 +589,7 @@
             }
 
             .logo {
-                height: 45px;
+                height: 55px;
             }
 
             nav ul {
@@ -612,7 +603,7 @@
             }
 
             .hero {
-                margin-top: 100px;
+                margin-top: 120px;
                 min-height: 50vh;
                 padding: 30px 15px;
             }
@@ -624,16 +615,6 @@
 
             .hero-content {
                 padding: 0 15px;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-                margin-bottom: 15px;
-            }
-
-            .hero-tagline {
-                font-size: 0.85rem;
-                margin-bottom: 20px;
             }
 
             .hero p {
@@ -720,7 +701,7 @@
     <header id="header">
         <div class="header-content">
             <a href="#" class="logo">
-                <img src="logo-text-black.png" alt="Come à la maison Group">
+                <img src="LOGO-WEB-scaled.jpg" alt="Come à la maison Group">
             </a>
             <nav>
                 <ul>
@@ -804,7 +785,7 @@
                     <h3>Nos Restaurants</h3>
                     <ul>
                         <li><a href="https://www.comealamaison.lu/" target="_blank">Come à la maison</a></li>
-                        <li><a href="https://www.google.com/search?gs_ssp=eJzj4tZP1zcsSa8oTs_OMmC0UjWoMDG3NDWxSDFJSko0NEk2tLQyqDBMTTY1MjRIMko1SUtLsjTyEk0qSiwuTi3KTFVISS1WyEssyczPKwYAS70Xeg&q=brasserie+des+nations&rlz=1C1GCEA_enLU1199LU1199&oq=brfasserie+des+&gs_lcrp=EgZjaHJvbWUqDwgCEC4YDRivARjHARiABDIGCAAQRRg5Mg8IARAuGA0YrwEYxwEYgAQyDwgCEC4YDRivARjHARiABDIPCAMQLhgNGK8BGMcBGIAEMg8IBBAuGA0YrwEYxwEYgAQyDwgFEC4YDRivARjHARiABDIJCAYQABgNGIAEMg8IBxAuGA0YrwEYxwEYgAQyCQgIEAAYDRiABNIBCDU5MjJqMGo0qAIAsAIA&sourceid=chrome&ie=UTF-8" target="_blank">Brasserie des Nations</a></li>
+                        <li><a href="https://www.google.com/search?q=brasserie+des+nations" target="_blank">Brasserie des Nations</a></li>
                         <li><a href="https://ceruzzi.lu/" target="_blank">Ceruzzi</a></li>
                         <li><a href="https://ilmercato.lu/" target="_blank">Il Mercato</a></li>
                         <li><a href="https://www.rotisserie-ardennaise.com/" target="_blank">La Rôtisserie Ardennaise</a></li>
@@ -825,14 +806,12 @@
         const skipBtn = document.getElementById('skipPopup');
         const popupCta = document.getElementById('popupCta');
 
-        // Show popup on page load with delay
         window.addEventListener('load', function() {
             setTimeout(function() {
                 popup.classList.add('active');
             }, 800);
         });
 
-        // Close popup
         function closePopup() {
             popup.classList.remove('active');
         }
@@ -847,14 +826,12 @@
             closePopup();
         });
 
-        // Close on overlay click
         popup.addEventListener('click', function(e) {
             if (e.target === popup) {
                 closePopup();
             }
         });
 
-        // Close on ESC key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && popup.classList.contains('active')) {
                 closePopup();
