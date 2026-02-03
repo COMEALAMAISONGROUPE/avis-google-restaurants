@@ -209,7 +209,7 @@
             z-index: 1000;
             background: var(--white);
             border-bottom: 1px solid var(--border);
-            padding: 20px 0;
+            padding: 15px 0;
             transition: all 0.3s ease;
         }
 
@@ -227,12 +227,16 @@
         }
 
         .logo {
-            font-family: 'Crimson Text', serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            height: 50px;
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            color: var(--black);
+        }
+
+        .logo img {
+            max-height: 100%;
+            width: auto;
+            object-fit: contain;
         }
 
         nav ul {
@@ -270,15 +274,16 @@
             width: 100%;
         }
 
-        /* HERO */
+        /* HERO - OPTIMISÉ MOBILE */
         .hero {
             margin-top: 70px;
-            min-height: 100vh;
+            min-height: 65vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            padding: 40px 20px;
         }
 
         .hero::before {
@@ -310,39 +315,39 @@
         .hero-content {
             max-width: 900px;
             text-align: center;
-            padding: 0 40px;
+            padding: 0 20px;
             position: relative;
             z-index: 2;
         }
 
         .hero h1 {
             font-family: 'Crimson Text', serif;
-            font-size: clamp(3.5rem, 10vw, 6rem);
+            font-size: clamp(2rem, 6vw, 3.5rem);
             font-weight: 600;
-            line-height: 1.1;
-            margin-bottom: 30px;
-            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
             color: var(--white);
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .hero-tagline {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 300;
             color: rgba(255,255,255,0.9);
-            margin-bottom: 40px;
+            margin-bottom: 25px;
             letter-spacing: 2px;
             text-transform: uppercase;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.05rem;
             color: rgba(255,255,255,0.95);
-            margin-bottom: 50px;
-            line-height: 1.8;
+            margin-bottom: 35px;
+            line-height: 1.7;
             font-weight: 300;
-            max-width: 700px;
+            max-width: 650px;
             margin-left: auto;
             margin-right: auto;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
@@ -386,7 +391,7 @@
         section {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 100px 40px;
+            padding: 80px 40px;
             border-top: 1px solid var(--border);
         }
 
@@ -396,26 +401,26 @@
 
         section h2 {
             font-family: 'Crimson Text', serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 600;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             line-height: 1.2;
         }
 
         .section-intro {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--gray-medium);
             line-height: 1.8;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             max-width: 800px;
         }
 
-        /* RESTAURANTS GRID */
+        /* RESTAURANTS GRID - OPTIMISÉ MOBILE */
         .restaurants-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 50px;
-            margin-top: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
         }
 
         .restaurant-card {
@@ -445,7 +450,7 @@
 
         .restaurant-image {
             width: 100%;
-            height: 400px;
+            height: 300px;
             object-fit: cover;
             display: block;
             transition: transform 0.5s ease;
@@ -456,7 +461,7 @@
         }
 
         .restaurant-info {
-            padding: 35px;
+            padding: 30px;
             background: var(--white);
             transition: background 0.3s ease;
         }
@@ -467,23 +472,23 @@
 
         .restaurant-name {
             font-family: 'Crimson Text', serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             letter-spacing: -0.3px;
         }
 
         .restaurant-location {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--gray-medium);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             line-height: 1.6;
         }
 
         .restaurant-description {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--gray-medium);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.6;
         }
 
@@ -570,11 +575,11 @@
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .popup-content {
-                padding: 50px 30px;
+                padding: 40px 25px;
             }
 
             .popup-title {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
 
             .popup-text {
@@ -582,24 +587,34 @@
             }
 
             .popup-highlight {
-                font-size: 1rem;
+                font-size: 0.95rem;
                 padding: 12px 20px;
             }
 
             .header-content {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px;
                 padding: 0 20px;
             }
 
+            .logo {
+                height: 45px;
+            }
+
             nav ul {
-                gap: 25px;
+                gap: 20px;
                 flex-wrap: wrap;
                 justify-content: center;
             }
 
+            nav a {
+                font-size: 0.85rem;
+            }
+
             .hero {
-                margin-top: 120px;
+                margin-top: 100px;
+                min-height: 50vh;
+                padding: 30px 15px;
             }
 
             .hero::before {
@@ -608,19 +623,22 @@
             }
 
             .hero-content {
-                padding: 0 20px;
+                padding: 0 15px;
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 1.8rem;
+                margin-bottom: 15px;
             }
 
             .hero-tagline {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+                margin-bottom: 20px;
             }
 
             .hero p {
-                font-size: 1rem;
+                font-size: 0.95rem;
+                margin-bottom: 25px;
             }
 
             .cta-buttons {
@@ -630,14 +648,22 @@
 
             .cta-button {
                 width: fit-content;
+                padding: 12px 35px;
+                font-size: 0.85rem;
             }
 
             section {
-                padding: 70px 20px;
+                padding: 50px 20px;
             }
 
             section h2 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+
+            .section-intro {
+                font-size: 0.95rem;
+                margin-bottom: 40px;
             }
 
             .restaurants-grid {
@@ -646,11 +672,22 @@
             }
 
             .restaurant-image {
-                height: 300px;
+                height: 250px;
+            }
+
+            .restaurant-info {
+                padding: 25px;
+            }
+
+            .restaurant-name {
+                font-size: 1.3rem;
             }
 
             .footer-top {
                 grid-template-columns: 1fr;
+                gap: 40px;
+                margin-bottom: 40px;
+                padding-bottom: 40px;
             }
 
             .footer-bottom {
@@ -682,7 +719,9 @@
 
     <header id="header">
         <div class="header-content">
-            <a href="#" class="logo">Come à la maison & co</a>
+            <a href="#" class="logo">
+                <img src="logo-text-black.png" alt="Come à la maison Group">
+            </a>
             <nav>
                 <ul>
                     <li><a href="#restaurants">Restaurants</a></li>
@@ -694,7 +733,7 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <p class="hero-tagline">L'excellence à chaque table</p>
-            <p>Votre avis n'est pas qu'un commentaire — c'est une invitation à nous <span class="hero-highlight">surpasser chaque jour</span>. Découvrez nos restaurants, savourez l'authenticité, et devenez partie de notre histoire. <span class="hero-highlight"><br>Vos mots façonnent notre avenir.<br></span></p>
+            <p>Votre avis n'est pas qu'un commentaire — c'est une invitation à nous surpasser chaque jour. Découvrez nos restaurants, savourez l'authenticité, et devenez l'empreinte qui marque notre histoire. <span class="hero-highlight"><br>Vos mots façonnent notre avenir.<br></span></p>
             <div class="cta-buttons">
                 <a href="#restaurants" class="cta-button">Voir nos restaurants</a>
             </div>
