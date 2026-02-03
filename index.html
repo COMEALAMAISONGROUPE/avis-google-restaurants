@@ -35,6 +35,172 @@
             font-size: 16px;
         }
 
+        /* POPUP OVERLAY */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* POPUP CONTAINER */
+        .popup-container {
+            background: var(--white);
+            max-width: 600px;
+            width: 100%;
+            border-radius: 0;
+            position: relative;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .popup-overlay.active .popup-container {
+            transform: translateY(0) scale(1);
+        }
+
+        /* CLOSE BUTTON */
+        .popup-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+
+        .popup-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .popup-close::before,
+        .popup-close::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 2px;
+            background: var(--black);
+            transition: background 0.3s ease;
+        }
+
+        .popup-close::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .popup-close::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        .popup-close:hover::before,
+        .popup-close:hover::after {
+            background: var(--gray-medium);
+        }
+
+        /* POPUP CONTENT */
+        .popup-content {
+            padding: 60px 50px;
+            text-align: center;
+        }
+
+        .popup-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 30px;
+            background: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .popup-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--black);
+            letter-spacing: -0.5px;
+        }
+
+        .popup-highlight {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            padding: 15px 25px;
+            margin: 25px 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--black);
+        }
+
+        .popup-text {
+            font-size: 1.05rem;
+            color: var(--gray-dark);
+            line-height: 1.7;
+            margin-bottom: 35px;
+            font-weight: 300;
+        }
+
+        .popup-cta {
+            display: inline-block;
+            padding: 16px 45px;
+            background: var(--black);
+            color: var(--white);
+            border: 2px solid var(--black);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .popup-cta:hover {
+            background: transparent;
+            color: var(--black);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-skip {
+            display: block;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--gray-medium);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .popup-skip:hover {
+            color: var(--black);
+        }
+
         /* HEADER */
         header {
             position: fixed;
@@ -403,6 +569,23 @@
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
+            .popup-content {
+                padding: 50px 30px;
+            }
+
+            .popup-title {
+                font-size: 1.8rem;
+            }
+
+            .popup-text {
+                font-size: 0.95rem;
+            }
+
+            .popup-highlight {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+
             .header-content {
                 flex-direction: column;
                 gap: 15px;
@@ -419,7 +602,6 @@
                 margin-top: 120px;
             }
 
-            /* FIX MOBILE: Retirer background-attachment fixed */
             .hero::before {
                 background-attachment: scroll;
                 background-position: center center;
@@ -479,6 +661,25 @@
     </style>
 </head>
 <body>
+    <!-- POPUP -->
+    <div class="popup-overlay" id="reviewPopup">
+        <div class="popup-container">
+            <button class="popup-close" id="closePopup"></button>
+            <div class="popup-content">
+                <div class="popup-icon">✨</div>
+                <h2 class="popup-title">Votre voix compte</h2>
+                <div class="popup-highlight">
+                    🎁 Gagnez un brunch pour deux personnes
+                </div>
+                <p class="popup-text">
+                    Partagez votre expérience et inspirez-nous à nous dépasser chaque jour. Chaque avis est une opportunité de vous offrir l'excellence que vous méritez.
+                </p>
+                <a href="#restaurants" class="popup-cta" id="popupCta">Partager mon expérience</a>
+                <a href="#" class="popup-skip" id="skipPopup">Plus tard</a>
+            </div>
+        </div>
+    </div>
+
     <header id="header">
         <div class="header-content">
             <a href="#" class="logo">Come à la maison & co</a>
@@ -579,6 +780,48 @@
     </footer>
 
     <script>
+        // Popup functionality
+        const popup = document.getElementById('reviewPopup');
+        const closeBtn = document.getElementById('closePopup');
+        const skipBtn = document.getElementById('skipPopup');
+        const popupCta = document.getElementById('popupCta');
+
+        // Show popup on page load with delay
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                popup.classList.add('active');
+            }, 800);
+        });
+
+        // Close popup
+        function closePopup() {
+            popup.classList.remove('active');
+        }
+
+        closeBtn.addEventListener('click', closePopup);
+        skipBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            closePopup();
+        });
+
+        popupCta.addEventListener('click', function() {
+            closePopup();
+        });
+
+        // Close on overlay click
+        popup.addEventListener('click', function(e) {
+            if (e.target === popup) {
+                closePopup();
+            }
+        });
+
+        // Close on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && popup.classList.contains('active')) {
+                closePopup();
+            }
+        });
+
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
