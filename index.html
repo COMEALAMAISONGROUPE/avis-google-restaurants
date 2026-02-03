@@ -464,7 +464,7 @@
             background: var(--gray-light);
         }
 
-        /* LOGO CONTAINER - CARRÉ AVEC FOND UNIFORME */
+        /* LOGO CONTAINER - ROND PARFAIT SANS RIEN AUTOUR */
         .restaurant-logo-wrapper {
             display: flex;
             justify-content: center;
@@ -473,16 +473,16 @@
         }
 
         .restaurant-logo-container {
-            width: 110px;
-            height: 110px;
-            border-radius: 12px;
-            background: var(--gray-light);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
-            padding: 15px;
+            padding: 0;
             overflow: hidden;
         }
 
@@ -492,11 +492,10 @@
         }
 
         .restaurant-logo-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .restaurant-name {
@@ -711,8 +710,8 @@
             }
 
             .restaurant-logo-container {
-                width: 100px;
-                height: 100px;
+                width: 110px;
+                height: 110px;
             }
 
             .review-btn {
@@ -782,7 +781,7 @@
                 <div class="restaurant-info">
                     <div class="restaurant-logo-wrapper">
                         <div class="restaurant-logo-container">
-                            <img src="449203847_1242257060481280_2284347406235910194_n.jpg" alt="Come à la maison Logo">
+                            <img src="come-a-la-maison-groupe-come_Plan-de-travail-1.jpg" alt="Come à la maison Logo">
                         </div>
                     </div>
                     <h3 class="restaurant-name">Come à la maison</h3>
@@ -797,7 +796,7 @@
                 <div class="restaurant-info">
                     <div class="restaurant-logo-wrapper">
                         <div class="restaurant-logo-container">
-                            <img src="123747115_366375771279539_5404328722792594066_n.jpg" alt="Brasserie des Nations Logo">
+                            <img src="611644101_17843493915670666_4965556442638396968_n.jpg" alt="Brasserie des Nations Logo">
                         </div>
                     </div>
                     <h3 class="restaurant-name">Brasserie des Nations</h3>
@@ -812,7 +811,7 @@
                 <div class="restaurant-info">
                     <div class="restaurant-logo-wrapper">
                         <div class="restaurant-logo-container">
-                            <img src="ceruzzi-logo.jpg" alt="Ceruzzi Logo">
+                            <img src="449203847_1242257060481280_2284347406235910194_n.jpg" alt="Ceruzzi Logo">
                         </div>
                     </div>
                     <h3 class="restaurant-name">Ceruzzi</h3>
@@ -842,7 +841,7 @@
                 <div class="restaurant-info">
                     <div class="restaurant-logo-wrapper">
                         <div class="restaurant-logo-container">
-                            <img src="611644101_17843493915670666_4965556442638396968_n.jpg" alt="La Rôtisserie Ardennaise Logo">
+                            <img src="123747115_366375771279539_5404328722792594066_n.jpg" alt="La Rôtisserie Ardennaise Logo">
                         </div>
                     </div>
                     <h3 class="restaurant-name">La Rôtisserie Ardennaise</h3>
