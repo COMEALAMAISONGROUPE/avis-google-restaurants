@@ -201,15 +201,15 @@
             color: var(--black);
         }
 
-        /* HEADER - LOGO TRÈS GRAND */
+        /* HEADER - LOGO TRÈS GRAND SANS BORDURES */
         header {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
             background: var(--white);
-            border-bottom: 1px solid var(--border);
-            padding: 15px 0;
+            border-bottom: none;
+            padding: 0;
             transition: all 0.3s ease;
         }
 
@@ -218,27 +218,30 @@
         }
 
         .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
         }
 
         .logo {
-            height: 120px;
+            height: 160px;
             display: flex;
             align-items: center;
+            justify-content: center;
             text-decoration: none;
-            padding: 10px 0;
+            padding: 0;
+            width: 100%;
         }
 
         .logo img {
             max-height: 100%;
-            width: auto;
+            width: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.05));
+            padding: 20px;
         }
 
         nav ul {
@@ -278,7 +281,7 @@
 
         /* HERO */
         .hero {
-            margin-top: 150px;
+            margin-top: 180px;
             min-height: 65vh;
             display: flex;
             align-items: center;
@@ -589,7 +592,7 @@
             }
 
             .logo {
-                height: 90px;
+                height: 120px;
             }
 
             nav ul {
@@ -603,7 +606,7 @@
             }
 
             .hero {
-                margin-top: 130px;
+                margin-top: 160px;
                 min-height: 50vh;
                 padding: 30px 15px;
             }
@@ -701,7 +704,7 @@
     <header id="header">
         <div class="header-content">
             <a href="#" class="logo">
-                <img src="LOGO-WEB-scaled.jpg" alt="Come à la maison Group">
+                <img src="472282651_1387969249261231_7595495068333774581_n.jpg" alt="Come à la maison">
             </a>
         </div>
     </header>
