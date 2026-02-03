@@ -201,47 +201,47 @@
             color: var(--black);
         }
 
-        /* HEADER - OPTIMIZED */
+        /* HEADER - LOGO À GAUCHE */
         header {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: var(--white);
+            background: transparent;
             border-bottom: none;
             padding: 0;
             transition: all 0.3s ease;
         }
 
         header.scrolled {
+            background: var(--white);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .header-content {
-            max-width: 100%;
-            margin: 0;
-            padding: 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             width: 100%;
         }
 
         .logo {
-            height: 70px;
+            height: 140px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             text-decoration: none;
             padding: 0;
-            width: 100%;
         }
 
         .logo img {
             max-height: 100%;
             width: auto;
             object-fit: contain;
-            padding: 10px 20px;
+            padding: 5px 0;
         }
 
         nav ul {
@@ -281,7 +281,7 @@
 
         /* HERO */
         .hero {
-            margin-top: 90px;
+            margin-top: 160px;
             min-height: 65vh;
             display: flex;
             align-items: center;
@@ -464,7 +464,7 @@
             background: var(--gray-light);
         }
 
-        /* LOGO CONTAINER - PERFECTLY BALANCED */
+        /* LOGO CONTAINER */
         .restaurant-logo-wrapper {
             display: flex;
             justify-content: center;
@@ -628,13 +628,12 @@
             }
 
             .header-content {
-                flex-direction: column;
-                gap: 12px;
                 padding: 0 20px;
+                justify-content: center;
             }
 
             .logo {
-                height: 60px;
+                height: 110px;
             }
 
             nav ul {
@@ -648,7 +647,7 @@
             }
 
             .hero {
-                margin-top: 80px;
+                margin-top: 140px;
                 min-height: 50vh;
                 padding: 30px 15px;
             }
@@ -742,7 +741,7 @@
                 <div class="popup-icon">✨</div>
                 <h2 class="popup-title">Votre voix compte</h2>
                 <div class="popup-highlight">
-                    🎁 Gagnez un brunch pour deux personnes
+                    🎁 Tentez de gagner un brunch pour 2 personnes
                 </div>
                 <p class="popup-text">
                     Partagez votre expérience et inspirez-nous à nous dépasser chaque jour. Chaque avis est une opportunité de vous offrir l'excellence que vous méritez.
@@ -871,8 +870,7 @@
             <div class="footer-bottom">
                 <p>&copy; 2026 Come à la maison & co. Tous droits réservés.</p>
             </div>
-        </div>
-    </footer>
+        </footer>
 
     <script>
         // Popup functionality
