@@ -43,7 +43,7 @@
             z-index: 1000;
             background: var(--white);
             border-bottom: 1px solid var(--border);
-            padding: 20px 0;
+            padding: 15px 0;
             transition: all 0.3s ease;
         }
 
@@ -63,20 +63,21 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
 
         .group-logo {
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--border);
+            flex-shrink: 0;
         }
 
         .logo {
             font-family: 'Crimson Text', serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 600;
             letter-spacing: 0.5px;
             text-decoration: none;
@@ -120,7 +121,7 @@
 
         /* HERO */
         .hero {
-            margin-top: 70px;
+            margin-top: 80px;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -136,7 +137,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('Severin.jpg');
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f5f5f5" width="1200" height="800"/></svg>');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -314,13 +315,20 @@
             background: var(--gray-light);
         }
 
+        .restaurant-logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
         .restaurant-logo {
-            width: 70px;
-            height: 70px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--border);
-            margin-bottom: 15px;
+            flex-shrink: 0;
             transition: transform 0.3s ease;
         }
 
@@ -434,13 +442,14 @@
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
-                gap: 15px;
+                gap: 10px;
                 padding: 0 20px;
             }
 
             .header-left {
-                flex-direction: column;
                 gap: 10px;
+                width: 100%;
+                justify-content: center;
             }
 
             nav ul {
@@ -500,6 +509,11 @@
                 height: 300px;
             }
 
+            .restaurant-logo-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
             .footer-top {
                 grid-template-columns: 1fr;
             }
@@ -515,7 +529,7 @@
     <header id="header">
         <div class="header-content">
             <div class="header-left">
-                <img src="come-group-logo.jpg" alt="Come à la maison Group" class="group-logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='%23fff' stroke='%23e0e0e0' stroke-width='2'/%3E%3Ctext x='100' y='95' text-anchor='middle' font-family='serif' font-size='16' font-weight='bold'%3ECome%3C/text%3E%3Ctext x='100' y='115' text-anchor='middle' font-family='serif' font-size='16' font-weight='bold'%3Eà la%3C/text%3E%3Ctext x='100' y='135' text-anchor='middle' font-family='serif' font-size='16' font-weight='bold'%3Emaison%3C/text%3E%3C/svg%3E" alt="Come à la maison Group" class="group-logo">
                 <a href="#" class="logo">Come à la maison & co</a>
             </div>
             <nav>
@@ -542,9 +556,11 @@
 
         <div class="restaurants-grid">
             <div class="restaurant-card">
-                <img src="come-a-la-maison.jpg" alt="Come à la maison" class="restaurant-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23f5f5f5' width='400' height='400'/%3E%3C/svg%3E" alt="Come à la maison" class="restaurant-image">
                 <div class="restaurant-info">
-                    <img src="come-logo.jpg" alt="Come à la maison" class="restaurant-logo">
+                    <div class="restaurant-logo-container">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='%23fff' stroke='%23e0e0e0' stroke-width='2'/%3E%3Ctext x='100' y='100' text-anchor='middle' font-family='serif' font-size='18' font-weight='bold'%3ECome%3C/text%3E%3C/svg%3E" alt="Come à la maison" class="restaurant-logo">
+                    </div>
                     <h3 class="restaurant-name">Come à la maison</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">L'authenticité italienne au cœur de la ville. Saveurs méditerranéennes et accueil chaleureux vous attendent.</p>
@@ -553,9 +569,11 @@
             </div>
 
             <div class="restaurant-card">
-                <img src="brasserie-des-nations.jpg" alt="Brasserie des Nations" class="restaurant-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23f5f5f5' width='400' height='400'/%3E%3C/svg%3E" alt="Brasserie des Nations" class="restaurant-image">
                 <div class="restaurant-info">
-                    <img src="brasserie-nations-logo.jpg" alt="Brasserie des Nations" class="restaurant-logo">
+                    <div class="restaurant-logo-container">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='%23004d00' stroke='%23004d00' stroke-width='2'/%3E%3Ctext x='100' y='100' text-anchor='middle' font-family='serif' font-size='14' font-weight='bold' fill='%23fff'%3EBrasserie%3C/text%3E%3C/svg%3E" alt="Brasserie des Nations" class="restaurant-logo">
+                    </div>
                     <h3 class="restaurant-name">Brasserie des Nations</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">Une atmosphère conviviale, une cuisine généreuse et un service impeccable. Découvrez l'excellence.</p>
@@ -564,9 +582,11 @@
             </div>
 
             <div class="restaurant-card">
-                <img src="Ceruzzi.jpg" alt="Ceruzzi" class="restaurant-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23f5f5f5' width='400' height='400'/%3E%3C/svg%3E" alt="Ceruzzi" class="restaurant-image">
                 <div class="restaurant-info">
-                    <img src="ceruzzi-logo.jpg" alt="Ceruzzi" class="restaurant-logo">
+                    <div class="restaurant-logo-container">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='%23fff' stroke='%23e0e0e0' stroke-width='2'/%3E%3Ctext x='100' y='100' text-anchor='middle' font-family='serif' font-size='20' font-weight='bold'%3ECeruzzi%3C/text%3E%3C/svg%3E" alt="Ceruzzi" class="restaurant-logo">
+                    </div>
                     <h3 class="restaurant-name">Ceruzzi</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">Délices italiens revisités avec passion. Un voyage culinaire authentique à chaque bouchée.</p>
@@ -575,9 +595,11 @@
             </div>
 
             <div class="restaurant-card">
-                <img src="mercato.jpg" alt="Il Mercato" class="restaurant-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23f5f5f5' width='400' height='400'/%3E%3C/svg%3E" alt="Il Mercato" class="restaurant-image">
                 <div class="restaurant-info">
-                    <img src="mercato-logo.jpg" alt="Il Mercato" class="restaurant-logo">
+                    <div class="restaurant-logo-container">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='%23fff' stroke='%23e0e0e0' stroke-width='2'/%3E%3Ctext x='100' y='100' text-anchor='middle' font-family='serif' font-size='16' font-weight='bold'%3EIl Mercato%3C/text%3E%3C/svg%3E" alt="Il Mercato" class="restaurant-logo">
+                    </div>
                     <h3 class="restaurant-name">Il Mercato</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">Marché urbain à l'italienne. Fraîcheur, qualité et authenticité pour une expérience inoubliable.</p>
@@ -586,9 +608,11 @@
             </div>
 
             <div class="restaurant-card">
-                <img src="Rotisserie.jpg" alt="La Rôtisserie Ardennaise" class="restaurant-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23f5f5f5' width='400' height='400'/%3E%3C/svg%3E" alt="La Rôtisserie Ardennaise" class="restaurant-image">
                 <div class="restaurant-info">
-                    <img src="rotisserie-logo.jpg" alt="La Rôtisserie Ardennaise" class="restaurant-logo">
+                    <div class="restaurant-logo-container">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='95' fill='%232a2a2a' stroke='%232a2a2a' stroke-width='2'/%3E%3Ctext x='100' y='100' text-anchor='middle' font-family='serif' font-size='12' font-weight='bold' fill='%23fff'%3ERôtisserie%3C/text%3E%3C/svg%3E" alt="La Rôtisserie Ardennaise" class="restaurant-logo">
+                    </div>
                     <h3 class="restaurant-name">La Rôtisserie Ardennaise</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">Traditions des Ardennes, excellence gastronomique. Viandes sélectionnées et préparées avec soin.</p>
@@ -605,7 +629,7 @@
                     <h3>Nos Restaurants</h3>
                     <ul>
                         <li><a href="https://www.comealamaison.lu/" target="_blank">Come à la maison</a></li>
-                        <li><a href="https://www.google.com/search?gs_ssp=eJzj4tZP1zcsSa8oTs_OMmC0UjWoMDG3NDWxSDFJSko0NEk2tLQyqDBMTTY1MjRIMko1SUtLsjTyEk0qSiwuTi3KTFVISS1WyEssyczPKwYAS70Xeg&q=brasserie+des+nations&rlz=1C1GCEA_enLU1199LU1199&oq=brfasserie+des+&gs_lcrp=EgZjaHJvbWUqDwgCEC4YDRivARjHARiABDIGCAAQRRg5Mg8IARAuGA0YrwEYxwEYgAQyDwgCEC4YDRivARjHARiABDIPCAMQLhgNGK8BGMcBGIAEMg8IBBAuGA0YrwEYxwEYgAQyDwgFEC4YDRivARjHARiABDIJCAYQABgNGIAEMg8IBxAuGA0YrwEYxwEYgAQyCQgIEAAYDRiABNIBCDU5MjJqMGo0qAIAsAIA&sourceid=chrome&ie=UTF-8" target="_blank">Brasserie des Nations</a></li>
+                        <li><a href="https://www.google.com/search?q=brasserie+des+nations+luxembourg" target="_blank">Brasserie des Nations</a></li>
                         <li><a href="https://ceruzzi.lu/" target="_blank">Ceruzzi</a></li>
                         <li><a href="https://ilmercato.lu/" target="_blank">Il Mercato</a></li>
                         <li><a href="https://www.rotisserie-ardennaise.com/" target="_blank">La Rôtisserie Ardennaise</a></li>
