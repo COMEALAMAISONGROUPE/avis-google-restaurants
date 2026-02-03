@@ -201,88 +201,10 @@
             color: var(--black);
         }
 
-        /* HEADER - LOGO À GAUCHE */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background: transparent;
-            border-bottom: none;
-            padding: 0;
-            transition: all 0.3s ease;
-        }
-
-        header.scrolled {
-            background: var(--white);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            width: 100%;
-        }
-
-        .logo {
-            height: 140px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            text-decoration: none;
-            padding: 0;
-        }
-
-        .logo img {
-            max-height: 100%;
-            width: auto;
-            object-fit: contain;
-            padding: 5px 0;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 50px;
-            list-style: none;
-        }
-
-        nav a {
-            color: var(--black);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 400;
-            letter-spacing: 0.3px;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--black);
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--gray-medium);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
         /* HERO */
         .hero {
-            margin-top: 160px;
-            min-height: 65vh;
+            margin-top: 0;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -315,6 +237,20 @@
             bottom: 0;
             background: linear-gradient(135deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 100%);
             z-index: 1;
+        }
+
+        /* HERO LOGO */
+        .hero-logo {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            z-index: 3;
+        }
+
+        .hero-logo img {
+            height: 110px;
+            width: auto;
+            object-fit: contain;
         }
 
         .hero-content {
@@ -627,34 +563,18 @@
                 padding: 12px 20px;
             }
 
-            .header-content {
-                padding: 0 20px;
-                justify-content: center;
+            .hero-logo {
+                left: 50%;
+                transform: translateX(-50%);
+                top: 15px;
             }
 
-            .logo {
-                height: 110px;
-            }
-
-            nav ul {
-                gap: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            nav a {
-                font-size: 0.85rem;
+            .hero-logo img {
+                height: 90px;
             }
 
             .hero {
-                margin-top: 140px;
-                min-height: 50vh;
-                padding: 30px 15px;
-            }
-
-            .hero::before {
-                background-attachment: scroll;
-                background-position: center center;
+                padding-top: 120px;
             }
 
             .hero-content {
@@ -752,15 +672,10 @@
         </div>
     </div>
 
-    <header id="header">
-        <div class="header-content">
-            <a href="#" class="logo">
-                <img src="472282651_1387969249261231_7595495068333774581_n.jpg" alt="Come à la maison">
-            </a>
-        </div>
-    </header>
-
     <section class="hero" id="home">
+        <div class="hero-logo">
+            <img src="472282651_1387969249261231_7595495068333774581_n.jpg" alt="Come à la maison">
+        </div>
         <div class="hero-content">
             <p class="hero-tagline">L'excellence à chaque table</p>
             <p>Votre avis n'est pas qu'un commentaire — c'est une invitation à nous surpasser chaque jour. Découvrez nos restaurants, savourez l'authenticité, et devenez l'empreinte qui marque notre histoire. <span class="hero-highlight"><br>Vos mots façonnent notre avenir.<br></span></p>
@@ -870,7 +785,8 @@
             <div class="footer-bottom">
                 <p>&copy; 2026 Come à la maison & co. Tous droits réservés.</p>
             </div>
-        </footer>
+        </div>
+    </footer>
 
     <script>
         // Popup functionality
@@ -909,12 +825,6 @@
             if (e.key === 'Escape' && popup.classList.contains('active')) {
                 closePopup();
             }
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            header.classList.toggle('scrolled', window.scrollY > 50);
         });
 
         // Smooth scroll
