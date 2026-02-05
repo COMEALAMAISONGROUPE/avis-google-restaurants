@@ -21,6 +21,11 @@
             --gray-medium: #808080;
             --gray-dark: #2a2a2a;
             --border: #E0E0E0;
+            --accent-gold: #FFD700;
+            --accent-orange: #FFA500;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
         }
 
         html {
@@ -33,6 +38,19 @@
             color: var(--black);
             line-height: 1.6;
             font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* SCROLL PROGRESS BAR */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+            z-index: 9999;
+            transition: width 0.1s ease-out;
         }
 
         /* POPUP OVERLAY */
@@ -42,8 +60,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
             z-index: 10000;
             display: flex;
             align-items: center;
@@ -51,7 +69,7 @@
             padding: 20px;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .popup-overlay.active {
@@ -62,34 +80,46 @@
         /* POPUP CONTAINER */
         .popup-container {
             background: var(--white);
-            max-width: 600px;
+            max-width: 650px;
             width: 100%;
-            border-radius: 0;
+            border-radius: 16px;
             position: relative;
-            transform: translateY(30px) scale(0.95);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: translateY(40px) scale(0.92);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+            overflow: hidden;
         }
 
         .popup-overlay.active .popup-container {
             transform: translateY(0) scale(1);
         }
 
+        /* POPUP DECORATIVE HEADER */
+        .popup-header-decoration {
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+        }
+
         /* CLOSE BUTTON */
         .popup-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: transparent;
+            top: 24px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            background: var(--gray-light);
             border: none;
+            border-radius: 50%;
             cursor: pointer;
             z-index: 10;
-            transition: transform 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .popup-close:hover {
+            background: var(--black);
             transform: rotate(90deg);
         }
 
@@ -97,76 +127,88 @@
         .popup-close::after {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
+            width: 18px;
             height: 2px;
             background: var(--black);
             transition: background 0.3s ease;
         }
 
+        .popup-close:hover::before,
+        .popup-close:hover::after {
+            background: var(--white);
+        }
+
         .popup-close::before {
-            transform: translate(-50%, -50%) rotate(45deg);
+            transform: rotate(45deg);
         }
 
         .popup-close::after {
-            transform: translate(-50%, -50%) rotate(-45deg);
-        }
-
-        .popup-close:hover::before,
-        .popup-close:hover::after {
-            background: var(--gray-medium);
+            transform: rotate(-45deg);
         }
 
         /* POPUP CONTENT */
         .popup-content {
-            padding: 60px 50px;
+            padding: 70px 60px 50px;
             text-align: center;
         }
 
         .popup-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 30px;
-            background: var(--black);
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 35px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.8rem;
+            box-shadow: var(--shadow-lg);
+            animation: pulseIcon 2s infinite;
+        }
+
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
         }
 
         .popup-title {
             font-family: 'Crimson Text', serif;
-            font-size: 2.2rem;
+            font-size: 2.6rem;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             line-height: 1.2;
             color: var(--black);
             letter-spacing: -0.5px;
         }
 
         .popup-highlight {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            padding: 15px 25px;
-            margin: 25px 0;
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-orange) 100%);
+            padding: 18px 30px;
+            margin: 30px 0;
             font-weight: 600;
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
-            border-left: 4px solid var(--black);
+            font-size: 1.2rem;
+            letter-spacing: 0.3px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.92; }
         }
 
         .popup-text {
-            font-size: 1.05rem;
+            font-size: 1.08rem;
             color: var(--gray-dark);
-            line-height: 1.7;
-            margin-bottom: 35px;
-            font-weight: 300;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            font-weight: 400;
         }
 
         .popup-cta {
             display: inline-block;
-            padding: 16px 45px;
+            padding: 18px 50px;
             background: var(--black);
             color: var(--white);
             border: 2px solid var(--black);
@@ -176,29 +218,32 @@
             letter-spacing: 0.5px;
             text-decoration: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
+            border-radius: 4px;
+            box-shadow: var(--shadow-md);
         }
 
         .popup-cta:hover {
             background: transparent;
             color: var(--black);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
         }
 
         .popup-skip {
             display: block;
-            margin-top: 20px;
-            font-size: 0.9rem;
+            margin-top: 25px;
+            font-size: 0.95rem;
             color: var(--gray-medium);
             text-decoration: none;
             cursor: pointer;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .popup-skip:hover {
             color: var(--black);
+            text-decoration: underline;
         }
 
         /* HERO */
@@ -225,7 +270,13 @@
             background-position: center;
             background-repeat: no-repeat;
             z-index: 0;
-            filter: brightness(0.5);
+            filter: brightness(0.48);
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.08); }
         }
 
         .hero::after {
@@ -235,93 +286,126 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 100%);
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
             z-index: 1;
         }
 
         /* HERO LOGO */
         .hero-logo {
             position: absolute;
-            top: 20px;
-            left: 40px;
+            top: 30px;
+            left: 50px;
             z-index: 3;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-logo img {
-            height: 110px;
+            height: 120px;
             width: auto;
             object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
         }
 
         .hero-content {
-            max-width: 900px;
+            max-width: 950px;
             text-align: center;
             padding: 0 20px;
             position: relative;
             z-index: 2;
+            animation: fadeInUp 1.2s ease-out 0.3s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-tagline {
-            font-size: 1rem;
-            font-weight: 300;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 25px;
-            letter-spacing: 2px;
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 30px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
         }
 
         .hero p {
-            font-size: 1.05rem;
-            color: rgba(255,255,255,0.95);
-            margin-bottom: 35px;
-            line-height: 1.7;
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.98);
+            margin-bottom: 45px;
+            line-height: 1.8;
             font-weight: 300;
-            max-width: 650px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
         }
 
         .hero-highlight {
-            font-weight: 500;
+            font-weight: 600;
             font-style: italic;
+            font-size: 1.25rem;
         }
 
         .cta-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
             margin: 0 auto;
         }
 
         .cta-button {
-            display: inline-block;
-            padding: 14px 40px;
-            background: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 45px;
+            background: rgba(255,255,255,0.12);
             color: var(--white);
-            border: 1px solid rgba(255,255,255,0.5);
+            border: 2px solid rgba(255,255,255,0.6);
             font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 400;
-            letter-spacing: 1px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1.2px;
             text-decoration: none;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            border-radius: 4px;
         }
 
         .cta-button:hover {
-            border-color: rgba(255,255,255,1);
-            color: var(--white);
+            background: var(--white);
+            border-color: var(--white);
+            color: var(--black);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
         }
 
         /* SECTIONS */
         section {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 80px 40px;
+            padding: 100px 50px;
             border-top: 1px solid var(--border);
         }
 
@@ -331,34 +415,50 @@
 
         section h2 {
             font-family: 'Crimson Text', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
             font-weight: 600;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             line-height: 1.2;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+            border-radius: 2px;
         }
 
         .section-intro {
-            font-size: 1.05rem;
+            font-size: 1.12rem;
             color: var(--gray-medium);
-            line-height: 1.8;
-            margin-bottom: 50px;
-            max-width: 800px;
+            line-height: 1.9;
+            margin-bottom: 60px;
+            max-width: 850px;
+            margin-top: 30px;
         }
 
         /* RESTAURANTS GRID */
         .restaurants-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
         }
 
         .restaurant-card {
             position: relative;
             overflow: hidden;
             border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            animation: fadeInUp 0.8s ease backwards;
+            border-radius: 12px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUpCard 0.8s ease backwards;
+            background: var(--white);
         }
 
         .restaurant-card:nth-child(1) { animation-delay: 0.1s; }
@@ -367,7 +467,7 @@
         .restaurant-card:nth-child(4) { animation-delay: 0.4s; }
         .restaurant-card:nth-child(5) { animation-delay: 0.5s; }
 
-        @keyframes fadeInUp {
+        @keyframes fadeInUpCard {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -378,22 +478,50 @@
             }
         }
 
+        .restaurant-card:hover {
+            border-color: var(--black);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .restaurant-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 320px;
+        }
+
         .restaurant-image {
             width: 100%;
-            height: 300px;
+            height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .restaurant-card:hover .restaurant-image {
-            transform: scale(1.05);
+            transform: scale(1.12);
+        }
+
+        /* HOVER OVERLAY */
+        .restaurant-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 165, 0, 0.15));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .restaurant-card:hover .restaurant-image-overlay {
+            opacity: 1;
         }
 
         .restaurant-info {
-            padding: 40px 30px;
+            padding: 45px 35px;
             background: var(--white);
-            transition: background 0.3s ease;
+            transition: background 0.4s ease;
         }
 
         .restaurant-card:hover .restaurant-info {
@@ -405,26 +533,31 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 28px;
+            margin-top: -70px;
+            position: relative;
+            z-index: 2;
         }
 
         .restaurant-logo-container {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            background: transparent;
+            background: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 0;
             overflow: hidden;
+            border: 4px solid var(--white);
         }
 
         .restaurant-card:hover .restaurant-logo-container {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px) scale(1.08);
+            border-color: var(--gray-light);
         }
 
         .restaurant-logo-container img {
@@ -436,80 +569,93 @@
 
         .restaurant-name {
             font-family: 'Crimson Text', serif;
-            font-size: 1.6rem;
+            font-size: 1.75rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             letter-spacing: -0.3px;
             text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        .restaurant-card:hover .restaurant-name {
+            color: var(--gray-dark);
         }
 
         .restaurant-location {
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             color: var(--gray-medium);
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             line-height: 1.6;
             text-align: center;
-            letter-spacing: 0.5px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
+            font-weight: 500;
         }
 
         .restaurant-description {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--gray-medium);
-            margin-bottom: 25px;
-            line-height: 1.7;
+            margin-bottom: 30px;
+            line-height: 1.75;
             text-align: center;
         }
 
         .review-btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             width: 100%;
-            padding: 14px 28px;
+            padding: 16px 32px;
             background: var(--black);
             color: var(--white);
             border: 2px solid var(--black);
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
             text-decoration: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
+            border-radius: 4px;
         }
 
         .review-btn:hover {
             background: transparent;
             color: var(--black);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
         }
 
         /* FOOTER */
         footer {
-            background: var(--white);
+            background: var(--gray-dark);
+            color: var(--white);
             border-top: 1px solid var(--border);
-            padding: 60px 40px;
+            padding: 70px 50px 40px;
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
         }
 
         .footer-top {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 60px;
-            margin-bottom: 60px;
-            padding-bottom: 60px;
-            border-bottom: 1px solid var(--border);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 70px;
+            margin-bottom: 70px;
+            padding-bottom: 70px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .footer-section h3 {
             font-family: 'Crimson Text', serif;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            color: var(--white);
         }
 
         .footer-section ul {
@@ -517,18 +663,20 @@
         }
 
         .footer-section li {
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .footer-section a {
-            color: var(--gray-medium);
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
         }
 
         .footer-section a:hover {
-            color: var(--black);
+            color: var(--white);
+            transform: translateX(5px);
         }
 
         .footer-bottom {
@@ -536,54 +684,106 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 25px;
         }
 
         .footer-bottom p {
-            color: var(--gray-medium);
-            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+        }
+
+        /* SCROLL TO TOP BUTTON */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+            transform: translateY(-5px);
         }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
+            .scroll-progress {
+                height: 2px;
+            }
+
             .popup-content {
-                padding: 40px 25px;
+                padding: 50px 30px 40px;
             }
 
             .popup-title {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
 
             .popup-text {
-                font-size: 0.95rem;
+                font-size: 1rem;
             }
 
             .popup-highlight {
-                font-size: 0.95rem;
-                padding: 12px 20px;
+                font-size: 1rem;
+                padding: 15px 22px;
+            }
+
+            .popup-icon {
+                width: 75px;
+                height: 75px;
+                font-size: 2.2rem;
             }
 
             .hero-logo {
                 left: 50%;
                 transform: translateX(-50%);
-                top: 15px;
+                top: 20px;
             }
 
             .hero-logo img {
-                height: 90px;
+                height: 95px;
             }
 
             .hero {
-                padding-top: 120px;
+                padding-top: 140px;
             }
 
             .hero-content {
                 padding: 0 15px;
             }
 
+            .hero-tagline {
+                font-size: 0.9rem;
+                letter-spacing: 2px;
+            }
+
             .hero p {
-                font-size: 0.95rem;
-                margin-bottom: 25px;
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+
+            .hero-highlight {
+                font-size: 1.1rem;
             }
 
             .cta-buttons {
@@ -592,71 +792,92 @@
             }
 
             .cta-button {
-                width: fit-content;
-                padding: 12px 35px;
-                font-size: 0.85rem;
+                width: 100%;
+                max-width: 280px;
+                padding: 14px 35px;
+                font-size: 0.9rem;
             }
 
             section {
-                padding: 50px 20px;
+                padding: 70px 25px;
             }
 
             section h2 {
-                font-size: 1.8rem;
-                margin-bottom: 30px;
+                font-size: 2rem;
+                margin-bottom: 25px;
+            }
+
+            section h2::after {
+                width: 60px;
+                height: 3px;
             }
 
             .section-intro {
-                font-size: 0.95rem;
-                margin-bottom: 40px;
+                font-size: 1rem;
+                margin-bottom: 50px;
             }
 
             .restaurants-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 40px;
             }
 
-            .restaurant-image {
-                height: 250px;
+            .restaurant-image-wrapper {
+                height: 280px;
             }
 
             .restaurant-info {
-                padding: 30px 20px;
+                padding: 40px 25px;
             }
 
             .restaurant-name {
-                font-size: 1.4rem;
+                font-size: 1.55rem;
+            }
+
+            .restaurant-logo-wrapper {
+                margin-top: -65px;
             }
 
             .restaurant-logo-container {
-                width: 95px;
-                height: 95px;
+                width: 100px;
+                height: 100px;
             }
 
             .review-btn {
-                padding: 12px 20px;
-                font-size: 0.85rem;
+                padding: 14px 25px;
+                font-size: 0.9rem;
             }
 
             .footer-top {
                 grid-template-columns: 1fr;
-                gap: 40px;
-                margin-bottom: 40px;
-                padding-bottom: 40px;
+                gap: 50px;
+                margin-bottom: 50px;
+                padding-bottom: 50px;
             }
 
             .footer-bottom {
                 flex-direction: column;
                 align-items: flex-start;
             }
+
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <!-- POPUP -->
     <div class="popup-overlay" id="reviewPopup">
         <div class="popup-container">
-            <button class="popup-close" id="closePopup"></button>
+            <div class="popup-header-decoration"></div>
+            <button class="popup-close" id="closePopup" aria-label="Fermer"></button>
             <div class="popup-content">
                 <div class="popup-icon">✨</div>
                 <h2 class="popup-title">Votre voix compte</h2>
@@ -680,7 +901,9 @@
             <p class="hero-tagline">L'excellence à chaque table</p>
             <p>Votre avis n'est pas qu'un commentaire — c'est une invitation à nous surpasser chaque jour. Découvrez nos restaurants, savourez l'authenticité, et devenez l'empreinte qui marque notre histoire. <span class="hero-highlight"><br>Vos mots façonnent notre avenir.<br></span></p>
             <div class="cta-buttons">
-                <a href="#restaurants" class="cta-button">Voir nos restaurants</a>
+                <a href="#restaurants" class="cta-button">
+                    <span>→</span> Voir nos restaurants
+                </a>
             </div>
         </div>
     </section>
@@ -691,7 +914,10 @@
 
         <div class="restaurants-grid">
             <div class="restaurant-card">
-                <img src="come-a-la-maison.jpg" alt="Come à la maison" class="restaurant-image">
+                <div class="restaurant-image-wrapper">
+                    <img src="come-a-la-maison.jpg" alt="Come à la maison" class="restaurant-image">
+                    <div class="restaurant-image-overlay"></div>
+                </div>
                 <div class="restaurant-info">
                     <div class="restaurant-logo-wrapper">
                         <div class="restaurant-logo-container">
@@ -701,12 +927,17 @@
                     <h3 class="restaurant-name">Come à la maison</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">L'authenticité italienne au cœur de la ville. Saveurs méditerranéennes et accueil chaleureux vous attendent.</p>
-                    <a href="https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE" target="_blank" class="review-btn">✓ Laisser un avis</a>
+                    <a href="https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE" target="_blank" class="review-btn">
+                        <span>⭐</span> Laisser un avis
+                    </a>
                 </div>
             </div>
 
             <div class="restaurant-card">
-                <img src="brasserie-des-nations.jpg" alt="Brasserie des Nations" class="restaurant-image">
+                <div class="restaurant-image-wrapper">
+                    <img src="brasserie-des-nations.jpg" alt="Brasserie des Nations" class="restaurant-image">
+                    <div class="restaurant-image-overlay"></div>
+                </div>
                 <div class="restaurant-info">
                     <div class="restaurant-logo-wrapper">
                         <div class="restaurant-logo-container">
@@ -716,12 +947,17 @@
                     <h3 class="restaurant-name">Brasserie des Nations</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">Une atmosphère conviviale, une cuisine généreuse et un service impeccable. Découvrez l'excellence.</p>
-                    <a href="https://search.google.com/local/writereview?placeid=ChIJGUyhu9RIlUcRkvtPLgshxR4" target="_blank" class="review-btn">✓ Laisser un avis</a>
+                    <a href="https://search.google.com/local/writereview?placeid=ChIJGUyhu9RIlUcRkvtPLgshxR4" target="_blank" class="review-btn">
+                        <span>⭐</span> Laisser un avis
+                    </a>
                 </div>
             </div>
 
             <div class="restaurant-card">
-                <img src="Ceruzzi.jpg" alt="Ceruzzi" class="restaurant-image">
+                <div class="restaurant-image-wrapper">
+                    <img src="Ceruzzi.jpg" alt="Ceruzzi" class="restaurant-image">
+                    <div class="restaurant-image-overlay"></div>
+                </div>
                 <div class="restaurant-info">
                     <div class="restaurant-logo-wrapper">
                         <div class="restaurant-logo-container">
@@ -731,12 +967,17 @@
                     <h3 class="restaurant-name">Ceruzzi</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">Délices italiens revisités avec passion. Un voyage culinaire authentique à chaque bouchée.</p>
-                    <a href="https://search.google.com/local/writereview?placeid=ChIJF62EKABJlUcRZW5S26CjnoI" target="_blank" class="review-btn">✓ Laisser un avis</a>
+                    <a href="https://search.google.com/local/writereview?placeid=ChIJF62EKABJlUcRZW5S26CjnoI" target="_blank" class="review-btn">
+                        <span>⭐</span> Laisser un avis
+                    </a>
                 </div>
             </div>
 
             <div class="restaurant-card">
-                <img src="mercato.jpg" alt="Il Mercato" class="restaurant-image">
+                <div class="restaurant-image-wrapper">
+                    <img src="mercato.jpg" alt="Il Mercato" class="restaurant-image">
+                    <div class="restaurant-image-overlay"></div>
+                </div>
                 <div class="restaurant-info">
                     <div class="restaurant-logo-wrapper">
                         <div class="restaurant-logo-container">
@@ -746,12 +987,17 @@
                     <h3 class="restaurant-name">Il Mercato</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">Marché urbain à l'italienne. Fraîcheur, qualité et authenticité pour une expérience inoubliable.</p>
-                    <a href="https://search.google.com/local/writereview?placeid=ChIJtcsSWQNPlUcR9YgqldycRRA" target="_blank" class="review-btn">✓ Laisser un avis</a>
+                    <a href="https://search.google.com/local/writereview?placeid=ChIJtcsSWQNPlUcR9YgqldycRRA" target="_blank" class="review-btn">
+                        <span>⭐</span> Laisser un avis
+                    </a>
                 </div>
             </div>
 
             <div class="restaurant-card">
-                <img src="Rotisserie.jpg" alt="La Rôtisserie Ardennaise" class="restaurant-image">
+                <div class="restaurant-image-wrapper">
+                    <img src="Rotisserie.jpg" alt="La Rôtisserie Ardennaise" class="restaurant-image">
+                    <div class="restaurant-image-overlay"></div>
+                </div>
                 <div class="restaurant-info">
                     <div class="restaurant-logo-wrapper">
                         <div class="restaurant-logo-container">
@@ -761,7 +1007,9 @@
                     <h3 class="restaurant-name">La Rôtisserie Ardennaise</h3>
                     <p class="restaurant-location">Luxembourg</p>
                     <p class="restaurant-description">Traditions des Ardennes, excellence gastronomique. Viandes sélectionnées et préparées avec soin.</p>
-                    <a href="http://search.google.com/local/writereview?placeid=ChIJv_ZOGytJlUcRp1K0RUL2MKQ" target="_blank" class="review-btn">✓ Laisser un avis</a>
+                    <a href="http://search.google.com/local/writereview?placeid=ChIJv_ZOGytJlUcRp1K0RUL2MKQ" target="_blank" class="review-btn">
+                        <span>⭐</span> Laisser un avis
+                    </a>
                 </div>
             </div>
         </div>
@@ -788,7 +1036,19 @@
         </div>
     </footer>
 
+    <!-- SCROLL TO TOP BUTTON -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Retour en haut">↑</button>
+
     <script>
+        // Scroll Progress Bar
+        const scrollProgress = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            scrollProgress.style.width = progress + '%';
+        });
+
         // Popup functionality
         const popup = document.getElementById('reviewPopup');
         const closeBtn = document.getElementById('closePopup');
@@ -798,7 +1058,7 @@
         window.addEventListener('load', function() {
             setTimeout(function() {
                 popup.classList.add('active');
-            }, 800);
+            }, 1200);
         });
 
         function closePopup() {
@@ -827,7 +1087,25 @@
             }
         });
 
-        // Smooth scroll
+        // Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 400) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -836,6 +1114,15 @@
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
+        });
+
+        // Add subtle parallax effect to hero
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.pageYOffset;
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
         });
     </script>
 </body>
