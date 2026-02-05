@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Come à la maison & co - Partagez votre expérience</title>
+    <title>Come à la maison & co - Votre expérience mérite d'être partagée</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,16 +16,17 @@
 
         :root {
             --white: #FFFFFF;
-            --black: #000000;
-            --gray-light: #F5F5F5;
-            --gray-medium: #808080;
+            --black: #0A0A0A;
+            --gray-light: #F8F8F8;
+            --gray-medium: #6B6B6B;
             --gray-dark: #2a2a2a;
-            --border: #E0E0E0;
-            --accent-gold: #FFD700;
-            --accent-orange: #FFA500;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+            --border: #E8E8E8;
+            --accent-gold: #D4AF37;
+            --accent-dark: #1A1A1A;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.20);
         }
 
         html {
@@ -47,8 +48,8 @@
             top: 0;
             left: 0;
             width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+            height: 2px;
+            background: var(--accent-gold);
             z-index: 9999;
             transition: width 0.1s ease-out;
         }
@@ -60,8 +61,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(20px);
             z-index: 10000;
             display: flex;
             align-items: center;
@@ -80,55 +81,55 @@
         /* POPUP CONTAINER */
         .popup-container {
             background: var(--white);
-            max-width: 650px;
+            max-width: 600px;
             width: 100%;
-            border-radius: 16px;
+            border-radius: 2px;
             position: relative;
-            transform: translateY(40px) scale(0.92);
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-xl);
             overflow: hidden;
         }
 
         .popup-overlay.active .popup-container {
-            transform: translateY(0) scale(1);
+            transform: translateY(0);
         }
 
         /* POPUP DECORATIVE HEADER */
         .popup-header-decoration {
-            height: 6px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+            height: 1px;
+            background: var(--accent-gold);
         }
 
         /* CLOSE BUTTON */
         .popup-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: var(--gray-light);
-            border: none;
-            border-radius: 50%;
+            top: 25px;
+            right: 25px;
+            width: 36px;
+            height: 36px;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 0;
             cursor: pointer;
             z-index: 10;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .popup-close:hover {
+            border-color: var(--black);
             background: var(--black);
-            transform: rotate(90deg);
         }
 
         .popup-close::before,
         .popup-close::after {
             content: '';
             position: absolute;
-            width: 18px;
-            height: 2px;
+            width: 14px;
+            height: 1px;
             background: var(--black);
             transition: background 0.3s ease;
         }
@@ -148,27 +149,16 @@
 
         /* POPUP CONTENT */
         .popup-content {
-            padding: 50px 40px 40px;
+            padding: 60px 50px 50px;
             text-align: center;
         }
 
         .popup-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 30px;
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            box-shadow: var(--shadow-lg);
-            animation: pulseIcon 2s infinite;
-        }
-
-        @keyframes pulseIcon {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); }
+            width: 1px;
+            height: 60px;
+            margin: 0 auto 40px;
+            background: var(--accent-gold);
+            opacity: 0.3;
         }
 
         .popup-title {
@@ -181,72 +171,65 @@
             letter-spacing: -0.5px;
         }
 
-        .popup-highlight {
-            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-orange) 100%);
-            padding: 15px 25px;
-            margin: 25px 0;
-            font-weight: 600;
-            font-size: 1.05rem;
-            letter-spacing: 0.3px;
-            border-radius: 8px;
-            box-shadow: var(--shadow-md);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.92; }
-        }
-
-        .popup-text {
-            font-size: 1rem;
-            color: var(--gray-dark);
-            line-height: 1.7;
+        .popup-subtitle {
+            font-size: 0.95rem;
+            color: var(--gray-medium);
             margin-bottom: 35px;
+            line-height: 1.7;
             font-weight: 400;
+        }
+
+        .popup-highlight {
+            background: var(--gray-light);
+            padding: 20px 30px;
+            margin: 35px 0;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            border-left: 2px solid var(--accent-gold);
+            text-align: left;
+            color: var(--gray-dark);
         }
 
         .popup-cta {
             display: inline-block;
-            padding: 16px 40px;
+            padding: 16px 45px;
             background: var(--black);
             color: var(--white);
-            border: 2px solid var(--black);
+            border: 1px solid var(--black);
             font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 1.5px;
             text-decoration: none;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             text-transform: uppercase;
-            border-radius: 4px;
-            box-shadow: var(--shadow-md);
+            border-radius: 0;
         }
 
         .popup-cta:hover {
             background: transparent;
             color: var(--black);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
         }
 
-        .popup-skip {
+        .popup-secondary {
             display: block;
             margin-top: 20px;
-            font-size: 0.9rem;
+            padding: 12px;
+            font-size: 0.85rem;
             color: var(--gray-medium);
             text-decoration: none;
             cursor: pointer;
             transition: all 0.3s ease;
+            letter-spacing: 0.5px;
         }
 
-        .popup-skip:hover {
+        .popup-secondary:hover {
             color: var(--black);
-            text-decoration: underline;
         }
 
-        /* HERO */
+        /* HERO SECTION */
         .hero {
             margin-top: 0;
             min-height: 100vh;
@@ -270,7 +253,7 @@
             background-position: center;
             background-repeat: no-repeat;
             z-index: 0;
-            filter: brightness(0.48);
+            filter: brightness(0.35) grayscale(0.2);
         }
 
         .hero::after {
@@ -280,14 +263,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%);
             z-index: 1;
         }
 
-        /* HERO LOGO */
         .hero-logo {
             position: absolute;
-            top: 30px;
+            top: 40px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
@@ -297,7 +279,7 @@
         @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateX(-50%) translateY(-30px);
+                transform: translateX(-50%) translateY(-20px);
             }
             to {
                 opacity: 1;
@@ -306,20 +288,20 @@
         }
 
         .hero-logo img {
-            height: 100px;
+            height: 90px;
             width: auto;
             object-fit: contain;
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
         }
 
         .hero-content {
-            max-width: 900px;
+            max-width: 850px;
             text-align: center;
             padding: 0 20px;
             position: relative;
             z-index: 2;
-            animation: fadeInUp 1.2s ease-out 0.3s backwards;
-            margin-top: 80px;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+            margin-top: 60px;
         }
 
         @keyframes fadeInUp {
@@ -333,130 +315,240 @@
             }
         }
 
-        .hero-tagline {
-            font-size: 0.95rem;
+        .hero-title {
+            font-family: 'Crimson Text', serif;
+            font-size: clamp(2.5rem, 7vw, 4.2rem);
             font-weight: 400;
-            color: rgba(255,255,255,0.95);
-            margin-bottom: 25px;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            text-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+            color: var(--white);
+            margin-bottom: 35px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
         }
 
-        .hero p {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.98);
-            margin-bottom: 40px;
-            line-height: 1.75;
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 50px;
+            line-height: 1.8;
             font-weight: 300;
-            max-width: 700px;
+            max-width: 650px;
             margin-left: auto;
             margin-right: auto;
-            text-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.3px;
         }
 
-        .hero-highlight {
-            font-weight: 600;
-            font-style: italic;
-            font-size: 1.2rem;
-            display: block;
-            margin-top: 15px;
-        }
-
-        .cta-buttons {
+        .hero-cta-group {
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin: 0 auto;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            margin-top: 50px;
         }
 
-        .cta-button {
+        .hero-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 18px 50px;
+            background: var(--white);
+            color: var(--black);
+            border: 1px solid var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            border-radius: 0;
+        }
+
+        .hero-cta-primary:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        .hero-cta-secondary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 15px 40px;
-            background: rgba(255,255,255,0.12);
+            padding: 16px 45px;
+            background: transparent;
             color: var(--white);
-            border: 2px solid rgba(255,255,255,0.6);
+            border: 1px solid rgba(255,255,255,0.3);
             font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 500;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-decoration: none;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             text-transform: uppercase;
-            backdrop-filter: blur(10px);
-            border-radius: 4px;
+            border-radius: 0;
         }
 
-        .cta-button:hover {
-            background: var(--white);
+        .hero-cta-secondary:hover {
             border-color: var(--white);
-            color: var(--black);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+            background: rgba(255,255,255,0.05);
         }
 
-        /* SECTIONS */
-        section {
-            max-width: 1280px;
+        /* WHY SECTION */
+        .why-section {
+            padding: 120px 30px;
+            background: var(--white);
+        }
+
+        .why-container {
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 80px 30px;
-            border-top: 1px solid var(--border);
+            text-align: center;
         }
 
-        section:first-of-type {
-            border-top: none;
-        }
-
-        section h2 {
+        .section-title {
             font-family: 'Crimson Text', serif;
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 600;
-            margin-bottom: 25px;
-            line-height: 1.2;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 500;
+            margin-bottom: 20px;
+            line-height: 1.3;
             position: relative;
             display: inline-block;
+            letter-spacing: -0.5px;
         }
 
-        section h2::after {
+        .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 70px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
-            border-radius: 2px;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: var(--accent-gold);
         }
 
-        .section-intro {
-            font-size: 1.05rem;
+        .section-subtitle {
+            font-size: 1rem;
             color: var(--gray-medium);
             line-height: 1.8;
-            margin-bottom: 50px;
-            max-width: 800px;
-            margin-top: 25px;
+            margin-bottom: 70px;
+            margin-top: 40px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
         }
 
-        /* RESTAURANTS GRID */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-top: 70px;
+        }
+
+        .benefit-card {
+            background: var(--white);
+            padding: 50px 35px;
+            border-radius: 0;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        .benefit-card:nth-child(1) { animation-delay: 0.1s; }
+        .benefit-card:nth-child(2) { animation-delay: 0.2s; }
+        .benefit-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .benefit-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .benefit-icon {
+            width: 1px;
+            height: 50px;
+            background: var(--accent-gold);
+            margin: 0 auto 30px;
+            opacity: 0.3;
+        }
+
+        .benefit-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.35rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: var(--black);
+            letter-spacing: -0.3px;
+        }
+
+        .benefit-description {
+            font-size: 0.9rem;
+            color: var(--gray-medium);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* RESTAURANTS SECTION - HIDDEN BY DEFAULT */
+        .restaurants-section {
+            padding: 60px 30px 100px;
+            background: var(--gray-light);
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .restaurants-section.visible {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .restaurants-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .restaurants-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .restaurants-title {
+            font-family: 'Crimson Text', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 500;
+            margin-bottom: 12px;
+            line-height: 1.3;
+            color: var(--black);
+            letter-spacing: -0.5px;
+        }
+
+        .restaurants-subtitle {
+            font-size: 0.9rem;
+            color: var(--gray-medium);
+            line-height: 1.5;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
         .restaurants-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 40px;
-            margin-top: 50px;
         }
 
         .restaurant-card {
             position: relative;
             overflow: hidden;
             border: 1px solid var(--border);
-            border-radius: 12px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: fadeInUpCard 0.8s ease backwards;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            animation: fadeInUpCard 0.6s ease backwards;
             background: var(--white);
         }
 
@@ -478,15 +570,15 @@
         }
 
         .restaurant-card:hover {
-            border-color: var(--black);
+            border-color: var(--accent-gold);
             transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-xl);
         }
 
         .restaurant-image-wrapper {
             position: relative;
             overflow: hidden;
-            height: 280px;
+            height: 320px;
         }
 
         .restaurant-image {
@@ -494,21 +586,22 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.6s ease;
+            filter: grayscale(0.1);
         }
 
         .restaurant-card:hover .restaurant-image {
-            transform: scale(1.1);
+            transform: scale(1.05);
+            filter: grayscale(0);
         }
 
-        /* HOVER OVERLAY */
         .restaurant-image-overlay {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 165, 0, 0.15));
+            background: rgba(212, 175, 55, 0.1);
             opacity: 0;
             transition: opacity 0.5s ease;
         }
@@ -518,45 +611,38 @@
         }
 
         .restaurant-info {
-            padding: 35px 25px 30px;
+            padding: 45px 35px 40px;
             background: var(--white);
-            transition: background 0.4s ease;
         }
 
-        .restaurant-card:hover .restaurant-info {
-            background: var(--gray-light);
-        }
-
-        /* LOGO CONTAINER */
         .restaurant-logo-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 22px;
-            margin-top: -60px;
+            margin-bottom: 30px;
+            margin-top: -80px;
             position: relative;
             z-index: 2;
         }
 
         .restaurant-logo-container {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             background: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--shadow-md);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
             padding: 0;
             overflow: hidden;
             border: 4px solid var(--white);
         }
 
         .restaurant-card:hover .restaurant-logo-container {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-5px) scale(1.05);
-            border-color: var(--gray-light);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
         }
 
         .restaurant-logo-container img {
@@ -569,8 +655,8 @@
         .restaurant-name {
             font-family: 'Crimson Text', serif;
             font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 8px;
+            font-weight: 500;
+            margin-bottom: 10px;
             letter-spacing: -0.3px;
             text-align: center;
             transition: color 0.3s ease;
@@ -578,62 +664,93 @@
         }
 
         .restaurant-card:hover .restaurant-name {
-            color: var(--gray-dark);
+            color: var(--accent-gold);
         }
 
         .restaurant-location {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--gray-medium);
-            margin-bottom: 18px;
+            margin-bottom: 22px;
             line-height: 1.5;
             text-align: center;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 500;
         }
 
         .restaurant-description {
-            font-size: 0.93rem;
+            font-size: 0.9rem;
             color: var(--gray-medium);
-            margin-bottom: 25px;
-            line-height: 1.65;
+            margin-bottom: 30px;
+            line-height: 1.8;
             text-align: center;
+            font-weight: 300;
         }
 
-        .review-btn {
+        .restaurant-btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .reserve-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             width: 100%;
-            padding: 14px 28px;
+            padding: 16px 32px;
             background: var(--black);
             color: var(--white);
-            border: 2px solid var(--black);
+            border: 1px solid var(--black);
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 1.5px;
             text-decoration: none;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             text-align: center;
-            border-radius: 4px;
+            border-radius: 0;
+            text-transform: uppercase;
         }
 
-        .review-btn:hover {
+        .reserve-btn:hover {
             background: transparent;
             color: var(--black);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
+        }
+
+        .review-btn-secondary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px 28px;
+            background: transparent;
+            color: var(--black);
+            border: 1px solid var(--border);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            border-radius: 0;
+            text-transform: uppercase;
+        }
+
+        .review-btn-secondary:hover {
+            border-color: var(--black);
         }
 
         /* FOOTER */
         footer {
-            background: var(--gray-dark);
+            background: var(--black);
             color: var(--white);
-            border-top: 1px solid var(--border);
-            padding: 60px 30px 35px;
+            padding: 80px 30px 40px;
         }
 
         .footer-content {
@@ -645,17 +762,18 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 50px;
-            margin-bottom: 50px;
-            padding-bottom: 50px;
+            margin-bottom: 60px;
+            padding-bottom: 60px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .footer-section h3 {
             font-family: 'Crimson Text', serif;
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 25px;
             color: var(--white);
+            letter-spacing: 0.5px;
         }
 
         .footer-section ul {
@@ -663,20 +781,22 @@
         }
 
         .footer-section li {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .footer-section a {
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.5);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
             display: inline-block;
+            font-weight: 300;
+            letter-spacing: 0.5px;
         }
 
         .footer-section a:hover {
             color: var(--white);
-            transform: translateX(5px);
+            transform: translateX(3px);
         }
 
         .footer-bottom {
@@ -684,30 +804,32 @@
         }
 
         .footer-bottom p {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.9rem;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
         }
 
         /* SCROLL TO TOP BUTTON */
         .scroll-to-top {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
+            bottom: 40px;
+            right: 40px;
             width: 50px;
             height: 50px;
             background: var(--black);
             color: var(--white);
-            border: none;
-            border-radius: 50%;
+            border: 1px solid var(--black);
+            border-radius: 0;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            box-shadow: var(--shadow-lg);
+            font-size: 1.2rem;
+            font-weight: 300;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             z-index: 1000;
         }
 
@@ -717,262 +839,127 @@
         }
 
         .scroll-to-top:hover {
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
-            transform: translateY(-5px);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
         }
 
         /* RESPONSIVE MOBILE */
         @media (max-width: 768px) {
-            .scroll-progress {
-                height: 2px;
-            }
-
             .popup-container {
-                border-radius: 12px;
                 margin: 0 15px;
             }
 
             .popup-content {
-                padding: 40px 25px 30px;
-            }
-
-            .popup-close {
-                top: 15px;
-                right: 15px;
-                width: 36px;
-                height: 36px;
+                padding: 50px 35px 40px;
             }
 
             .popup-title {
-                font-size: 1.5rem;
-                margin-bottom: 18px;
+                font-size: 1.6rem;
             }
 
-            .popup-text {
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin-bottom: 30px;
-            }
-
-            .popup-highlight {
-                font-size: 0.95rem;
-                padding: 12px 20px;
-                margin: 20px 0;
-            }
-
-            .popup-icon {
-                width: 70px;
-                height: 70px;
-                font-size: 2rem;
-                margin-bottom: 25px;
-            }
-
-            .popup-cta {
-                padding: 14px 35px;
-                font-size: 0.88rem;
-            }
-
-            .popup-skip {
-                margin-top: 18px;
-                font-size: 0.85rem;
+            .popup-subtitle {
+                font-size: 0.9rem;
             }
 
             .hero {
-                padding: 130px 20px 40px;
-                min-height: 85vh;
-            }
-
-            .hero-logo {
-                top: 20px;
+                padding: 120px 20px 50px;
             }
 
             .hero-logo img {
-                height: 80px;
+                height: 75px;
             }
 
             .hero-content {
-                padding: 0 15px;
-                margin-top: 0;
+                margin-top: 40px;
             }
 
-            .hero-tagline {
-                font-size: 0.8rem;
-                letter-spacing: 2px;
-                margin-bottom: 20px;
-            }
-
-            .hero p {
-                font-size: 0.95rem;
+            .hero-title {
+                font-size: 2rem;
                 margin-bottom: 30px;
-                line-height: 1.65;
             }
 
-            .hero-highlight {
-                font-size: 1.05rem;
-                margin-top: 12px;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-
-            .cta-button {
-                width: 100%;
-                max-width: 280px;
-                padding: 13px 30px;
-                font-size: 0.85rem;
-                letter-spacing: 0.8px;
-            }
-
-            section {
-                padding: 60px 20px;
-            }
-
-            section h2 {
-                font-size: 1.8rem;
-                margin-bottom: 20px;
-            }
-
-            section h2::after {
-                width: 50px;
-                height: 3px;
-                bottom: -8px;
-            }
-
-            .section-intro {
+            .hero-subtitle {
                 font-size: 0.95rem;
-                line-height: 1.7;
                 margin-bottom: 40px;
-                margin-top: 20px;
+            }
+
+            .hero-cta-primary, .hero-cta-secondary {
+                width: 100%;
+                max-width: 300px;
+                padding: 16px 35px;
+                font-size: 0.8rem;
+            }
+
+            .why-section {
+                padding: 80px 20px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 50px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .restaurants-section {
+                padding: 40px 20px 70px;
+            }
+
+            .restaurants-header {
+                margin-bottom: 35px;
+            }
+
+            .restaurants-title {
+                font-size: 1.6rem;
+                margin-bottom: 10px;
+            }
+
+            .restaurants-subtitle {
+                font-size: 0.85rem;
             }
 
             .restaurants-grid {
                 grid-template-columns: 1fr;
-                gap: 35px;
-                margin-top: 40px;
+                gap: 30px;
             }
 
             .restaurant-image-wrapper {
-                height: 240px;
+                height: 280px;
             }
 
             .restaurant-info {
-                padding: 30px 20px 25px;
+                padding: 40px 25px 35px;
             }
 
             .restaurant-name {
                 font-size: 1.4rem;
-                line-height: 1.3;
-                margin-bottom: 8px;
-            }
-
-            .restaurant-location {
-                font-size: 0.8rem;
-                margin-bottom: 15px;
-            }
-
-            .restaurant-description {
-                font-size: 0.88rem;
-                line-height: 1.6;
-                margin-bottom: 22px;
             }
 
             .restaurant-logo-wrapper {
-                margin-top: -55px;
-                margin-bottom: 20px;
+                margin-top: -70px;
             }
 
             .restaurant-logo-container {
-                width: 90px;
-                height: 90px;
-                border-width: 3px;
-            }
-
-            .review-btn {
-                padding: 13px 22px;
-                font-size: 0.85rem;
-                gap: 6px;
+                width: 100px;
+                height: 100px;
             }
 
             footer {
-                padding: 50px 20px 30px;
-            }
-
-            .footer-top {
-                gap: 40px;
-                margin-bottom: 40px;
-                padding-bottom: 40px;
-            }
-
-            .footer-section h3 {
-                font-size: 1.15rem;
-                margin-bottom: 18px;
-            }
-
-            .footer-section a {
-                font-size: 0.9rem;
-            }
-
-            .footer-bottom p {
-                font-size: 0.85rem;
+                padding: 70px 20px 35px;
             }
 
             .scroll-to-top {
-                bottom: 20px;
-                right: 20px;
+                bottom: 25px;
+                right: 25px;
                 width: 45px;
                 height: 45px;
-                font-size: 1.2rem;
-            }
-        }
-
-        /* EXTRA SMALL DEVICES */
-        @media (max-width: 400px) {
-            .popup-content {
-                padding: 35px 20px 25px;
-            }
-
-            .popup-title {
-                font-size: 1.35rem;
-            }
-
-            .popup-text {
-                font-size: 0.9rem;
-            }
-
-            .hero {
-                padding: 120px 15px 30px;
-            }
-
-            .hero-logo img {
-                height: 70px;
-            }
-
-            .hero p {
-                font-size: 0.9rem;
-            }
-
-            section {
-                padding: 50px 15px;
-            }
-
-            section h2 {
-                font-size: 1.6rem;
-            }
-
-            .restaurant-info {
-                padding: 25px 18px 22px;
-            }
-
-            .restaurant-name {
-                font-size: 1.3rem;
-            }
-
-            .restaurant-logo-container {
-                width: 85px;
-                height: 85px;
             }
         }
 
@@ -983,22 +970,8 @@
                 transform: none;
             }
 
-            .hero-content {
-                margin-top: 0;
-            }
-
-            section {
-                padding: 90px 40px;
-            }
-
             .restaurants-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 45px;
-            }
-
-            .footer-top {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 60px;
             }
         }
 
@@ -1009,21 +982,8 @@
                 transform: none;
             }
 
-            .hero-content {
-                margin-top: 0;
-            }
-
-            section {
-                padding: 100px 50px;
-            }
-
             .restaurants-grid {
                 grid-template-columns: repeat(3, 1fr);
-            }
-
-            .footer-top {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 70px;
             }
         }
     </style>
@@ -1038,147 +998,211 @@
             <div class="popup-header-decoration"></div>
             <button class="popup-close" id="closePopup" aria-label="Fermer"></button>
             <div class="popup-content">
-                <div class="popup-icon">✨</div>
-                <h2 class="popup-title">Votre voix compte</h2>
+                <div class="popup-icon"></div>
+                <h2 class="popup-title">Partagez votre moment d'exception</h2>
+                <p class="popup-subtitle">Votre expérience inspire les autres et enrichit notre engagement vers l'excellence.</p>
+
                 <div class="popup-highlight">
-                    🎁 Tirage au sort chaque semaine : gagnez un brunch pour 2 personnes
+                    Chaque semaine, un brunch pour deux personnes est offert à l'un de nos contributeurs.
                 </div>
-                <p class="popup-text">
-                    Partagez votre expérience et inspirez-nous à nous dépasser chaque jour. Chaque avis est une opportunité de vous offrir l'excellence que vous méritez.
-                </p>
+
                 <a href="#restaurants" class="popup-cta" id="popupCta">Partager mon expérience</a>
-                <a href="#" class="popup-skip" id="skipPopup">Plus tard</a>
+                <a href="#" class="popup-secondary" id="skipPopup">Plus tard</a>
             </div>
         </div>
     </div>
 
+    <!-- HERO SECTION -->
     <section class="hero" id="home">
         <div class="hero-logo">
             <img src="472282651_1387969249261231_7595495068333774581_n.jpg" alt="Come à la maison">
         </div>
         <div class="hero-content">
-            <p class="hero-tagline">L'excellence à chaque table</p>
-            <p>Votre avis n'est pas qu'un commentaire — c'est une invitation à nous surpasser chaque jour. Découvrez nos restaurants, savourez l'authenticité, et devenez l'empreinte qui marque notre histoire.<span class="hero-highlight">Vos mots façonnent notre avenir.</span></p>
-            <div class="cta-buttons">
-                <a href="#restaurants" class="cta-button">
-                    <span>→</span> Voir nos restaurants
+            <h1 class="hero-title">L'excellence se partage</h1>
+            <p class="hero-subtitle">Votre regard affine notre art. Chaque retour d'expérience nourrit notre quête de perfection et inspire ceux qui nous découvrent.</p>
+
+            <div class="hero-cta-group">
+                <a href="#restaurants" class="hero-cta-primary" id="mainCta">
+                    Partager mon expérience
+                </a>
+                <a href="#restaurants" class="hero-cta-secondary" id="secondaryCta">
+                    Découvrir nos adresses
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="restaurants">
-        <h2>Nos Établissements</h2>
-        <p class="section-intro">Chacun de nos restaurants incarne la passion pour l'excellence culinaire. Visitez-nous et partagez votre expérience unique.</p>
+    <!-- WHY SECTION -->
+    <section class="why-section">
+        <div class="why-container">
+            <h2 class="section-title">Pourquoi votre voix compte</h2>
+            <p class="section-subtitle">Votre perspective enrichit notre communauté et guide nos évolutions.</p>
 
-        <div class="restaurants-grid">
-            <div class="restaurant-card">
-                <div class="restaurant-image-wrapper">
-                    <img src="come-a-la-maison.jpg" alt="Come à la maison" class="restaurant-image">
-                    <div class="restaurant-image-overlay"></div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon"></div>
+                    <h3 class="benefit-title">Récompenses exclusives</h3>
+                    <p class="benefit-description">Participez chaque semaine au tirage au sort pour remporter un brunch gastronomique pour deux.</p>
                 </div>
-                <div class="restaurant-info">
-                    <div class="restaurant-logo-wrapper">
-                        <div class="restaurant-logo-container">
-                            <img src="come-a-la-maison-groupe-come_Plan-de-travail-1.jpg" alt="Come à la maison Logo">
-                        </div>
-                    </div>
-                    <h3 class="restaurant-name">Come à la maison</h3>
-                    <p class="restaurant-location">Luxembourg</p>
-                    <p class="restaurant-description">L'authenticité italienne au cœur de la ville. Saveurs méditerranéennes et accueil chaleureux vous attendent.</p>
-                    <a href="https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE" target="_blank" class="review-btn">
-                        <span>⭐</span> Laisser un avis
-                    </a>
-                </div>
-            </div>
 
-            <div class="restaurant-card">
-                <div class="restaurant-image-wrapper">
-                    <img src="brasserie-des-nations.jpg" alt="Brasserie des Nations" class="restaurant-image">
-                    <div class="restaurant-image-overlay"></div>
+                <div class="benefit-card">
+                    <div class="benefit-icon"></div>
+                    <h3 class="benefit-title">Influence directe</h3>
+                    <p class="benefit-description">Vos retours façonnent notre offre et affinent chaque détail de nos expériences culinaires.</p>
                 </div>
-                <div class="restaurant-info">
-                    <div class="restaurant-logo-wrapper">
-                        <div class="restaurant-logo-container">
-                            <img src="611644101_17843493915670666_4965556442638396968_n.jpg" alt="Brasserie des Nations Logo">
-                        </div>
-                    </div>
-                    <h3 class="restaurant-name">Brasserie des Nations</h3>
-                    <p class="restaurant-location">Luxembourg</p>
-                    <p class="restaurant-description">Une atmosphère conviviale, une cuisine généreuse et un service impeccable. Découvrez l'excellence.</p>
-                    <a href="https://search.google.com/local/writereview?placeid=ChIJGUyhu9RIlUcRkvtPLgshxR4" target="_blank" class="review-btn">
-                        <span>⭐</span> Laisser un avis
-                    </a>
-                </div>
-            </div>
 
-            <div class="restaurant-card">
-                <div class="restaurant-image-wrapper">
-                    <img src="Ceruzzi.jpg" alt="Ceruzzi" class="restaurant-image">
-                    <div class="restaurant-image-overlay"></div>
-                </div>
-                <div class="restaurant-info">
-                    <div class="restaurant-logo-wrapper">
-                        <div class="restaurant-logo-container">
-                            <img src="449203847_1242257060481280_2284347406235910194_n.jpg" alt="Ceruzzi Logo">
-                        </div>
-                    </div>
-                    <h3 class="restaurant-name">Ceruzzi</h3>
-                    <p class="restaurant-location">Luxembourg</p>
-                    <p class="restaurant-description">Délices italiens revisités avec passion. Un voyage culinaire authentique à chaque bouchée.</p>
-                    <a href="https://search.google.com/local/writereview?placeid=ChIJF62EKABJlUcRZW5S26CjnoI" target="_blank" class="review-btn">
-                        <span>⭐</span> Laisser un avis
-                    </a>
-                </div>
-            </div>
-
-            <div class="restaurant-card">
-                <div class="restaurant-image-wrapper">
-                    <img src="mercato.jpg" alt="Il Mercato" class="restaurant-image">
-                    <div class="restaurant-image-overlay"></div>
-                </div>
-                <div class="restaurant-info">
-                    <div class="restaurant-logo-wrapper">
-                        <div class="restaurant-logo-container">
-                            <img src="446215405_760611436142259_6999356268202875394_n.jpg" alt="Il Mercato Logo">
-                        </div>
-                    </div>
-                    <h3 class="restaurant-name">Il Mercato</h3>
-                    <p class="restaurant-location">Luxembourg</p>
-                    <p class="restaurant-description">Marché urbain à l'italienne. Fraîcheur, qualité et authenticité pour une expérience inoubliable.</p>
-                    <a href="https://search.google.com/local/writereview?placeid=ChIJtcsSWQNPlUcR9YgqldycRRA" target="_blank" class="review-btn">
-                        <span>⭐</span> Laisser un avis
-                    </a>
-                </div>
-            </div>
-
-            <div class="restaurant-card">
-                <div class="restaurant-image-wrapper">
-                    <img src="Rotisserie.jpg" alt="La Rôtisserie Ardennaise" class="restaurant-image">
-                    <div class="restaurant-image-overlay"></div>
-                </div>
-                <div class="restaurant-info">
-                    <div class="restaurant-logo-wrapper">
-                        <div class="restaurant-logo-container">
-                            <img src="123747115_366375771279539_5404328722792594066_n.jpg" alt="La Rôtisserie Ardennaise Logo">
-                        </div>
-                    </div>
-                    <h3 class="restaurant-name">La Rôtisserie Ardennaise</h3>
-                    <p class="restaurant-location">Luxembourg</p>
-                    <p class="restaurant-description">Traditions des Ardennes, excellence gastronomique. Viandes sélectionnées et préparées avec soin.</p>
-                    <a href="http://search.google.com/local/writereview?placeid=ChIJv_ZOGytJlUcRp1K0RUL2MKQ" target="_blank" class="review-btn">
-                        <span>⭐</span> Laisser un avis
-                    </a>
+                <div class="benefit-card">
+                    <div class="benefit-icon"></div>
+                    <h3 class="benefit-title">Communauté inspirante</h3>
+                    <p class="benefit-description">Guidez les épicuriens vers leurs prochaines découvertes gastronomiques.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- RESTAURANTS SECTION (HIDDEN BY DEFAULT) -->
+    <section class="restaurants-section" id="restaurants">
+        <div class="restaurants-container">
+            <div class="restaurants-header">
+                <h2 class="restaurants-title">Nos adresses</h2>
+                <p class="restaurants-subtitle">Réservation ou témoignage</p>
+            </div>
+
+            <div class="restaurants-grid">
+                <div class="restaurant-card">
+                    <div class="restaurant-image-wrapper">
+                        <img src="come-a-la-maison.jpg" alt="Come à la maison" class="restaurant-image">
+                        <div class="restaurant-image-overlay"></div>
+                    </div>
+                    <div class="restaurant-info">
+                        <div class="restaurant-logo-wrapper">
+                            <div class="restaurant-logo-container">
+                                <img src="come-a-la-maison-groupe-come_Plan-de-travail-1.jpg" alt="Come à la maison Logo">
+                            </div>
+                        </div>
+                        <h3 class="restaurant-name">Come à la maison</h3>
+                        <p class="restaurant-location">Luxembourg</p>
+                        <p class="restaurant-description">L'authenticité italienne au cœur de la ville. Saveurs méditerranéennes et accueil chaleureux.</p>
+                        <div class="restaurant-btn-group">
+                            <a href="https://www.comealamaison.lu/" target="_blank" class="reserve-btn">
+                                Réserver
+                            </a>
+                            <a href="https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE" target="_blank" class="review-btn-secondary">
+                                Partager mon avis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="restaurant-card">
+                    <div class="restaurant-image-wrapper">
+                        <img src="brasserie-des-nations.jpg" alt="Brasserie des Nations" class="restaurant-image">
+                        <div class="restaurant-image-overlay"></div>
+                    </div>
+                    <div class="restaurant-info">
+                        <div class="restaurant-logo-wrapper">
+                            <div class="restaurant-logo-container">
+                                <img src="611644101_17843493915670666_4965556442638396968_n.jpg" alt="Brasserie des Nations Logo">
+                            </div>
+                        </div>
+                        <h3 class="restaurant-name">Brasserie des Nations</h3>
+                        <p class="restaurant-location">Luxembourg</p>
+                        <p class="restaurant-description">Atmosphère conviviale, cuisine généreuse et service impeccable. L'excellence à chaque visite.</p>
+                        <div class="restaurant-btn-group">
+                            <a href="https://www.google.com/search?q=brasserie+des+nations" target="_blank" class="reserve-btn">
+                                Réserver
+                            </a>
+                            <a href="https://search.google.com/local/writereview?placeid=ChIJGUyhu9RIlUcRkvtPLgshxR4" target="_blank" class="review-btn-secondary">
+                                Partager mon avis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="restaurant-card">
+                    <div class="restaurant-image-wrapper">
+                        <img src="Ceruzzi.jpg" alt="Ceruzzi" class="restaurant-image">
+                        <div class="restaurant-image-overlay"></div>
+                    </div>
+                    <div class="restaurant-info">
+                        <div class="restaurant-logo-wrapper">
+                            <div class="restaurant-logo-container">
+                                <img src="449203847_1242257060481280_2284347406235910194_n.jpg" alt="Ceruzzi Logo">
+                            </div>
+                        </div>
+                        <h3 class="restaurant-name">Ceruzzi</h3>
+                        <p class="restaurant-location">Luxembourg</p>
+                        <p class="restaurant-description">Délices italiens revisités avec passion. Un voyage culinaire authentique à chaque bouchée.</p>
+                        <div class="restaurant-btn-group">
+                            <a href="https://ceruzzi.lu/" target="_blank" class="reserve-btn">
+                                Réserver
+                            </a>
+                            <a href="https://search.google.com/local/writereview?placeid=ChIJF62EKABJlUcRZW5S26CjnoI" target="_blank" class="review-btn-secondary">
+                                Partager mon avis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="restaurant-card">
+                    <div class="restaurant-image-wrapper">
+                        <img src="mercato.jpg" alt="Il Mercato" class="restaurant-image">
+                        <div class="restaurant-image-overlay"></div>
+                    </div>
+                    <div class="restaurant-info">
+                        <div class="restaurant-logo-wrapper">
+                            <div class="restaurant-logo-container">
+                                <img src="446215405_760611436142259_6999356268202875394_n.jpg" alt="Il Mercato Logo">
+                            </div>
+                        </div>
+                        <h3 class="restaurant-name">Il Mercato</h3>
+                        <p class="restaurant-location">Luxembourg</p>
+                        <p class="restaurant-description">Marché urbain à l'italienne. Fraîcheur, qualité et authenticité pour une expérience inoubliable.</p>
+                        <div class="restaurant-btn-group">
+                            <a href="https://ilmercato.lu/" target="_blank" class="reserve-btn">
+                                Réserver
+                            </a>
+                            <a href="https://search.google.com/local/writereview?placeid=ChIJtcsSWQNPlUcR9YgqldycRRA" target="_blank" class="review-btn-secondary">
+                                Partager mon avis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="restaurant-card">
+                    <div class="restaurant-image-wrapper">
+                        <img src="Rotisserie.jpg" alt="La Rôtisserie Ardennaise" class="restaurant-image">
+                        <div class="restaurant-image-overlay"></div>
+                    </div>
+                    <div class="restaurant-info">
+                        <div class="restaurant-logo-wrapper">
+                            <div class="restaurant-logo-container">
+                                <img src="123747115_366375771279539_5404328722792594066_n.jpg" alt="La Rôtisserie Ardennaise Logo">
+                            </div>
+                        </div>
+                        <h3 class="restaurant-name">La Rôtisserie Ardennaise</h3>
+                        <p class="restaurant-location">Luxembourg</p>
+                        <p class="restaurant-description">Traditions des Ardennes, excellence gastronomique. Viandes sélectionnées et préparées avec soin.</p>
+                        <div class="restaurant-btn-group">
+                            <a href="https://www.rotisserie-ardennaise.com/" target="_blank" class="reserve-btn">
+                                Réserver
+                            </a>
+                            <a href="http://search.google.com/local/writereview?placeid=ChIJv_ZOGytJlUcRp1K0RUL2MKQ" target="_blank" class="review-btn-secondary">
+                                Partager mon avis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="footer-top">
                 <div class="footer-section">
-                    <h3>Nos Restaurants</h3>
+                    <h3>Nos Adresses</h3>
                     <ul>
                         <li><a href="https://www.comealamaison.lu/" target="_blank">Come à la maison</a></li>
                         <li><a href="https://www.google.com/search?q=brasserie+des+nations" target="_blank">Brasserie des Nations</a></li>
@@ -1217,7 +1241,7 @@
         window.addEventListener('load', function() {
             setTimeout(function() {
                 popup.classList.add('active');
-            }, 1200);
+            }, 2000);
         });
 
         function closePopup() {
@@ -1232,6 +1256,7 @@
 
         popupCta.addEventListener('click', function() {
             closePopup();
+            showRestaurants();
         });
 
         popup.addEventListener('click', function(e) {
@@ -1244,6 +1269,34 @@
             if (e.key === 'Escape' && popup.classList.contains('active')) {
                 closePopup();
             }
+        });
+
+        // Show restaurants section
+        const restaurantsSection = document.getElementById('restaurants');
+        const mainCta = document.getElementById('mainCta');
+        const secondaryCta = document.getElementById('secondaryCta');
+
+        function showRestaurants() {
+            restaurantsSection.classList.add('visible');
+            restaurantsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        mainCta.addEventListener('click', function(e) {
+            e.preventDefault();
+            showRestaurants();
+        });
+
+        secondaryCta.addEventListener('click', function(e) {
+            e.preventDefault();
+            showRestaurants();
+        });
+
+        // Also show restaurants when clicking any anchor link to #restaurants
+        document.querySelectorAll('a[href="#restaurants"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                showRestaurants();
+            });
         });
 
         // Scroll to Top Button
@@ -1261,17 +1314,6 @@
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
-            });
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
             });
         });
     </script>
