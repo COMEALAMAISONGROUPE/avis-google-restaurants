@@ -154,11 +154,15 @@
         }
 
         .popup-icon {
-            width: 1px;
-            height: 60px;
-            margin: 0 auto 40px;
-            background: var(--accent-gold);
-            opacity: 0.3;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: floatGently 3s ease-in-out infinite;
+        }
+
+        @keyframes floatGently {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
         }
 
         .popup-title {
@@ -181,7 +185,7 @@
 
         .popup-highlight {
             background: var(--gray-light);
-            padding: 20px 30px;
+            padding: 22px 30px;
             margin: 35px 0;
             font-weight: 500;
             font-size: 0.95rem;
@@ -189,6 +193,35 @@
             border-left: 2px solid var(--accent-gold);
             text-align: left;
             color: var(--gray-dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .popup-highlight-emoji {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .popup-benefits {
+            text-align: left;
+            margin: 30px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .popup-benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
+        .popup-benefit-emoji {
+            font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
         .popup-cta {
@@ -468,11 +501,10 @@
         }
 
         .benefit-icon {
-            width: 1px;
-            height: 50px;
-            background: var(--accent-gold);
-            margin: 0 auto 30px;
-            opacity: 0.3;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            opacity: 0.85;
+            display: block;
         }
 
         .benefit-title {
@@ -861,6 +893,10 @@
                 font-size: 0.9rem;
             }
 
+            .popup-icon {
+                font-size: 2.5rem;
+            }
+
             .hero {
                 padding: 120px 20px 50px;
             }
@@ -906,6 +942,10 @@
             .benefits-grid {
                 grid-template-columns: 1fr;
                 gap: 35px;
+            }
+
+            .benefit-icon {
+                font-size: 2.5rem;
             }
 
             .restaurants-section {
@@ -998,12 +1038,28 @@
             <div class="popup-header-decoration"></div>
             <button class="popup-close" id="closePopup" aria-label="Fermer"></button>
             <div class="popup-content">
-                <div class="popup-icon"></div>
+                <div class="popup-icon">✨</div>
                 <h2 class="popup-title">Partagez votre moment d'exception</h2>
                 <p class="popup-subtitle">Votre expérience inspire les autres et enrichit notre engagement vers l'excellence.</p>
 
                 <div class="popup-highlight">
-                    Chaque semaine, un brunch pour deux personnes est offert à l'un de nos contributeurs.
+                    <span class="popup-highlight-emoji">🎁</span>
+                    <span>Chaque semaine, un brunch pour deux personnes est offert à l'un de nos contributeurs.</span>
+                </div>
+
+                <div class="popup-benefits">
+                    <div class="popup-benefit-item">
+                        <span class="popup-benefit-emoji">✓</span>
+                        <span>Guidez les épicuriens vers leurs prochaines découvertes</span>
+                    </div>
+                    <div class="popup-benefit-item">
+                        <span class="popup-benefit-emoji">✓</span>
+                        <span>Participez au tirage au sort hebdomadaire</span>
+                    </div>
+                    <div class="popup-benefit-item">
+                        <span class="popup-benefit-emoji">✓</span>
+                        <span>Contribuez à l'évolution de nos expériences</span>
+                    </div>
                 </div>
 
                 <a href="#restaurants" class="popup-cta" id="popupCta">Partager mon expérience</a>
@@ -1040,19 +1096,19 @@
 
             <div class="benefits-grid">
                 <div class="benefit-card">
-                    <div class="benefit-icon"></div>
+                    <span class="benefit-icon">🎁</span>
                     <h3 class="benefit-title">Récompenses exclusives</h3>
                     <p class="benefit-description">Participez chaque semaine au tirage au sort pour remporter un brunch gastronomique pour deux.</p>
                 </div>
 
                 <div class="benefit-card">
-                    <div class="benefit-icon"></div>
+                    <span class="benefit-icon">💎</span>
                     <h3 class="benefit-title">Influence directe</h3>
                     <p class="benefit-description">Vos retours façonnent notre offre et affinent chaque détail de nos expériences culinaires.</p>
                 </div>
 
                 <div class="benefit-card">
-                    <div class="benefit-icon"></div>
+                    <span class="benefit-icon">🌟</span>
                     <h3 class="benefit-title">Communauté inspirante</h3>
                     <p class="benefit-description">Guidez les épicuriens vers leurs prochaines découvertes gastronomiques.</p>
                 </div>
@@ -1216,7 +1272,7 @@
             <div class="footer-bottom">
                 <p>&copy; 2026 Come à la maison & co. Tous droits réservés.</p>
             </div>
-        </div>
+        </footer>
     </footer>
 
     <!-- SCROLL TO TOP BUTTON -->
