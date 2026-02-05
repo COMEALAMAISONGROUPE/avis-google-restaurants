@@ -224,8 +224,17 @@
             flex-shrink: 0;
         }
 
+        .popup-cta-wrapper {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
         .popup-cta {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             padding: 16px 45px;
             background: var(--black);
             color: var(--white);
@@ -239,11 +248,23 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             border-radius: 0;
+            text-align: center;
         }
 
         .popup-cta:hover {
             background: transparent;
             color: var(--black);
+        }
+
+        .popup-cta-emoji {
+            font-size: 1rem;
+            display: inline-block;
+            line-height: 1;
+        }
+
+        .popup-cta span:not(.popup-cta-emoji) {
+            display: inline-block;
+            text-align: center;
         }
 
         .popup-secondary {
@@ -382,8 +403,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 18px 50px;
+            position: relative;
+            padding: 18px 50px 18px 60px;
             background: var(--white);
             color: var(--black);
             border: 1px solid var(--white);
@@ -396,11 +417,25 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             border-radius: 0;
+            text-align: center;
         }
 
         .hero-cta-primary:hover {
             background: transparent;
             color: var(--white);
+        }
+
+        .hero-cta-emoji {
+            position: absolute;
+            left: 30px;
+            font-size: 1rem;
+            display: inline-block;
+            line-height: 1;
+        }
+
+        .hero-cta-primary span:not(.hero-cta-emoji) {
+            display: inline-block;
+            text-align: center;
         }
 
         .hero-cta-secondary {
@@ -756,7 +791,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
             padding: 15px 28px;
             background: transparent;
@@ -776,6 +811,17 @@
 
         .review-btn-secondary:hover {
             border-color: var(--black);
+        }
+
+        .review-btn-emoji {
+            font-size: 0.95rem;
+            display: inline-block;
+            line-height: 1;
+        }
+
+        .review-btn-secondary span:not(.review-btn-emoji) {
+            display: inline-block;
+            text-align: center;
         }
 
         /* FOOTER */
@@ -926,6 +972,14 @@
                 font-size: 0.8rem;
             }
 
+            .hero-cta-primary {
+                padding-left: 45px;
+            }
+
+            .hero-cta-emoji {
+                left: 20px;
+            }
+
             .why-section {
                 padding: 80px 20px;
             }
@@ -1062,7 +1116,12 @@
                     </div>
                 </div>
 
-                <a href="#restaurants" class="popup-cta" id="popupCta">Partager mon expérience</a>
+                <div class="popup-cta-wrapper">
+                    <a href="#restaurants" class="popup-cta" id="popupCta">
+                        <span class="popup-cta-emoji">🌟</span>
+                        <span>Partager mon expérience</span>
+                    </a>
+                </div>
                 <a href="#" class="popup-secondary" id="skipPopup">Plus tard</a>
             </div>
         </div>
@@ -1079,7 +1138,8 @@
 
             <div class="hero-cta-group">
                 <a href="#restaurants" class="hero-cta-primary" id="mainCta">
-                    Partager mon expérience
+                    <span class="hero-cta-emoji">🌟</span>
+                    <span>Partager mon expérience</span>
                 </a>
                 <a href="#restaurants" class="hero-cta-secondary" id="secondaryCta">
                     Découvrir nos adresses
@@ -1144,7 +1204,8 @@
                                 Réserver
                             </a>
                             <a href="https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE" target="_blank" class="review-btn-secondary">
-                                Partager mon avis
+                                <span class="review-btn-emoji">🌟</span>
+                                <span>Partager mon avis</span>
                             </a>
                         </div>
                     </div>
@@ -1169,7 +1230,8 @@
                                 Réserver
                             </a>
                             <a href="https://search.google.com/local/writereview?placeid=ChIJGUyhu9RIlUcRkvtPLgshxR4" target="_blank" class="review-btn-secondary">
-                                Partager mon avis
+                                <span class="review-btn-emoji">🌟</span>
+                                <span>Partager mon avis</span>
                             </a>
                         </div>
                     </div>
@@ -1194,7 +1256,8 @@
                                 Réserver
                             </a>
                             <a href="https://search.google.com/local/writereview?placeid=ChIJF62EKABJlUcRZW5S26CjnoI" target="_blank" class="review-btn-secondary">
-                                Partager mon avis
+                                <span class="review-btn-emoji">🌟</span>
+                                <span>Partager mon avis</span>
                             </a>
                         </div>
                     </div>
@@ -1219,7 +1282,8 @@
                                 Réserver
                             </a>
                             <a href="https://search.google.com/local/writereview?placeid=ChIJtcsSWQNPlUcR9YgqldycRRA" target="_blank" class="review-btn-secondary">
-                                Partager mon avis
+                                <span class="review-btn-emoji">🌟</span>
+                                <span>Partager mon avis</span>
                             </a>
                         </div>
                     </div>
@@ -1244,7 +1308,8 @@
                                 Réserver
                             </a>
                             <a href="http://search.google.com/local/writereview?placeid=ChIJv_ZOGytJlUcRp1K0RUL2MKQ" target="_blank" class="review-btn-secondary">
-                                Partager mon avis
+                                <span class="review-btn-emoji">🌟</span>
+                                <span>Partager mon avis</span>
                             </a>
                         </div>
                     </div>
