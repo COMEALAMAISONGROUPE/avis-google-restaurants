@@ -89,6 +89,8 @@
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: var(--shadow-xl);
             overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .popup-overlay.active .popup-container {
@@ -104,8 +106,8 @@
         /* CLOSE BUTTON */
         .popup-close {
             position: absolute;
-            top: 25px;
-            right: 25px;
+            top: 20px;
+            right: 20px;
             width: 36px;
             height: 36px;
             background: transparent;
@@ -149,13 +151,13 @@
 
         /* POPUP CONTENT */
         .popup-content {
-            padding: 60px 50px 50px;
+            padding: 50px 40px 40px;
             text-align: center;
         }
 
         .popup-icon {
-            font-size: 3rem;
-            margin-bottom: 30px;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
             opacity: 0.9;
             animation: floatGently 3s ease-in-out infinite;
         }
@@ -167,28 +169,28 @@
 
         .popup-title {
             font-family: 'Crimson Text', serif;
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             line-height: 1.3;
             color: var(--black);
             letter-spacing: -0.5px;
         }
 
         .popup-subtitle {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--gray-medium);
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             line-height: 1.7;
             font-weight: 400;
         }
 
         .popup-highlight {
             background: var(--gray-light);
-            padding: 22px 30px;
-            margin: 35px 0;
+            padding: 20px 25px;
+            margin: 30px 0;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             letter-spacing: 0.3px;
             border-left: 2px solid var(--accent-gold);
             text-align: left;
@@ -205,7 +207,7 @@
 
         .popup-benefits {
             text-align: left;
-            margin: 30px 0;
+            margin: 25px 0;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -215,12 +217,12 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--gray-dark);
         }
 
         .popup-benefit-emoji {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             flex-shrink: 0;
         }
 
@@ -228,6 +230,7 @@
             display: flex;
             justify-content: center;
             width: 100%;
+            margin-top: 30px;
         }
 
         .popup-cta {
@@ -235,12 +238,12 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 16px 45px;
+            padding: 16px 40px;
             background: var(--black);
             color: var(--white);
             border: 1px solid var(--black);
             font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 1.5px;
             text-decoration: none;
@@ -249,6 +252,8 @@
             text-transform: uppercase;
             border-radius: 0;
             text-align: center;
+            width: 100%;
+            max-width: 100%;
         }
 
         .popup-cta:hover {
@@ -269,7 +274,7 @@
 
         .popup-secondary {
             display: block;
-            margin-top: 20px;
+            margin-top: 18px;
             padding: 12px;
             font-size: 0.85rem;
             color: var(--gray-medium);
@@ -307,7 +312,7 @@
             background-position: center;
             background-repeat: no-repeat;
             z-index: 0;
-            filter: brightness(0.35) grayscale(0.2);
+            filter: brightness(0.55) grayscale(0.2);
         }
 
         .hero::after {
@@ -317,7 +322,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.4) 100%);
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 100%);
             z-index: 1;
         }
 
@@ -371,19 +376,19 @@
 
         .hero-title {
             font-family: 'Crimson Text', serif;
-            font-size: clamp(2.5rem, 7vw, 4.2rem);
+            font-size: clamp(2.2rem, 7vw, 4.2rem);
             font-weight: 400;
             color: var(--white);
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             line-height: 1.2;
             letter-spacing: -0.5px;
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.15rem);
-            color: rgba(255,255,255,0.85);
-            margin-bottom: 50px;
-            line-height: 1.8;
+            font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 40px;
+            line-height: 1.7;
             font-weight: 300;
             max-width: 650px;
             margin-left: auto;
@@ -395,21 +400,20 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
-            margin-top: 50px;
+            gap: 14px;
+            margin-top: 40px;
         }
 
         .hero-cta-primary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            padding: 18px 50px 18px 60px;
+            padding: 16px 40px;
             background: var(--white);
             color: var(--black);
             border: 1px solid var(--white);
             font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 1.5px;
             text-decoration: none;
@@ -418,6 +422,8 @@
             text-transform: uppercase;
             border-radius: 0;
             text-align: center;
+            width: 100%;
+            max-width: 320px;
         }
 
         .hero-cta-primary:hover {
@@ -425,30 +431,17 @@
             color: var(--white);
         }
 
-        .hero-cta-emoji {
-            position: absolute;
-            left: 30px;
-            font-size: 1rem;
-            display: inline-block;
-            line-height: 1;
-        }
-
-        .hero-cta-primary span:not(.hero-cta-emoji) {
-            display: inline-block;
-            text-align: center;
-        }
-
         .hero-cta-secondary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 16px 45px;
+            padding: 15px 40px;
             background: transparent;
             color: var(--white);
-            border: 1px solid rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,255,255,0.4);
             font-family: 'Inter', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
             letter-spacing: 1.5px;
             text-decoration: none;
@@ -456,6 +449,8 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             border-radius: 0;
+            width: 100%;
+            max-width: 320px;
         }
 
         .hero-cta-secondary:hover {
@@ -465,7 +460,7 @@
 
         /* WHY SECTION */
         .why-section {
-            padding: 120px 30px;
+            padding: 80px 25px;
             background: var(--white);
         }
 
@@ -477,9 +472,9 @@
 
         .section-title {
             font-family: 'Crimson Text', serif;
-            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-size: clamp(1.8rem, 5vw, 3.2rem);
             font-weight: 500;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             line-height: 1.3;
             position: relative;
             display: inline-block;
@@ -489,20 +484,20 @@
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -15px;
+            bottom: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 50px;
             height: 1px;
             background: var(--accent-gold);
         }
 
         .section-subtitle {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--gray-medium);
-            line-height: 1.8;
-            margin-bottom: 70px;
-            margin-top: 40px;
+            line-height: 1.7;
+            margin-bottom: 50px;
+            margin-top: 35px;
             max-width: 650px;
             margin-left: auto;
             margin-right: auto;
@@ -511,14 +506,14 @@
 
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 50px;
-            margin-top: 70px;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 50px;
         }
 
         .benefit-card {
             background: var(--white);
-            padding: 50px 35px;
+            padding: 40px 30px;
             border-radius: 0;
             border: 1px solid var(--border);
             transition: all 0.3s ease;
@@ -536,17 +531,17 @@
         }
 
         .benefit-icon {
-            font-size: 2.8rem;
-            margin-bottom: 25px;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
             opacity: 0.85;
             display: block;
         }
 
         .benefit-title {
             font-family: 'Crimson Text', serif;
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: 500;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: var(--black);
             letter-spacing: -0.3px;
         }
@@ -554,13 +549,13 @@
         .benefit-description {
             font-size: 0.9rem;
             color: var(--gray-medium);
-            line-height: 1.8;
+            line-height: 1.7;
             font-weight: 300;
         }
 
         /* RESTAURANTS SECTION - HIDDEN BY DEFAULT */
         .restaurants-section {
-            padding: 60px 30px 100px;
+            padding: 50px 20px 80px;
             background: var(--gray-light);
             display: none;
             animation: fadeIn 0.5s ease;
@@ -582,21 +577,21 @@
 
         .restaurants-header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .restaurants-title {
             font-family: 'Crimson Text', serif;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-size: clamp(1.6rem, 4vw, 2.5rem);
             font-weight: 500;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             line-height: 1.3;
             color: var(--black);
             letter-spacing: -0.5px;
         }
 
         .restaurants-subtitle {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--gray-medium);
             line-height: 1.5;
             font-weight: 300;
@@ -605,8 +600,8 @@
 
         .restaurants-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
+            grid-template-columns: 1fr;
+            gap: 30px;
         }
 
         .restaurant-card {
@@ -638,14 +633,14 @@
 
         .restaurant-card:hover {
             border-color: var(--accent-gold);
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
         .restaurant-image-wrapper {
             position: relative;
             overflow: hidden;
-            height: 320px;
+            height: 280px;
         }
 
         .restaurant-image {
@@ -678,7 +673,7 @@
         }
 
         .restaurant-info {
-            padding: 45px 35px 40px;
+            padding: 40px 25px 35px;
             background: var(--white);
         }
 
@@ -686,15 +681,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 30px;
-            margin-top: -80px;
+            margin-bottom: 25px;
+            margin-top: -70px;
             position: relative;
             z-index: 2;
         }
 
         .restaurant-logo-container {
-            width: 110px;
-            height: 110px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             background: var(--white);
             display: flex;
@@ -721,9 +716,9 @@
 
         .restaurant-name {
             font-family: 'Crimson Text', serif;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 500;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             letter-spacing: -0.3px;
             text-align: center;
             transition: color 0.3s ease;
@@ -735,9 +730,9 @@
         }
 
         .restaurant-location {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--gray-medium);
-            margin-bottom: 22px;
+            margin-bottom: 18px;
             line-height: 1.5;
             text-align: center;
             letter-spacing: 2px;
@@ -746,10 +741,10 @@
         }
 
         .restaurant-description {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--gray-medium);
-            margin-bottom: 30px;
-            line-height: 1.8;
+            margin-bottom: 25px;
+            line-height: 1.7;
             text-align: center;
             font-weight: 300;
         }
@@ -766,12 +761,12 @@
             justify-content: center;
             gap: 10px;
             width: 100%;
-            padding: 16px 32px;
+            padding: 16px 30px;
             background: var(--black);
             color: var(--white);
             border: 1px solid var(--black);
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 1.5px;
             text-decoration: none;
@@ -798,7 +793,7 @@
             color: var(--black);
             border: 1px solid var(--border);
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 1.5px;
             text-decoration: none;
@@ -814,7 +809,7 @@
         }
 
         .review-btn-emoji {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             display: inline-block;
             line-height: 1;
         }
@@ -828,7 +823,7 @@
         footer {
             background: var(--black);
             color: var(--white);
-            padding: 80px 30px 40px;
+            padding: 60px 25px 35px;
         }
 
         .footer-content {
@@ -839,17 +834,17 @@
         .footer-top {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 50px;
-            margin-bottom: 60px;
-            padding-bottom: 60px;
+            gap: 40px;
+            margin-bottom: 50px;
+            padding-bottom: 50px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .footer-section h3 {
             font-family: 'Crimson Text', serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 500;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             color: var(--white);
             letter-spacing: 0.5px;
         }
@@ -859,13 +854,13 @@
         }
 
         .footer-section li {
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
 
         .footer-section a {
             color: rgba(255,255,255,0.5);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: all 0.3s ease;
             display: inline-block;
             font-weight: 300;
@@ -883,7 +878,7 @@
 
         .footer-bottom p {
             color: rgba(255,255,255,0.4);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 300;
             letter-spacing: 0.5px;
         }
@@ -891,10 +886,10 @@
         /* SCROLL TO TOP BUTTON */
         .scroll-to-top {
             position: fixed;
-            bottom: 40px;
-            right: 40px;
-            width: 50px;
-            height: 50px;
+            bottom: 25px;
+            right: 25px;
+            width: 48px;
+            height: 48px;
             background: var(--black);
             color: var(--white);
             border: 1px solid var(--black);
@@ -903,7 +898,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 300;
             opacity: 0;
             visibility: hidden;
@@ -921,151 +916,104 @@
             box-shadow: var(--shadow-lg);
         }
 
-        /* RESPONSIVE MOBILE */
-        @media (max-width: 768px) {
+        /* MOBILE OPTIMIZATIONS */
+        @media (max-width: 480px) {
             .popup-container {
-                margin: 0 15px;
+                margin: 10px;
+                max-height: 85vh;
             }
 
             .popup-content {
-                padding: 50px 35px 40px;
+                padding: 45px 25px 35px;
             }
 
             .popup-title {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
 
             .popup-subtitle {
-                font-size: 0.9rem;
-            }
-
-            .popup-icon {
-                font-size: 2.5rem;
-            }
-
-            .hero {
-                padding: 120px 20px 50px;
-            }
-
-            .hero-logo img {
-                height: 75px;
-            }
-
-            .hero-content {
-                margin-top: 40px;
-            }
-
-            .hero-title {
-                font-size: 2rem;
-                margin-bottom: 30px;
-            }
-
-            .hero-subtitle {
-                font-size: 0.95rem;
-                margin-bottom: 40px;
-            }
-
-            .hero-cta-primary, .hero-cta-secondary {
-                width: 100%;
-                max-width: 300px;
-                padding: 16px 35px;
-                font-size: 0.8rem;
-            }
-
-            .hero-cta-primary {
-                padding-left: 45px;
-            }
-
-            .hero-cta-emoji {
-                left: 20px;
-            }
-
-            .why-section {
-                padding: 80px 20px;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .section-subtitle {
-                font-size: 0.9rem;
-                margin-bottom: 50px;
-            }
-
-            .benefits-grid {
-                grid-template-columns: 1fr;
-                gap: 35px;
-            }
-
-            .benefit-icon {
-                font-size: 2.5rem;
-            }
-
-            .restaurants-section {
-                padding: 40px 20px 70px;
-            }
-
-            .restaurants-header {
-                margin-bottom: 35px;
-            }
-
-            .restaurants-title {
-                font-size: 1.6rem;
-                margin-bottom: 10px;
-            }
-
-            .restaurants-subtitle {
                 font-size: 0.85rem;
             }
 
-            .restaurants-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            .popup-icon {
+                font-size: 2.2rem;
             }
 
-            .restaurant-image-wrapper {
-                height: 280px;
+            .popup-highlight {
+                padding: 18px 20px;
+                font-size: 0.85rem;
             }
 
-            .restaurant-info {
-                padding: 40px 25px 35px;
+            .popup-benefit-item {
+                font-size: 0.8rem;
             }
 
-            .restaurant-name {
-                font-size: 1.4rem;
+            .popup-cta {
+                padding: 15px 35px;
+                font-size: 0.75rem;
             }
 
-            .restaurant-logo-wrapper {
-                margin-top: -70px;
+            .hero-logo img {
+                height: 70px;
             }
 
-            .restaurant-logo-container {
-                width: 100px;
-                height: 100px;
+            .hero-title {
+                font-size: 1.9rem;
             }
 
-            footer {
-                padding: 70px 20px 35px;
+            .hero-subtitle {
+                font-size: 0.9rem;
             }
 
-            .scroll-to-top {
-                bottom: 25px;
-                right: 25px;
-                width: 45px;
-                height: 45px;
+            .hero-cta-primary,
+            .hero-cta-secondary {
+                font-size: 0.75rem;
+                padding: 15px 35px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .benefit-card {
+                padding: 35px 25px;
             }
         }
 
         /* TABLET */
-        @media (min-width: 769px) and (max-width: 1024px) {
+        @media (min-width: 769px) {
+            .popup-content {
+                padding: 60px 50px 50px;
+            }
+
             .hero-logo {
                 left: 40px;
                 transform: none;
             }
 
+            .hero-cta-primary,
+            .hero-cta-secondary {
+                max-width: 350px;
+                padding: 18px 50px;
+                font-size: 0.85rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 40px;
+            }
+
             .restaurants-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 35px;
+            }
+
+            .why-section {
+                padding: 120px 30px;
+            }
+
+            .restaurants-section {
+                padding: 60px 30px 100px;
             }
         }
 
@@ -1078,6 +1026,11 @@
 
             .restaurants-grid {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 40px;
+            }
+
+            .restaurant-image-wrapper {
+                height: 320px;
             }
         }
     </style>
@@ -1138,8 +1091,7 @@
 
             <div class="hero-cta-group">
                 <a href="#restaurants" class="hero-cta-primary" id="mainCta">
-                    <span class="hero-cta-emoji">🌟</span>
-                    <span>Partager mon expérience</span>
+                    Partager mon expérience
                 </a>
                 <a href="#restaurants" class="hero-cta-secondary" id="secondaryCta">
                     Découvrir nos adresses
