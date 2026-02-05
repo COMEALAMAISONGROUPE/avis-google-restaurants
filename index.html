@@ -437,7 +437,7 @@
             background: rgba(255,255,255,0.05);
         }
 
-        /* WHY SECTION */
+        /* WHY SECTION - ULTRA COMPACT MOBILE */
         .why-section {
             padding: 80px 25px;
             background: var(--white);
@@ -896,8 +896,9 @@
             box-shadow: var(--shadow-lg);
         }
 
-        /* MOBILE OPTIMIZATIONS */
+        /* MOBILE OPTIMIZATIONS - ULTRA COMPACT */
         @media (max-width: 480px) {
+            /* POPUP */
             .popup-container {
                 margin: 15px;
             }
@@ -942,6 +943,7 @@
                 font-size: 0.8rem;
             }
 
+            /* HERO */
             .hero-logo img {
                 height: 70px;
             }
@@ -960,12 +962,50 @@
                 padding: 15px 35px;
             }
 
+            /* WHY SECTION - DRASTIQUEMENT RÉDUIT */
+            .why-section {
+                padding: 40px 20px 35px !important;
+            }
+
             .section-title {
-                font-size: 1.6rem;
+                font-size: 1.5rem !important;
+                margin-bottom: 10px !important;
+            }
+
+            .section-title::after {
+                bottom: -8px;
+                width: 35px;
+            }
+
+            .section-subtitle {
+                font-size: 0.8rem !important;
+                margin-bottom: 25px !important;
+                margin-top: 20px !important;
+                line-height: 1.5 !important;
+            }
+
+            .benefits-grid {
+                gap: 18px !important;
+                margin-top: 25px !important;
             }
 
             .benefit-card {
-                padding: 35px 25px;
+                padding: 25px 20px !important;
+            }
+
+            .benefit-icon {
+                font-size: 2rem !important;
+                margin-bottom: 12px !important;
+            }
+
+            .benefit-title {
+                font-size: 1.1rem !important;
+                margin-bottom: 8px !important;
+            }
+
+            .benefit-description {
+                font-size: 0.8rem !important;
+                line-height: 1.5 !important;
             }
         }
 
@@ -1095,7 +1135,7 @@
         </div>
     </section>
 
-    <!-- WHY SECTION -->
+    <!-- WHY SECTION - ULTRA COMPACT MOBILE -->
     <section class="why-section">
         <div class="why-container">
             <h2 class="section-title">Pourquoi votre voix compte</h2>
@@ -1350,7 +1390,7 @@
             setTimeout(function() {
                 // Sur mobile, scroller avec offset réduit pour voir toute la première carte
                 const isMobile = window.innerWidth <= 768;
-                const offset = isMobile ? 15 : 20;
+                const offset = isMobile ? 10 : 20;
                 const offsetPosition = restaurantsSection.offsetTop - offset;
                 window.scrollTo({
                     top: offsetPosition,
