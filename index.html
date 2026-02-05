@@ -534,7 +534,7 @@
 
         /* RESTAURANTS SECTION - HIDDEN BY DEFAULT */
         .restaurants-section {
-            padding: 30px 20px 80px;
+            padding: 25px 18px 80px;
             background: var(--gray-light);
             display: none;
             animation: fadeIn 0.5s ease;
@@ -556,8 +556,8 @@
 
         .restaurants-header {
             text-align: center;
-            margin-bottom: 35px;
-            padding-top: 10px;
+            margin-bottom: 28px;
+            padding-top: 8px;
         }
 
         .restaurants-title {
@@ -581,7 +581,7 @@
         .restaurants-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 30px;
+            gap: 25px;
         }
 
         .restaurant-card {
@@ -620,7 +620,7 @@
         .restaurant-image-wrapper {
             position: relative;
             overflow: hidden;
-            height: 280px;
+            height: 220px;
         }
 
         .restaurant-image {
@@ -653,7 +653,7 @@
         }
 
         .restaurant-info {
-            padding: 40px 25px 35px;
+            padding: 35px 20px 30px;
             background: var(--white);
         }
 
@@ -661,15 +661,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 25px;
-            margin-top: -70px;
+            margin-bottom: 18px;
+            margin-top: -60px;
             position: relative;
             z-index: 2;
         }
 
         .restaurant-logo-container {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             background: var(--white);
             display: flex;
@@ -696,9 +696,9 @@
 
         .restaurant-name {
             font-family: 'Crimson Text', serif;
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 500;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             letter-spacing: -0.3px;
             text-align: center;
             transition: color 0.3s ease;
@@ -710,10 +710,10 @@
         }
 
         .restaurant-location {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: var(--gray-medium);
-            margin-bottom: 18px;
-            line-height: 1.5;
+            margin-bottom: 12px;
+            line-height: 1.4;
             text-align: center;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -721,10 +721,10 @@
         }
 
         .restaurant-description {
-            font-size: 0.85rem;
+            font-size: 0.83rem;
             color: var(--gray-medium);
-            margin-bottom: 25px;
-            line-height: 1.7;
+            margin-bottom: 20px;
+            line-height: 1.6;
             text-align: center;
             font-weight: 300;
         }
@@ -732,7 +732,7 @@
         .restaurant-btn-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .reserve-btn {
@@ -1012,6 +1012,10 @@
             .restaurants-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 35px;
+            }
+
+            .restaurant-image-wrapper {
+                height: 280px;
             }
 
             .why-section {
@@ -1335,7 +1339,7 @@
             }
         });
 
-        // Show restaurants section with optimized scroll
+        // Show restaurants section with optimized mobile scroll
         const restaurantsSection = document.getElementById('restaurants');
         const mainCta = document.getElementById('mainCta');
         const secondaryCta = document.getElementById('secondaryCta');
@@ -1344,7 +1348,10 @@
             restaurantsSection.classList.add('visible');
             // Attendre que la section soit visible avant de scroller
             setTimeout(function() {
-                const offsetPosition = restaurantsSection.offsetTop - 20;
+                // Sur mobile, scroller avec offset réduit pour voir toute la première carte
+                const isMobile = window.innerWidth <= 768;
+                const offset = isMobile ? 15 : 20;
+                const offsetPosition = restaurantsSection.offsetTop - offset;
                 window.scrollTo({
                     top: offsetPosition,
                     behavior: 'smooth'
