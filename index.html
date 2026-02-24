@@ -1116,14 +1116,14 @@
                 </div>
                 <div id="lead-success-section" style="display:none;">
                     <div class="popup-icon">🎉</div>
-                    <h2 class="popup-title" style="color:#27ae60;">Votre code promo</h2>
+                    <h2 class="popup-title" style="color:#27ae60;">Merci <span id="leadPrenomDisplay"></span> !</h2>
                     <div class="popup-highlight" style="text-align:center;justify-content:center;border-left:2px solid #27ae60;background:#f0faf4;">
                         <span style="font-size:1.6rem;font-weight:bold;color:#27ae60;letter-spacing:4px;">VIPCLUB5</span>
                     </div>
-                    <p class="popup-subtitle">Présentez ce code lors de votre prochaine visite pour bénéficier de -5% sur votre addition.</p>
+                    <p class="popup-subtitle">Votre code <strong>VIPCLUB5</strong> sera envoyé par email. Présentez-le lors de votre prochaine visite pour -5% sur l'addition.</p><p class="popup-subtitle" style="margin-top:12px;font-weight:500;color:var(--black);">Votre avis compte énormément pour nous ! Aidez d'autres gourmands à nous découvrir.</p>
                     <div class="popup-cta-wrapper">
-                        <a href="#restaurants" class="popup-cta" id="popupCta">
-                            <span>Découvrir nos restaurants</span>
+                        <a href="#restaurants" class="popup-cta" id="popupCta" style="background:var(--accent-gold);border-color:var(--accent-gold);">
+                            <span>⭐ Laisser un avis Google</span>
                         </a>
                     </div>
                 </div>
@@ -1366,11 +1366,11 @@
             }).then(function() {
                 document.getElementById('lead-form-section').style.display = 'none';
                                 localStorage.setItem('leadCaptured', 'true');
-                document.getElementById('lead-success-section').style.display = 'block';
+                document.getElementById('leadPrenomDisplay').textContent = document.getElementById('leadPrenom').value; document.getElementById('lead-success-section').style.display = 'block';
                 document.getElementById('skipPopup').style.display = 'none';
             }).catch(function() {
                 document.getElementById('lead-form-section').style.display = 'none';
-                document.getElementById('lead-success-section').style.display = 'block';
+                document.getElementById('leadPrenomDisplay').textContent = document.getElementById('leadPrenom').value; document.getElementById('lead-success-section').style.display = 'block';
                 document.getElementById('skipPopup').style.display = 'none';
             });
         }
