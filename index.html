@@ -1089,26 +1089,43 @@
     <!-- SCROLL PROGRESS BAR -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- POPUP AVEC CONCOURS BRUNCH -->
+    <!-- POPUP LEAD CAPTURE -5% -->
     <div class="popup-overlay" id="reviewPopup">
         <div class="popup-container">
             <div class="popup-header-decoration"></div>
             <button class="popup-close" id="closePopup" aria-label="Fermer"></button>
             <div class="popup-content">
-                <div class="popup-icon">✨</div>
-                <h2 class="popup-title">Partagez votre expérience</h2>
-                <p class="popup-subtitle">Votre avis inspire les autres et enrichit notre engagement vers l'excellence.</p>
-
-                <div class="popup-highlight">
-                    <span class="popup-highlight-emoji">💬</span>
-                    <span>Un simple mot de votre part fait toute la différence pour notre équipe.</span>
+                <div id="lead-form-section">
+                    <div class="popup-icon">🎁</div>
+                    <h2 class="popup-title">-5% sur votre addition !</h2>
+                    <p class="popup-subtitle">Renseignez vos coordonnées pour recevoir votre code promo exclusif.</p>
+                    <form id="leadForm" onsubmit="submitLead(event)" style="text-align:left;margin-top:20px;">
+                        <input type="text" id="leadPrenom" placeholder="Votre prénom" required style="width:100%;padding:12px 16px;margin-bottom:10px;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;border-radius:0;">
+                        <input type="email" id="leadEmail" placeholder="Votre email" required style="width:100%;padding:12px 16px;margin-bottom:10px;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;border-radius:0;">
+                        <input type="tel" id="leadTelephone" placeholder="Votre téléphone" required style="width:100%;padding:12px 16px;margin-bottom:14px;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;border-radius:0;">
+                        <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:18px;font-size:0.75rem;color:var(--gray-medium);cursor:pointer;">
+                            <input type="checkbox" id="leadRgpd" required style="margin-top:2px;">
+                            <span>J'accepte de recevoir des offres par email et SMS. Désinscription possible à tout moment.</span>
+                        </label>
+                        <div class="popup-cta-wrapper">
+                            <button type="submit" class="popup-cta" id="leadSubmitBtn">
+                                <span>Je récupère mon -5%</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
-                <div class="popup-cta-wrapper">
-                    <a href="#restaurants" class="popup-cta" id="popupCta">
-                        </span>
-                        <span>Partager mon avis</span>
-                    </a>
+                <div id="lead-success-section" style="display:none;">
+                    <div class="popup-icon">🎉</div>
+                    <h2 class="popup-title" style="color:#27ae60;">Votre code promo</h2>
+                    <div class="popup-highlight" style="text-align:center;justify-content:center;border-left:2px solid #27ae60;background:#f0faf4;">
+                        <span style="font-size:1.6rem;font-weight:bold;color:#27ae60;letter-spacing:4px;">VIPCLUB5</span>
+                    </div>
+                    <p class="popup-subtitle">Présentez ce code lors de votre prochaine visite pour bénéficier de -5% sur votre addition.</p>
+                    <div class="popup-cta-wrapper">
+                        <a href="#restaurants" class="popup-cta" id="popupCta">
+                            <span>Découvrir nos restaurants</span>
+                        </a>
+                    </div>
                 </div>
                 <a href="#" class="popup-secondary" id="skipPopup">Plus tard</a>
             </div>
@@ -1304,7 +1321,7 @@
 
     <!-- MENTION LEGALE -->
     <div style="text-align:center;padding:8px 20px;opacity:0.04;font-size:9px;color:#666;user-select:none;">
-        Les avis sont libres et volontaires. Aucune contrepartie n'est offerte en échange d'un avis.
+                    Offre -5% soumise à conditions. Vos données sont collectées conformément au RGPD pour des communications marketing.
     </div>
 
     <!-- COPYRIGHT -->
@@ -1326,6 +1343,38 @@
             scrollProgress.style.width = progress + '%';
         });
 
+               // Lead Capture - Apps Script URL
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-GBbyySuEZZ-HA81xv_BjcedRA4CmvrP19-wOXjsr6hldkrhmEo2l7V-J67WEs4250g/exec';
+
+        function submitLead(e) {
+            e.preventDefault();
+            var btn = document.getElementById('leadSubmitBtn');
+            btn.querySelector('span').textContent = 'Envoi en cours...';
+            btn.disabled = true;
+            var data = {
+                prenom: document.getElementById('leadPrenom').value,
+                email: document.getElementById('leadEmail').value,
+                telephone: document.getElementById('leadTelephone').value,
+                code: 'VIPCLUB5',
+                source: 'popup-site'
+            };
+            fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            }).then(function() {
+                document.getElementById('lead-form-section').style.display = 'none';
+                document.getElementById('lead-success-section').style.display = 'block';
+                document.getElementById('skipPopup').style.display = 'none';
+            }).catch(function() {
+                document.getElementById('lead-form-section').style.display = 'none';
+                document.getElementById('lead-success-section').style.display = 'block';
+                document.getElementById('skipPopup').style.display = 'none';
+            });
+        }
+ 
+        
         // Popup functionality
         const popup = document.getElementById('reviewPopup');
         const closeBtn = document.getElementById('closePopup');
