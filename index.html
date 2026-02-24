@@ -1365,6 +1365,7 @@
                 body: JSON.stringify(data)
             }).then(function() {
                 document.getElementById('lead-form-section').style.display = 'none';
+                                localStorage.setItem('leadCaptured', 'true');
                 document.getElementById('lead-success-section').style.display = 'block';
                 document.getElementById('skipPopup').style.display = 'none';
             }).catch(function() {
@@ -1382,9 +1383,11 @@
         const popupCta = document.getElementById('popupCta');
 
         window.addEventListener('load', function() {
-            setTimeout(function() {
-                popup.classList.add('active');
-            }, 2000);
+if (!localStorage.getItem('leadCaptured')) {
+                setTimeout(function() {
+                    popup.classList.add('active');
+                }, 2000);
+            }
         });
 
         function closePopup() {
