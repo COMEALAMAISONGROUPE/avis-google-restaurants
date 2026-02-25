@@ -1119,19 +1119,19 @@
                     <div id="timer-section">
                         <div class="popup-icon">⏳</div>
                         <h2 class="popup-title" style="color:#27ae60;">Merci <span id="leadPrenomDisplay"></span> !</h2>
-                        <p class="popup-subtitle">Votre code promo <strong>VIPCLUB5</strong> vous sera envoyé par email dans :</p>
+                        <p class="popup-subtitle">Votre code promo <strong>VIPCLUB5</strong> sera disponible dans :</p>
                         <div style="text-align:center;margin:25px 0;">
-                            <span id="countdownTimer" style="font-size:2.5rem;font-weight:700;color:var(--accent-gold);font-family:'Crimson Text',serif;letter-spacing:2px;">05:00</span>
+                            <span id="countdownTimer" style="font-size:2.5rem;font-weight:700;color:var(--accent-gold);font-family:'Crimson Text',serif;letter-spacing:2px;">01:00</span>
                         </div>
                         <div style="background:var(--gray-light);padding:18px 22px;margin:20px 0;border-left:2px solid var(--accent-gold);text-align:left;">
-                            <p style="font-size:0.85rem;color:var(--gray-dark);margin:0;"><strong>⚡ Accès instantané :</strong> Laissez un avis Google et recevez votre code immédiatement par email !</p>
+                            <p style="font-size:0.85rem;color:var(--gray-dark);margin:0;"><strong>⚡ Accès instantané :</strong> Laissez un avis Google et débloquez votre code instantanément !</p>
                         </div>
                         <div class="popup-cta-wrapper">
                             <a href="https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE" target="_blank" id="reviewForCodeBtn" class="popup-cta" onclick="reviewForInstantCode();" style="background:var(--accent-gold);border-color:var(--accent-gold);color:#fff;">
                                 <span>⭐ LAISSER UN AVIS & RECEVOIR MON CODE</span>
                             </a>
                         </div>
-                        <a href="#" class="popup-secondary" onclick="closePopup();return false;">Je patiente 5 minutes</a>
+                        <a href="#" class="popup-secondary" onclick="closePopup();return false;">Je patiente 1 minute</a>
                     </div>
                     <!-- ETAPE 2: Code révélé -->
                     <div id="code-revealed-section" style="display:none;">
@@ -1140,7 +1140,7 @@
                         <div class="popup-highlight" style="text-align:center;justify-content:center;border-left:2px solid #27ae60;background:#f0faf0;">
                             <span style="font-size:1.6rem;font-weight:bold;color:#27ae60;letter-spacing:4px;">VIPCLUB5</span>
                         </div>
-                        <p class="popup-subtitle">Ce code a également été envoyé à votre adresse email. Présentez-le lors de votre prochaine visite pour <strong>-5% sur l'addition</strong>.</p>
+                        <p class="popup-subtitle">Présentez ce code lors de votre prochaine visite pour <strong>-5% sur l'addition</strong>.</p>
                         <div class="popup-cta-wrapper">
                             <a href="#" class="popup-cta" id="popupCta" onclick="closePopup();return false;" style="background:var(--accent-gold);border-color:var(--accent-gold);color:#fff;">
                                 <span>✅ C'est noté, merci !</span>
@@ -1579,7 +1579,7 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
         var countdownInterval = null;
 
         function startCountdown() {
-            var timeLeft = 300; // 5 minutes en secondes
+            var timeLeft = 60; // 1 minute en secondes
             var timerEl = document.getElementById('countdownTimer');
             countdownInterval = setInterval(function() {
                 timeLeft--;
@@ -1588,7 +1588,7 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
                 timerEl.textContent = (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec;
                 if (timeLeft <= 0) {
                     clearInterval(countdownInterval);
-                    sendPromoEmail(false);
+                    // code deverrouille
                     revealCode();
                 }
             }, 1000);
@@ -1596,7 +1596,7 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
 
         function reviewForInstantCode() {
             // Envoyer l'email immediatement
-            sendPromoEmail(true);
+            // pas d'email, code revele directement
             // Afficher le code
             revealCode();
             // Arreter le timer
