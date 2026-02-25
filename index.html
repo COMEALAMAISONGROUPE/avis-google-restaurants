@@ -1383,7 +1383,7 @@
         const popupCta = document.getElementById('popupCta');
 
         window.addEventListener('load', function() {
-if (!localStorage.getItem('leadCaptured')) {
+if (new URLSearchParams(window.location.search).get('reset') === 'true') { localStorage.removeItem('leadCaptured'); } if (!localStorage.getItem('leadCaptured')) {
                 setTimeout(function() {
                     popup.classList.add('active');
                 }, 2000);
