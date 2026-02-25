@@ -1346,7 +1346,47 @@
                // Lead Capture - Apps Script URL
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-GBbyySuEZZ-HA81xv_BjcedRA4CmvrP19-wOXjsr6hldkrhmEo2l7V-J67WEs4250g/exec';
 
-            function submitLead(e) {
+            // Anti-fraude : Fingerprint navigateur (canvas)
+        function getFingerprint() {
+            try {
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                ctx.textBaseline = 'top';
+                ctx.font = '14px Arial';
+                ctx.fillText('fingerprint', 2, 2);
+                ctx.fillStyle = 'rgba(102,204,0,0.7)';
+                ctx.fillRect(50, 50, 60, 60);
+                var dataUrl = canvas.toDataURL();
+                var hash = 0;
+                for (var i = 0; i < dataUrl.length; i++) {
+                    var char = dataUrl.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash;
+                }
+                return Math.abs(hash).toString(36);
+            } catch(e) {
+                return 'unknown';
+            }
+        }
+
+        // Anti-fraude : CookieId persistant (localStorage)
+        function getCookieId() {
+            var id = localStorage.getItem('_devId');
+            if (!id) {
+                id = Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('_devId', id);
+            }
+            return id;
+        }
+
+        // Anti-fraude : Recuperer IP publique
+        var userIP = '';
+        fetch('https://api.ipify.org?format=json')
+            .then(function(r) { return r.json(); })
+            .then(function(d) { userIP = d.ip || ''; })
+            .catch(function() { userIP = ''; });
+
+        function submitLead(e) {
             e.preventDefault();
             var btn = document.getElementById('leadSubmitBtn');
             btn.disabled = true;
@@ -1385,7 +1425,7 @@
                     } else if (response.field === 'telephone') {
                         errorMsg.textContent = 'Ce numero de telephone a deja ete utilise.';
                     } else {
-                        errorMsg.textContent = 'Ces coordonnees ont deja ete utilisees.';
+                        errorMsg.textContent = 'Vous avez deja beneficie de cette offre.';
                     }
                 } else {
                     btn.querySelector('span').textContent = 'Je recupere mon -5%';
@@ -1401,6 +1441,9 @@
                 + '&telephone=' + encodeURIComponent(telephone)
                 + '&code=VIPCLUB5'
                 + '&source=popup-site'
+            + '&fingerprint=' + encodeURIComponent(getFingerprint())
+            + '&ip=' + encodeURIComponent(userIP)
+            + '&cookieId=' + encodeURIComponent(getCookieId())
                 + '&callback=' + callbackName;
             var script = document.createElement('script');
             script.id = 'leadScript';
