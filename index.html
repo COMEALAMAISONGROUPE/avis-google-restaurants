@@ -1127,7 +1127,7 @@
                             <p style="font-size:0.85rem;color:var(--gray-dark);margin:0;"><strong>⚡ Accès instantané :</strong> Laissez un avis Google et recevez votre code immédiatement par email !</p>
                         </div>
                         <div class="popup-cta-wrapper">
-                            <a href="#" id="reviewForCodeBtn" class="popup-cta" onclick="reviewForInstantCode();return false;" style="background:var(--accent-gold);border-color:var(--accent-gold);color:#fff;">
+                            <a href="https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE" target="_blank" id="reviewForCodeBtn" class="popup-cta" onclick="reviewForInstantCode();" style="background:var(--accent-gold);border-color:var(--accent-gold);color:#fff;">
                                 <span>⭐ LAISSER UN AVIS & RECEVOIR MON CODE</span>
                             </a>
                         </div>
@@ -1599,8 +1599,6 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
             sendPromoEmail(true);
             // Afficher le code
             revealCode();
-            // Ouvrir la page d'avis Google (premier restaurant par defaut)
-            window.open('https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE', '_blank');
             // Arreter le timer
             if (countdownInterval) clearInterval(countdownInterval);
         }
