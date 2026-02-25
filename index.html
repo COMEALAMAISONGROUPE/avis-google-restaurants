@@ -1347,34 +1347,75 @@
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-GBbyySuEZZ-HA81xv_BjcedRA4CmvrP19-wOXjsr6hldkrhmEo2l7V-J67WEs4250g/exec';
 
         function submitLead(e) {
+            function submitLead(e) {
             e.preventDefault();
             var btn = document.getElementById('leadSubmitBtn');
             btn.querySelector('span').textContent = 'Envoi en cours...';
             btn.disabled = true;
-            var data = {
-                prenom: document.getElementById('leadPrenom').value,
-                email: document.getElementById('leadEmail').value,
-                telephone: document.getElementById('leadTelephone').value,
-                code: 'VIPCLUB5',
-                source: 'popup-site'
+            var prenom = document.getElementById('leadPrenom').value;
+            var email = document.getElementById('leadEmail').value;
+            var telephone = document.getElementById('leadTelephone').value;
+
+            // Utiliser GET + JSONP pour contourner CORS et lire la reponse serveur
+            var callbackName = 'leadCallback_' + Date.now();
+            window[callbackName] = function(response) {
+                // Nettoyer
+                delete window[callbackName];
+                var scriptTag = document.getElementById('leadScript');
+                if (scriptTag) scriptTag.remove();
+
+                if (response.status === 'success') {
+                    // Nouveau lead => afficher le code promo
+                    document.getElementById('lead-form-section').style.display = 'none';
+                    localStorage.setItem('leadCaptured', 'true');
+                    document.getElementById('leadPrenomDisplay').textContent = prenom;
+                    document.getElementById('lead-success-section').style.display = 'block';
+                    document.getElementById('skipPopup').style.display = 'none';
+                } else if (response.status === 'duplicate') {
+                    // Doublon => afficher un message d'erreur
+                    btn.querySelector('span').textContent = 'Je recupere mon -5%';
+                    btn.disabled = false;
+                    var errorMsg = document.getElementById('leadErrorMsg');
+                    if (!errorMsg) {
+                        errorMsg = document.createElement('p');
+                        errorMsg.id = 'leadErrorMsg';
+                        errorMsg.style.cssText = 'color:#e74c3c;font-size:0.85rem;margin-top:10px;text-align:center;';
+                        document.getElementById('leadForm').appendChild(errorMsg);
+                    }
+                    if (response.field === 'email') {
+                        errorMsg.textContent = 'Cet email a deja ete utilise pour obtenir un code promo.';
+                    } else if (response.field === 'telephone') {
+                        errorMsg.textContent = 'Ce numero de telephone a deja ete utilise.';
+                    } else {
+                        errorMsg.textContent = 'Ces coordonnees ont deja ete utilisees.';
+                    }
+                } else {
+                    btn.querySelector('span').textContent = 'Je recupere mon -5%';
+                    btn.disabled = false;
+                    alert('Une erreur est survenue. Veuillez reessayer.');
+                }
             };
-            fetch(APPS_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data)
-            }).then(function() {
-                document.getElementById('lead-form-section').style.display = 'none';
-                                localStorage.setItem('leadCaptured', 'true');
-                document.getElementById('leadPrenomDisplay').textContent = document.getElementById('leadPrenom').value; document.getElementById('lead-success-section').style.display = 'block';
-                document.getElementById('skipPopup').style.display = 'none';
-            }).catch(function() {
-                document.getElementById('lead-form-section').style.display = 'none';
-                document.getElementById('leadPrenomDisplay').textContent = document.getElementById('leadPrenom').value; document.getElementById('lead-success-section').style.display = 'block';
-                document.getElementById('skipPopup').style.display = 'none';
-            });
+
+            // Creer le script JSONP
+            var params = 'action=register'
+                + '&prenom=' + encodeURIComponent(prenom)
+                + '&email=' + encodeURIComponent(email)
+                + '&telephone=' + encodeURIComponent(telephone)
+                + '&code=VIPCLUB5'
+                + '&source=popup-site'
+                + '&callback=' + callbackName;
+            var script = document.createElement('script');
+            script.id = 'leadScript';
+            script.src = APPS_SCRIPT_URL + '?' + params;
+            script.onerror = function() {
+                delete window[callbackName];
+                script.remove();
+                btn.querySelector('span').textContent = 'Je recupere mon -5%';
+                btn.disabled = false;
+                alert('Erreur de connexion. Veuillez reessayer.');
+            };
+            document.body.appendChild(script);
         }
- 
         
         // Popup functionality
         const popup = document.getElementById('reviewPopup');
