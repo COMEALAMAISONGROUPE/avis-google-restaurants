@@ -1124,11 +1124,11 @@
                             <span id="countdownTimer" style="font-size:2.5rem;font-weight:700;color:var(--accent-gold);font-family:'Crimson Text',serif;letter-spacing:2px;">01:00</span>
                         </div>
                         <div style="background:var(--gray-light);padding:18px 22px;margin:20px 0;border-left:2px solid var(--accent-gold);text-align:left;">
-                            <p style="font-size:0.85rem;color:var(--gray-dark);margin:0;"><strong>⚡ Accès instantané :</strong> Laissez un avis Google et débloquez votre code instantanément !</p>
+                            <p style="font-size:0.85rem;color:var(--gray-dark);margin:0;"><strong>💬 En attendant :</strong> Partagez votre expérience et aidez-nous à nous améliorer !</p>
                         </div>
                         <div class="popup-cta-wrapper">
                             <a href="https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE" id="reviewForCodeBtn" class="popup-cta" onclick="reviewForInstantCode();" style="background:var(--accent-gold);border-color:var(--accent-gold);color:#fff;">
-                                <span>⭐ LAISSER UN AVIS & RECEVOIR MON CODE</span>
+                                <span>⭐ PARTAGER MON EXPERIENCE</span>
                             </a>
                         </div>
                         <a href="#" class="popup-secondary" onclick="return false;">Je patiente 1 minute</a>
@@ -1138,7 +1138,7 @@
                         <div class="popup-icon">🎉</div>
                         <h2 class="popup-title" style="color:#27ae60;">Votre code promo !</h2>
                         <div class="popup-highlight" style="text-align:center;justify-content:center;border-left:2px solid #27ae60;background:#f0faf0;">
-                            <span style="font-size:1.6rem;font-weight:bold;color:#27ae60;letter-spacing:4px;"></span>
+                            <span id="promoCodeDisplay" style="font-size:1.6rem;font-weight:bold;color:#27ae60;letter-spacing:4px;"></span>
                         </div>
                         <p class="popup-subtitle">Présentez ce code lors de votre prochaine visite pour <strong>-5% sur l'addition</strong>.</p>
                         <div class="popup-cta-wrapper">
@@ -1354,6 +1354,10 @@
     <button class="scroll-to-top" id="scrollToTop" aria-label="Retour en haut">↑</button>
 
     <script>
+                // Generate unique promo code once
+        var _pch = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        window._uniquePromoCode = 'PROMO';
+        for (var _pi = 0; _pi < 6; _pi++) window._uniquePromoCode += _pch.charAt(Math.floor(Math.random() * _pch.length));
         // Scroll Progress Bar
         const scrollProgress = document.getElementById('scrollProgress');
         window.addEventListener('scroll', () => {
@@ -1459,7 +1463,7 @@
                 + '&prenom=' + encodeURIComponent(prenom)
                 + '&email=' + encodeURIComponent(email)
                 + '&telephone=' + encodeURIComponent(telephone)
-                + '&code=VIPCLUB5'
+                + '&code=' + encodeURIComponent(window._uniquePromoCode || 'PROMO')
                 + '&source=popup-site'
             + '&fingerprint=' + encodeURIComponent(getFingerprint())
             + '&ip=' + encodeURIComponent(userIP)
@@ -1604,35 +1608,32 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
             }, 1000);
         }
 
-            function reviewForInstantCode() {
-                        if (window._reviewCodeDone) return;
-        window._reviewCodeDone = true;
-            // Envoyer l'email immediatement
-            // pas d'email, code revele directement
-            // Afficher le code
-                    // Ouvrir la page avis Google dans un nouvel onglet
-        openReviewPopup('https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE');
-            revealCode();
-            // Arreter le timer
-            if (countdownInterval) clearInterval(countdownInterval);
+                    function reviewForInstantCode() {
+            if (window._reviewCodeDone) return;
+            window._reviewCodeDone = true;
+            openReviewPopup('https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE');
         }
 
         function revealCode() {
             document.getElementById('timer-section').style.display = 'none';
             document.getElementById('code-revealed-section').style.display = 'block';
+            var ch = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            var code = 'PROMO';
+            for (var i = 0; i < 6; i++) code += ch.charAt(Math.floor(Math.random() * ch.length));
+            var el = document.getElementById('promoCodeDisplay');
+            if (el) el.textContent = window._uniquePromoCode;
         }
 
         function sendPromoEmail(instant) {
             var email = window._leadEmail || '';
             var prenom = window._leadPrenom || '';
             if (!email) return;
-            var params = 'action=sendpromo' + '&email=' + encodeURIComponent(email) + '&prenom=' + encodeURIComponent(prenom) + '&code=VIPCLUB5' + '&instant=' + (instant ? 'true' : 'false');
+            var params = 'action=sendpromo' + '&email=' + encodeURIComponent(email) + '&prenom=' + encodeURIComponent(prenom) + '&code=' + encodeURIComponent(window._uniquePromoCode || 'PROMO') + '&instant=' + (instant ? 'true' : 'false');
             var script = document.createElement('script');
             script.src = APPS_SCRIPT_URL + '?' + params + '&callback=promoEmailSent';
             document.body.appendChild(script);
         }
         window.promoEmailSent = function() {}; /* ========== REVIEW POPUP ========== */ var currentReviewUrl = ''; var selectedStars = 0; function openReviewPopup(url) { currentReviewUrl = url; selectedStars = 0; document.querySelectorAll('.review-iframe-star').forEach(function(s) { s.classList.remove('active'); s.style.filter = ''; s.style.opacity = ''; }); document.getElementById('reviewTextarea').value = ''; document.getElementById('reviewIframeOverlay').classList.add('active'); document.body.style.overflow = 'hidden'; } function closeReviewPopup() { document.getElementById('reviewIframeOverlay').classList.remove('active'); document.body.style.overflow = ''; } document.getElementById('reviewIframeClose').addEventListener('click', closeReviewPopup); document.getElementById('reviewIframeOverlay').addEventListener('click', function(e) { if (e.target === this) closeReviewPopup(); }); document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && document.getElementById('reviewIframeOverlay').classList.contains('active')) { closeReviewPopup(); } }); /* Star rating */ document.querySelectorAll('.review-iframe-star').forEach(function(star) { star.addEventListener('click', function() { selectedStars = parseInt(this.getAttribute('data-star')); document.querySelectorAll('.review-iframe-star').forEach(function(s, i) { if (i < selectedStars) { s.classList.add('active'); } else { s.classList.remove('active'); } }); }); star.addEventListener('mouseenter', function() { var val = parseInt(this.getAttribute('data-star')); document.querySelectorAll('.review-iframe-star').forEach(function(s, i) { if (i < val) { s.style.filter = 'grayscale(0)'; s.style.opacity = '1'; } else { s.style.filter = ''; s.style.opacity = ''; } }); }); star.addEventListener('mouseleave', function() { document.querySelectorAll('.review-iframe-star').forEach(function(s, i) { if (!s.classList.contains('active')) { s.style.filter = ''; s.style.opacity = ''; } }); }); }); function submitReviewPopup() { if (selectedStars === 0) { alert('Veuillez selectionner une note'); return; } window.open(currentReviewUrl, '_blank'); closeReviewPopup(); } function openGoogleReviewDirect(e) { e.preventDefault(); window.open(currentReviewUrl, '_blank'); closeReviewPopup(); } /* Intercept all review-btn-secondary clicks to open popup */ document.querySelectorAll('.review-btn-secondary').forEach(function(link) { link.addEventListener('click', function(e) { e.preventDefault(); var url = this.getAttribute('href'); if (url && url.indexOf('writereview') !== -1) { openReviewPopup(url); } }); });
     </script>
-<script>(function(){var c='PROMO';var ch='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';for(var i=0;i<6;i++)c+=ch.charAt(Math.floor(Math.random()*ch.length));var ts=document.getElementById('timer-section');if(ts){var subs=ts.querySelectorAll('.popup-subtitle');if(subs.length>0)subs[0].textContent='Votre code promo sera disponible dans :';var rfb=document.getElementById('reviewForCodeBtn');if(rfb){var newBtn=rfb.cloneNode(true);rfb.parentNode.replaceChild(newBtn,rfb);newBtn.id='reviewForCodeBtn';newBtn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();openReviewPopup(newBtn.getAttribute('href'));});var sp=newBtn.querySelectorAll('span');if(sp.length>1)sp[sp.length-1].textContent='PARTAGER MON EXPERIENCE';}var skipLinks=ts.querySelectorAll('.popup-secondary');for(var j=0;j<skipLinks.length;j++)skipLinks[j].style.display='none';}window.revealCode=function(){document.getElementById('timer-section').style.display='none';var crs=document.getElementById('code-revealed-section');crs.style.display='block';var el=document.getElementById('promoCodeDisplay');if(el)el.textContent=c;};window.reviewForInstantCode=function(){if(window._reviewCodeDone)return;window._reviewCodeDone=true;openReviewPopup('https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE');};})();</script>
 </body>
 </html>
