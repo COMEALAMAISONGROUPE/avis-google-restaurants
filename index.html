@@ -1346,11 +1346,9 @@
                // Lead Capture - Apps Script URL
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-GBbyySuEZZ-HA81xv_BjcedRA4CmvrP19-wOXjsr6hldkrhmEo2l7V-J67WEs4250g/exec';
 
-        function submitLead(e) {
             function submitLead(e) {
             e.preventDefault();
             var btn = document.getElementById('leadSubmitBtn');
-            btn.querySelector('span').textContent = 'Envoi en cours...';
             btn.disabled = true;
             var prenom = document.getElementById('leadPrenom').value;
             var email = document.getElementById('leadEmail').value;
