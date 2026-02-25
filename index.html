@@ -1611,7 +1611,7 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
             // pas d'email, code revele directement
             // Afficher le code
                     // Ouvrir la page avis Google dans un nouvel onglet
-        var a = document.createElement('a'); a.href = 'https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE'; a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        window.open('https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE', '_blank');
             revealCode();
             // Arreter le timer
             if (countdownInterval) clearInterval(countdownInterval);
