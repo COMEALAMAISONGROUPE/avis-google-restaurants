@@ -1127,11 +1127,11 @@
                             <p style="font-size:0.85rem;color:var(--gray-dark);margin:0;"><strong>⚡ Accès instantané :</strong> Laissez un avis Google et débloquez votre code instantanément !</p>
                         </div>
                         <div class="popup-cta-wrapper">
-                            <a href="https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE" target="_blank" id="reviewForCodeBtn" class="popup-cta" onclick="reviewForInstantCode();" style="background:var(--accent-gold);border-color:var(--accent-gold);color:#fff;">
+                            <a href="https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE" target="_blank" id="reviewForCodeBtn" class="popup-cta" onclick="reviewForInstantCode();return false;" style="background:var(--accent-gold);border-color:var(--accent-gold);color:#fff;">
                                 <span>⭐ LAISSER UN AVIS & RECEVOIR MON CODE</span>
                             </a>
                         </div>
-                        <a href="#" class="popup-secondary" onclick="closePopup();return false;">Je patiente 1 minute</a>
+                        <a href="#" class="popup-secondary" onclick="return false;">Je patiente 1 minute</a>
                     </div>
                     <!-- ETAPE 2: Code révélé -->
                     <div id="code-revealed-section" style="display:none;">
@@ -1598,6 +1598,8 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
             // Envoyer l'email immediatement
             // pas d'email, code revele directement
             // Afficher le code
+                    // Ouvrir la page avis Google dans un nouvel onglet
+        window.open('https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE', '_blank');
             revealCode();
             // Arreter le timer
             if (countdownInterval) clearInterval(countdownInterval);
