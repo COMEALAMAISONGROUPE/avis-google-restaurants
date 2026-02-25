@@ -1507,6 +1507,16 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
             showRestaurants();
         });
 
+            // Bouton Laisser un avis => code instantane + ouvre Google avis dans nouvel onglet
+    var reviewBtn = document.getElementById('reviewForCodeBtn');
+    if (reviewBtn) {
+        reviewBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            reviewForInstantCode();
+        });
+    }
+
         popup.addEventListener('click', function(e) {
             if (e.target === popup) {
                 closePopup();
@@ -1594,7 +1604,9 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
             }, 1000);
         }
 
-        function reviewForInstantCode() {
+            function reviewForInstantCode() {
+                        if (window._reviewCodeDone) return;
+        window._reviewCodeDone = true;
             // Envoyer l'email immediatement
             // pas d'email, code revele directement
             // Afficher le code
