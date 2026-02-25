@@ -1115,20 +1115,39 @@
                     </form>
                 </div>
                 <div id="lead-success-section" style="display:none;">
-                    <div class="popup-icon">🎉</div>
-                    <h2 class="popup-title" style="color:#27ae60;">Merci <span id="leadPrenomDisplay"></span> !</h2>
-                    <div class="popup-highlight" style="text-align:center;justify-content:center;border-left:2px solid #27ae60;background:#f0faf4;">
-                        <span style="font-size:1.6rem;font-weight:bold;color:#27ae60;letter-spacing:4px;">VIPCLUB5</span>
+                    <!-- ETAPE 1: Timer + option avis -->
+                    <div id="timer-section">
+                        <div class="popup-icon">⏳</div>
+                        <h2 class="popup-title" style="color:#27ae60;">Merci <span id="leadPrenomDisplay"></span> !</h2>
+                        <p class="popup-subtitle">Votre code promo <strong>VIPCLUB5</strong> vous sera envoyé par email dans :</p>
+                        <div style="text-align:center;margin:25px 0;">
+                            <span id="countdownTimer" style="font-size:2.5rem;font-weight:700;color:var(--accent-gold);font-family:'Crimson Text',serif;letter-spacing:2px;">05:00</span>
+                        </div>
+                        <div style="background:var(--gray-light);padding:18px 22px;margin:20px 0;border-left:2px solid var(--accent-gold);text-align:left;">
+                            <p style="font-size:0.85rem;color:var(--gray-dark);margin:0;"><strong>⚡ Accès instantané :</strong> Laissez un avis Google et recevez votre code immédiatement par email !</p>
+                        </div>
+                        <div class="popup-cta-wrapper">
+                            <a href="#" id="reviewForCodeBtn" class="popup-cta" onclick="reviewForInstantCode();return false;" style="background:var(--accent-gold);border-color:var(--accent-gold);color:#fff;">
+                                <span>⭐ LAISSER UN AVIS & RECEVOIR MON CODE</span>
+                            </a>
+                        </div>
+                        <a href="#" class="popup-secondary" onclick="closePopup();return false;">Je patiente 5 minutes</a>
                     </div>
-                    <p class="popup-subtitle">Votre code <strong>VIPCLUB5</strong> sera envoyé par email. Présentez-le lors de votre prochaine visite pour -5% sur l'addition.</p><p class="popup-subtitle" style="margin-top:12px;font-weight:500;color:var(--black);">Profitez de votre réduction lors de votre prochaine visite !</p>
-                    <div class="popup-cta-wrapper">
-                        <a href="#" class="popup-cta" id="popupCta" onclick="closePopup();return false;" style="background:var(--accent-gold);border-color:var(--accent-gold);">
-                            <span>✅ C'est noté, merci !</span>
-                        </a>
+                    <!-- ETAPE 2: Code révélé -->
+                    <div id="code-revealed-section" style="display:none;">
+                        <div class="popup-icon">🎉</div>
+                        <h2 class="popup-title" style="color:#27ae60;">Votre code promo !</h2>
+                        <div class="popup-highlight" style="text-align:center;justify-content:center;border-left:2px solid #27ae60;background:#f0faf0;">
+                            <span style="font-size:1.6rem;font-weight:bold;color:#27ae60;letter-spacing:4px;">VIPCLUB5</span>
+                        </div>
+                        <p class="popup-subtitle">Ce code a également été envoyé à votre adresse email. Présentez-le lors de votre prochaine visite pour <strong>-5% sur l'addition</strong>.</p>
+                        <div class="popup-cta-wrapper">
+                            <a href="#" class="popup-cta" id="popupCta" onclick="closePopup();return false;" style="background:var(--accent-gold);border-color:var(--accent-gold);color:#fff;">
+                                <span>✅ C'est noté, merci !</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <a href="#" class="popup-secondary" id="skipPopup">Plus tard</a>
-            </div>
         </div>
     </div>
 
@@ -1407,7 +1426,7 @@
                     document.getElementById('lead-form-section').style.display = 'none';
                     localStorage.setItem('leadCaptured', 'true');
                     document.getElementById('leadPrenomDisplay').textContent = prenom;
-                    document.getElementById('lead-success-section').style.display = 'block';
+                    document.getElementById('lead-success-section').style.display = 'block'; window._leadEmail = email; window._leadPrenom = prenom; startCountdown();
                     document.getElementById('skipPopup').style.display = 'none';
                 } else if (response.status === 'duplicate') {
                     // Doublon => afficher un message d'erreur
@@ -1554,6 +1573,52 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
                 behavior: 'smooth'
             });
         });
+
+                // ========== TIMER & EMAIL PROMO ==========
+        var countdownInterval = null;
+
+        function startCountdown() {
+            var timeLeft = 300; // 5 minutes en secondes
+            var timerEl = document.getElementById('countdownTimer');
+            countdownInterval = setInterval(function() {
+                timeLeft--;
+                var min = Math.floor(timeLeft / 60);
+                var sec = timeLeft % 60;
+                timerEl.textContent = (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec;
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    sendPromoEmail(false);
+                    revealCode();
+                }
+            }, 1000);
+        }
+
+        function reviewForInstantCode() {
+            // Envoyer l'email immediatement
+            sendPromoEmail(true);
+            // Afficher le code
+            revealCode();
+            // Ouvrir la page d'avis Google (premier restaurant par defaut)
+            window.open('https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE', '_blank');
+            // Arreter le timer
+            if (countdownInterval) clearInterval(countdownInterval);
+        }
+
+        function revealCode() {
+            document.getElementById('timer-section').style.display = 'none';
+            document.getElementById('code-revealed-section').style.display = 'block';
+        }
+
+        function sendPromoEmail(instant) {
+            var email = window._leadEmail || '';
+            var prenom = window._leadPrenom || '';
+            if (!email) return;
+            var params = 'action=sendpromo' + '&email=' + encodeURIComponent(email) + '&prenom=' + encodeURIComponent(prenom) + '&code=VIPCLUB5' + '&instant=' + (instant ? 'true' : 'false');
+            var script = document.createElement('script');
+            script.src = APPS_SCRIPT_URL + '?' + params + '&callback=promoEmailSent';
+            document.body.appendChild(script);
+        }
+        window.promoEmailSent = function() {};
     </script>
 </body>
 </html>
