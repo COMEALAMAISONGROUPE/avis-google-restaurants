@@ -1622,6 +1622,7 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
             for (var i = 0; i < 6; i++) code += ch.charAt(Math.floor(Math.random() * ch.length));
             var el = document.getElementById('promoCodeDisplay');
             if (el) el.textContent = window._uniquePromoCode;
+                    sendPromoEmail(false);
         }
 
         function sendPromoEmail(instant) {
