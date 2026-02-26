@@ -1098,7 +1098,7 @@
                 <div id="lead-form-section">
                     <div class="popup-icon">🎁</div>
                     <h2 class="popup-title">-5% sur votre addition !</h2>
-                    <p class="popup-subtitle">Renseignez vos coordonnées pour recevoir votre code promo exclusif.</p>
+                    <p class="popup-subtitle">Inscrivez-vous à la newsletter pour recevoir votre code promo exclusif.</p>
                     <form id="leadForm" onsubmit="submitLead(event)" style="text-align:left;margin-top:20px;">
                         <input type="text" id="leadPrenom" placeholder="Votre prénom" required style="width:100%;padding:12px 16px;margin-bottom:10px;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;border-radius:0;">
                         <input type="email" id="leadEmail" placeholder="Votre email" required style="width:100%;padding:12px 16px;margin-bottom:10px;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;border-radius:0;">
@@ -1413,7 +1413,7 @@
         function submitLead(e) {
             e.preventDefault();
             var btn = document.getElementById('leadSubmitBtn');
-            btn.disabled = true;
+            btn.disabled = true; btn.querySelector('span').textContent = 'CHARGEMENT...'; btn.style.opacity = '0.7'; btn.style.cursor = 'wait';
             var prenom = document.getElementById('leadPrenom').value;
             var email = document.getElementById('leadEmail').value;
             var telephone = document.getElementById('leadTelephone').value;
@@ -1436,7 +1436,7 @@
                 } else if (response.status === 'duplicate') {
                     // Doublon => afficher un message d'erreur
                     btn.querySelector('span').textContent = 'Je recupere mon -5%';
-                    btn.disabled = false;
+                    btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
                     var errorMsg = document.getElementById('leadErrorMsg');
                     if (!errorMsg) {
                         errorMsg = document.createElement('p');
@@ -1453,7 +1453,7 @@
                     }
                 } else {
                     btn.querySelector('span').textContent = 'Je recupere mon -5%';
-                    btn.disabled = false;
+                    btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
                     alert('Une erreur est survenue. Veuillez reessayer.');
                 }
             };
@@ -1476,7 +1476,7 @@
                 delete window[callbackName];
                 script.remove();
                 btn.querySelector('span').textContent = 'Je recupere mon -5%';
-                btn.disabled = false;
+                btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
                 alert('Erreur de connexion. Veuillez reessayer.');
             };
             document.body.appendChild(script);
