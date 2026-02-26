@@ -1098,7 +1098,7 @@
                 <div id="lead-form-section">
                     <div class="popup-icon">🎁</div>
                     <h2 class="popup-title">Tentez votre chance !</h2>
-                    <p class="popup-subtitle">Chaque semaine, nous tirons au sort un gagnant parmi nos inscrits. Inscrivez-vous à notre newsletter pour participer !</p>
+                    <p class="popup-subtitle">Chaque semaine, nous tirons au sort plusieurs gagnants parmi nos inscrits. Inscrivez-vous à notre newsletter pour participer !</p>
                     <form id="leadForm" onsubmit="submitLead(event)" style="text-align:left;margin-top:20px;">
                         <input type="text" id="leadPrenom" placeholder="Votre prénom" required style="width:100%;padding:12px 16px;margin-bottom:10px;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;border-radius:0;">
                         <input type="email" id="leadEmail" placeholder="Votre email" required style="width:100%;padding:12px 16px;margin-bottom:10px;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;border-radius:0;">
@@ -1165,8 +1165,8 @@
                 <a href="#restaurants" class="hero-cta-primary" id="mainCta">
                     Partager mon expérience
                 </a>
-                <a href="#restaurants" class="hero-cta-secondary" id="secondaryCta">
-                    Découvrir nos adresses
+                <a href="#newsletter" class="hero-cta-secondary" id="secondaryCta">
+                    M'inscrire à la newsletter
                 </a>
             </div>
         </div>
@@ -1338,6 +1338,7 @@
             </div>
         </div>
     </section>
+    
 
     <!-- MENTION LEGALE -->
     <div style="text-align:center;padding:8px 20px;opacity:0.6;font-size:11px;color:#666;">
@@ -1750,6 +1751,204 @@ window.submitLead = function(e) {
 };
 var leadForm = document.getElementById('leadForm');
 if (leadForm) { leadForm.onsubmit = window.submitLead; }
+</script>
+    <style>
+/* NEWSLETTER SECTION */
+.newsletter-section {
+    padding: 80px 25px;
+    background: var(--black);
+    color: var(--white);
+    text-align: center;
+}
+.newsletter-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.newsletter-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: floatGently 3s ease-in-out infinite;
+}
+.newsletter-title {
+    font-family: 'Crimson Text', serif;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: var(--white);
+    letter-spacing: -0.5px;
+}
+.newsletter-subtitle {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    margin-bottom: 35px;
+    font-weight: 300;
+}
+.newsletter-form {
+    max-width: 450px;
+    margin: 0 auto;
+}
+.newsletter-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.newsletter-fields input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    border-radius: 0;
+    transition: border-color 0.3s;
+}
+.newsletter-fields input::placeholder {
+    color: rgba(255,255,255,0.4);
+}
+.newsletter-fields input:focus {
+    border-color: var(--accent-gold);
+}
+.newsletter-rgpd {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.newsletter-rgpd label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+}
+.newsletter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 17px 40px;
+    background: var(--white);
+    color: var(--black);
+    border: 1px solid var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    border-radius: 0;
+}
+.newsletter-btn:hover {
+    background: transparent;
+    color: var(--white);
+}
+.newsletter-message {
+    margin-top: 20px;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+.newsletter-message.success {
+    color: #4ade80;
+}
+.newsletter-message.error {
+    color: #f87171;
+}
+</style>
+    <script>
+/* Disable popup auto-open */
+window.addEventListener('load', function() {
+    var popup = document.getElementById('reviewPopup');
+    if (popup) popup.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+/* Override secondaryCta to scroll to newsletter */
+var secCta = document.getElementById('secondaryCta');
+if (secCta) {
+    secCta.replaceWith(secCta.cloneNode(true));
+    var newSecCta = document.getElementById('secondaryCta');
+    newSecCta.addEventListener('click', function(e) {
+        e.preventDefault();
+        var nlSection = document.getElementById('newsletter');
+        if (nlSection) {
+            nlSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+}
+
+/* Newsletter form submit */
+function submitNewsletter(e) {
+    e.preventDefault();
+    var btn = document.getElementById('nlSubmitBtn');
+    var msgDiv = document.getElementById('nlMessage');
+    btn.disabled = true;
+    btn.querySelector('span').textContent = 'CHARGEMENT...';
+    btn.style.opacity = '0.7';
+    var prenom = document.getElementById('nlPrenom').value;
+    var email = document.getElementById('nlEmail').value;
+    var telephone = document.getElementById('nlTelephone').value;
+    var cbName = 'nlCB_' + Date.now();
+    window[cbName] = function(response) {
+        delete window[cbName];
+        var s = document.getElementById('nlScript');
+        if (s) s.remove();
+        if (response.status === 'success') {
+            document.getElementById('newsletterForm').style.display = 'none';
+            msgDiv.className = 'newsletter-message success';
+            msgDiv.style.display = 'block';
+            msgDiv.innerHTML = '<div style="font-size:2.5rem;margin-bottom:15px;">\u2705</div><strong>Merci ' + prenom + ' !</strong><br>Vous \u00eates bien inscrit(e) \u00e0 notre newsletter.<br>Vous participez d\u00e9sormais \u00e0 nos tirages au sort hebdomadaires !';
+            localStorage.setItem('leadCaptured', 'true');
+            return;
+        }
+        if (response.status === 'duplicate') {
+            msgDiv.className = 'newsletter-message error';
+            msgDiv.style.display = 'block';
+            if (response.field === 'email') {
+                msgDiv.textContent = 'Cet email est d\u00e9j\u00e0 inscrit.';
+            } else if (response.field === 'telephone') {
+                msgDiv.textContent = 'Ce num\u00e9ro est d\u00e9j\u00e0 inscrit.';
+            } else {
+                msgDiv.textContent = 'Vous \u00eates d\u00e9j\u00e0 inscrit(e).';
+            }
+            btn.querySelector('span').textContent = 'Je participe au tirage !';
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            return;
+        }
+        btn.querySelector('span').textContent = 'Je participe au tirage !';
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        alert('Une erreur est survenue. Veuillez r\u00e9essayer.');
+    };
+    var params = 'action=register'
+        + '&prenom=' + encodeURIComponent(prenom)
+        + '&email=' + encodeURIComponent(email)
+        + '&telephone=' + encodeURIComponent(telephone)
+        + '&code=' + encodeURIComponent(window._uniquePromoCode || 'NL')
+        + '&source=newsletter-section'
+        + '&fingerprint=' + encodeURIComponent(getFingerprint())
+        + '&ip=' + encodeURIComponent(userIP)
+        + '&cookieId=' + encodeURIComponent(getCookieId())
+        + '&callback=' + cbName;
+    var sc = document.createElement('script');
+    sc.id = 'nlScript';
+    sc.src = APPS_SCRIPT_URL + '?' + params;
+    sc.onerror = function() {
+        delete window[cbName];
+        sc.remove();
+        btn.querySelector('span').textContent = 'Je participe au tirage !';
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        alert('Erreur de connexion. Veuillez r\u00e9essayer.');
+    };
+    document.body.appendChild(sc);
+}
 </script>
 </body>
 </html>
