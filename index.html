@@ -8,12 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --white: #FFFFFF;
             --black: #0A0A0A;
@@ -28,1168 +23,202 @@
             --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
             --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.20);
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--white);
-            color: var(--black);
-            line-height: 1.6;
-            font-size: 16px;
-            overflow-x: hidden;
-        }
-
-        /* SCROLL PROGRESS BAR */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: var(--accent-gold);
-            z-index: 9999;
-            transition: width 0.1s ease-out;
-        }
-
-        /* POPUP OVERLAY */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(20px);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .popup-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* POPUP CONTAINER */
-        .popup-container {
-            background: var(--white);
-            max-width: 520px;
-            width: 100%;
-            border-radius: 2px;
-            position: relative;
-            transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: var(--shadow-xl);
-            overflow: hidden;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .popup-overlay.active .popup-container {
-            transform: translateY(0);
-        }
-
-        /* POPUP DECORATIVE HEADER */
-        .popup-header-decoration {
-            height: 1px;
-            background: var(--accent-gold);
-        }
-
-        /* CLOSE BUTTON */
-        .popup-close {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            width: 34px;
-            height: 34px;
-            background: transparent;
-            border: 1px solid var(--border);
-            border-radius: 0;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .popup-close:hover {
-            border-color: var(--black);
-            background: var(--black);
-        }
-
-        .popup-close::before,
-        .popup-close::after {
-            content: '';
-            position: absolute;
-            width: 14px;
-            height: 1px;
-            background: var(--black);
-            transition: background 0.3s ease;
-        }
-
-        .popup-close:hover::before,
-        .popup-close:hover::after {
-            background: var(--white);
-        }
-
-        .popup-close::before {
-            transform: rotate(45deg);
-        }
-
-        .popup-close::after {
-            transform: rotate(-45deg);
-        }
-
-        /* POPUP CONTENT */
-        .popup-content {
-            padding: 45px 35px 40px;
-            text-align: center;
-        }
-
-        .popup-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-            animation: floatGently 3s ease-in-out infinite;
-        }
-
-        @keyframes floatGently {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .popup-title {
-            font-family: 'Crimson Text', serif;
-            font-size: 1.7rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            line-height: 1.3;
-            color: var(--black);
-            letter-spacing: -0.5px;
-        }
-
-        .popup-subtitle {
-            font-size: 0.9rem;
-            color: var(--gray-medium);
-            margin-bottom: 25px;
-            line-height: 1.6;
-            font-weight: 400;
-        }
-
-        .popup-highlight {
-            background: var(--gray-light);
-            padding: 18px 22px;
-            margin: 25px 0;
-            font-weight: 500;
-            font-size: 0.9rem;
-            letter-spacing: 0.3px;
-            border-left: 2px solid var(--accent-gold);
-            text-align: left;
-            color: var(--gray-dark);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .popup-highlight-emoji {
-            font-size: 1.4rem;
-            flex-shrink: 0;
-        }
-
-        .popup-cta-wrapper {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin-top: 25px;
-        }
-
-        .popup-cta {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 17px 40px;
-            background: var(--black);
-            color: var(--white);
-            border: 1px solid var(--black);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            border-radius: 0;
-            text-align: center;
-            width: 100%;
-            max-width: 100%;
-        }
-
-        .popup-cta:hover {
-            background: transparent;
-            color: var(--black);
-        }
-
-        .popup-cta-emoji {
-            font-size: 1rem;
-            display: inline-block;
-            line-height: 1;
-        }
-
-        .popup-cta span:not(.popup-cta-emoji) {
-            display: inline-block;
-            text-align: center;
-        }
-
-        .popup-secondary {
-            display: block;
-            margin-top: 16px;
-            padding: 10px;
-            font-size: 0.85rem;
-            color: var(--gray-medium);
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
-        }
-
-        .popup-secondary:hover {
-            color: var(--black);
-        }
-
-        /* HERO SECTION */
-        .hero {
-            margin-top: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            padding: 40px 20px;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('Severin.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: 0;
-            filter: brightness(0.8) grayscale(0.1);
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.1) 100%);
-            z-index: 1;
-        }
-
-        .hero-logo {
-            position: absolute;
-            top: 40px;
-            left: 20px;
-            transform: none;
-            z-index: 3;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-
-        .hero-logo img {
-            height: 90px;
-            width: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5));
-        }
-
-        .hero-content {
-            max-width: 850px;
-            text-align: center;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
-            animation: fadeInUp 1s ease-out 0.3s backwards;
-            margin-top: 60px;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-title {
-            font-family: 'Crimson Text', serif;
-            font-size: clamp(2.2rem, 7vw, 4.2rem);
-            font-weight: 400;
-            color: var(--white);
-            margin-bottom: 30px;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(0.95rem, 2.5vw, 1.15rem);
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 40px;
-            line-height: 1.7;
-            font-weight: 300;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            letter-spacing: 0.3px;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 14px;
-            margin-top: 40px;
-        }
-
-        .hero-cta-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 40px;
-            background: var(--white);
-            color: var(--black);
-            border: 1px solid var(--white);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            border-radius: 0;
-            text-align: center;
-            width: 100%;
-            max-width: 320px;
-        }
-
-        .hero-cta-primary:hover {
-            background: transparent;
-            color: var(--white);
-        }
-
-        .hero-cta-secondary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 15px 40px;
-            background: transparent;
-            color: var(--white);
-            border: 1px solid rgba(255,255,255,0.4);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            border-radius: 0;
-            width: 100%;
-            max-width: 320px;
-        }
-
-        .hero-cta-secondary:hover {
-            border-color: var(--white);
-            background: rgba(255,255,255,0.05);
-        }
-
-        /* WHY SECTION - ULTRA COMPACT MOBILE */
-        .why-section {
-            padding: 80px 25px;
-            background: var(--white);
-        }
-
-        .why-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .section-title {
-            font-family: 'Crimson Text', serif;
-            font-size: clamp(1.8rem, 5vw, 3.2rem);
-            font-weight: 500;
-            margin-bottom: 18px;
-            line-height: 1.3;
-            position: relative;
-            display: inline-block;
-            letter-spacing: -0.5px;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 1px;
-            background: var(--accent-gold);
-        }
-
-        .section-subtitle {
-            font-size: 0.95rem;
-            color: var(--gray-medium);
-            line-height: 1.7;
-            margin-bottom: 50px;
-            margin-top: 35px;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 300;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .benefit-card {
-            background: var(--white);
-            padding: 40px 30px;
-            border-radius: 0;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.6s ease backwards;
-        }
-
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--black); line-height: 1.6; font-size: 16px; overflow-x: hidden; }
+        .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 2px; background: var(--accent-gold); z-index: 9999; transition: width 0.1s ease-out; }
+        /* POPUP OVERLAY - INFORMATIF SEULEMENT */
+        .popup-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(20px); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: all 0.5s cubic-bezier(0.4,0,0.2,1); }
+        .popup-overlay.active { opacity: 1; visibility: visible; }
+        .popup-container { background: var(--white); max-width: 480px; width: 100%; border-radius: 2px; position: relative; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.4,0,0.2,1); box-shadow: var(--shadow-xl); overflow: hidden; }
+        .popup-overlay.active .popup-container { transform: translateY(0); }
+        .popup-header-decoration { height: 3px; background: var(--accent-gold); }
+        .popup-close { position: absolute; top: 18px; right: 18px; width: 34px; height: 34px; background: transparent; border: 1px solid var(--border); border-radius: 0; cursor: pointer; z-index: 10; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .popup-close:hover { border-color: var(--black); background: var(--black); }
+        .popup-close::before, .popup-close::after { content: ''; position: absolute; width: 14px; height: 1px; background: var(--black); transition: background 0.3s ease; }
+        .popup-close:hover::before, .popup-close:hover::after { background: var(--white); }
+        .popup-close::before { transform: rotate(45deg); }
+        .popup-close::after { transform: rotate(-45deg); }
+        .popup-content { padding: 45px 35px 40px; text-align: center; }
+        .popup-icon { font-size: 3rem; margin-bottom: 20px; animation: floatGently 3s ease-in-out infinite; }
+        @keyframes floatGently { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .popup-title { font-family: 'Crimson Text', serif; font-size: 1.7rem; font-weight: 600; margin-bottom: 15px; color: var(--black); letter-spacing: -0.5px; }
+        .popup-subtitle { font-size: 0.9rem; color: var(--gray-medium); margin-bottom: 25px; line-height: 1.6; }
+        .popup-highlight { background: var(--gray-light); padding: 18px 22px; margin: 20px 0; font-weight: 500; font-size: 0.9rem; border-left: 3px solid var(--accent-gold); text-align: left; color: var(--gray-dark); display: flex; align-items: center; gap: 12px; }
+        .popup-cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 17px 40px; background: var(--black); color: var(--white); border: 1px solid var(--black); font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; text-decoration: none; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; width: 100%; margin-top: 20px; }
+        .popup-cta:hover { background: transparent; color: var(--black); }
+        .popup-secondary { display: block; margin-top: 14px; padding: 8px; font-size: 0.85rem; color: var(--gray-medium); cursor: pointer; transition: color 0.3s ease; }
+        .popup-secondary:hover { color: var(--black); }
+        /* HERO */
+        .hero { margin-top: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 40px 20px; }
+        .hero::before { content: ''; position: absolute; inset: 0; background-image: url('Severin.jpg'); background-size: cover; background-position: center; z-index: 0; filter: brightness(0.8) grayscale(0.1); }
+        .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(0,0,0,0.15) 0%,rgba(0,0,0,0.1) 100%); z-index: 1; }
+        .hero-logo { position: absolute; top: 40px; left: 20px; z-index: 3; }
+        .hero-logo img { height: 90px; width: auto; object-fit: contain; filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5)); }
+        .hero-content { max-width: 850px; text-align: center; padding: 0 20px; position: relative; z-index: 2; animation: fadeInUp 1s ease-out 0.3s backwards; margin-top: 60px; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-title { font-family: 'Crimson Text', serif; font-size: clamp(2.2rem,7vw,4.2rem); font-weight: 400; color: var(--white); margin-bottom: 30px; line-height: 1.2; letter-spacing: -0.5px; }
+        .hero-subtitle { font-size: clamp(0.95rem,2.5vw,1.15rem); color: rgba(255,255,255,0.9); margin-bottom: 40px; line-height: 1.7; font-weight: 300; max-width: 650px; margin-left: auto; margin-right: auto; }
+        .hero-cta-group { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 40px; }
+        .hero-cta-primary { display: inline-flex; align-items: center; justify-content: center; padding: 16px 40px; background: var(--white); color: var(--black); border: 1px solid var(--white); font-family: 'Inter',sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; text-decoration: none; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; width: 100%; max-width: 320px; }
+        .hero-cta-primary:hover { background: transparent; color: var(--white); }
+        .hero-cta-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 40px; background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.4); font-family: 'Inter',sans-serif; font-size: 0.8rem; font-weight: 500; letter-spacing: 1.5px; text-decoration: none; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; width: 100%; max-width: 320px; }
+        .hero-cta-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+        /* WHY SECTION */
+        .why-section { padding: 80px 25px; background: var(--white); }
+        .why-container { max-width: 1100px; margin: 0 auto; text-align: center; }
+        .section-title { font-family: 'Crimson Text', serif; font-size: clamp(1.8rem,5vw,3.2rem); font-weight: 500; margin-bottom: 18px; line-height: 1.3; position: relative; display: inline-block; letter-spacing: -0.5px; }
+        .section-title::after { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 50px; height: 1px; background: var(--accent-gold); }
+        .section-subtitle { font-size: 0.95rem; color: var(--gray-medium); line-height: 1.7; margin: 35px auto 50px; max-width: 650px; font-weight: 300; }
+        .benefits-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-top: 50px; }
+        .benefit-card { background: var(--white); padding: 40px 30px; border: 1px solid var(--border); transition: all 0.3s ease; animation: fadeInUp 0.6s ease backwards; }
         .benefit-card:nth-child(1) { animation-delay: 0.1s; }
         .benefit-card:nth-child(2) { animation-delay: 0.2s; }
         .benefit-card:nth-child(3) { animation-delay: 0.3s; }
-
-        .benefit-card:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .benefit-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            opacity: 0.85;
-            display: block;
-        }
-
-        .benefit-title {
-            font-family: 'Crimson Text', serif;
-            font-size: 1.3rem;
-            font-weight: 500;
-            margin-bottom: 12px;
-            color: var(--black);
-            letter-spacing: -0.3px;
-        }
-
-        .benefit-description {
-            font-size: 0.9rem;
-            color: var(--gray-medium);
-            line-height: 1.7;
-            font-weight: 300;
-        }
-
-        /* RESTAURANTS SECTION - HIDDEN BY DEFAULT */
-        .restaurants-section {
-            padding: 25px 18px 80px;
-            background: var(--gray-light);
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .restaurants-section.visible {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .restaurants-container {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .restaurants-header {
-            text-align: center;
-            margin-bottom: 28px;
-            padding-top: 8px;
-        }
-
-        .restaurants-title {
-            font-family: 'Crimson Text', serif;
-            font-size: clamp(1.6rem, 4vw, 2.5rem);
-            font-weight: 500;
-            margin-bottom: 10px;
-            line-height: 1.3;
-            color: var(--black);
-            letter-spacing: -0.5px;
-        }
-
-        .restaurants-subtitle {
-            font-size: 0.85rem;
-            color: var(--gray-medium);
-            line-height: 1.5;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        .restaurants-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-
-        .restaurant-card {
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            border-radius: 0;
-            transition: all 0.3s ease;
-            animation: fadeInUpCard 0.6s ease backwards;
-            background: var(--white);
-        }
-
-        .restaurant-card:nth-child(1) { animation-delay: 0.1s; }
-        .restaurant-card:nth-child(2) { animation-delay: 0.2s; }
-        .restaurant-card:nth-child(3) { animation-delay: 0.3s; }
-        .restaurant-card:nth-child(4) { animation-delay: 0.4s; }
-        .restaurant-card:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes fadeInUpCard {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .restaurant-card:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .restaurant-image-wrapper {
-            position: relative;
-            overflow: hidden;
-            height: 220px;
-        }
-
-        .restaurant-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s ease;
-            filter: grayscale(0.1);
-        }
-
-        .restaurant-card:hover .restaurant-image {
-            transform: scale(1.05);
-            filter: grayscale(0);
-        }
-
-        .restaurant-image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(212, 175, 55, 0.1);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .restaurant-card:hover .restaurant-image-overlay {
-            opacity: 1;
-        }
-
-        .restaurant-info {
-            padding: 35px 20px 30px;
-            background: var(--white);
-        }
-
-        .restaurant-logo-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 18px;
-            margin-top: -60px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .restaurant-logo-container {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow-lg);
-            transition: all 0.3s ease;
-            padding: 0;
-            overflow: hidden;
-            border: 4px solid var(--white);
-        }
-
-        .restaurant-card:hover .restaurant-logo-container {
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-            transform: translateY(-5px);
-        }
-
-        .restaurant-logo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        .restaurant-name {
-            font-family: 'Crimson Text', serif;
-            font-size: 1.35rem;
-            font-weight: 500;
-            margin-bottom: 6px;
-            letter-spacing: -0.3px;
-            text-align: center;
-            transition: color 0.3s ease;
-            line-height: 1.3;
-        }
-
-        .restaurant-card:hover .restaurant-name {
-            color: var(--accent-gold);
-        }
-
-        .restaurant-location {
-            font-size: 0.72rem;
-            color: var(--gray-medium);
-            margin-bottom: 12px;
-            line-height: 1.4;
-            text-align: center;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 500;
-        }
-
-        .restaurant-description {
-            font-size: 0.83rem;
-            color: var(--gray-medium);
-            margin-bottom: 20px;
-            line-height: 1.6;
-            text-align: center;
-            font-weight: 300;
-        }
-
-        .restaurant-btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .reserve-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 16px 30px;
-            background: var(--black);
-            color: var(--white);
-            border: 1px solid var(--black);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            border-radius: 0;
-            text-transform: uppercase;
-        }
-
-        .reserve-btn:hover {
-            background: transparent;
-            color: var(--black);
-        }
-
-        .review-btn-secondary {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 15px 28px;
-            background: transparent;
-            color: var(--black);
-            border: 1px solid var(--border);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            border-radius: 0;
-            text-transform: uppercase;
-        }
-
-        .review-btn-secondary:hover {
-            border-color: var(--black);
-        }
-
-        .review-btn-emoji {
-            font-size: 0.9rem;
-            display: inline-block;
-            line-height: 1;
-        }
-
-        .review-btn-secondary span:not(.review-btn-emoji) {
-            display: inline-block;
-            text-align: center;
-        }
-
+        .benefit-card:hover { border-color: var(--accent-gold); transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .benefit-icon { font-size: 2.5rem; margin-bottom: 20px; opacity: 0.85; display: block; }
+        .benefit-title { font-family: 'Crimson Text', serif; font-size: 1.3rem; font-weight: 500; margin-bottom: 12px; color: var(--black); }
+        .benefit-description { font-size: 0.9rem; color: var(--gray-medium); line-height: 1.7; font-weight: 300; }
+        /* RESTAURANTS SECTION */
+        .restaurants-section { padding: 25px 18px 80px; background: var(--gray-light); display: none; animation: fadeIn 0.5s ease; }
+        .restaurants-section.visible { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .restaurants-container { max-width: 1280px; margin: 0 auto; }
+        .restaurants-header { text-align: center; margin-bottom: 28px; padding-top: 8px; }
+        .restaurants-title { font-family: 'Crimson Text', serif; font-size: clamp(1.6rem,4vw,2.5rem); font-weight: 500; margin-bottom: 10px; color: var(--black); letter-spacing: -0.5px; }
+        .restaurants-subtitle { font-size: 0.85rem; color: var(--gray-medium); font-weight: 300; letter-spacing: 0.5px; }
+        .restaurants-grid { display: grid; grid-template-columns: 1fr; gap: 25px; }
+        .restaurant-card { position: relative; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s ease; background: var(--white); }
+        .restaurant-card:hover { border-color: var(--accent-gold); transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .restaurant-image-wrapper { position: relative; overflow: hidden; height: 220px; }
+        .restaurant-image { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; filter: grayscale(0.1); }
+        .restaurant-card:hover .restaurant-image { transform: scale(1.05); filter: grayscale(0); }
+        .restaurant-info { padding: 35px 20px 30px; background: var(--white); }
+        .restaurant-logo-wrapper { display: flex; justify-content: center; margin-bottom: 18px; margin-top: -60px; position: relative; z-index: 2; }
+        .restaurant-logo-container { width: 90px; height: 90px; border-radius: 50%; background: var(--white); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-lg); overflow: hidden; border: 4px solid var(--white); transition: all 0.3s ease; }
+        .restaurant-logo-container img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .restaurant-name { font-family: 'Crimson Text', serif; font-size: 1.35rem; font-weight: 500; margin-bottom: 6px; text-align: center; transition: color 0.3s ease; }
+        .restaurant-card:hover .restaurant-name { color: var(--accent-gold); }
+        .restaurant-location { font-size: 0.72rem; color: var(--gray-medium); margin-bottom: 12px; text-align: center; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; }
+        .restaurant-description { font-size: 0.83rem; color: var(--gray-medium); margin-bottom: 20px; line-height: 1.6; text-align: center; font-weight: 300; }
+        .restaurant-btn-group { display: flex; flex-direction: column; gap: 10px; }
+        .reserve-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 16px 30px; background: var(--black); color: var(--white); border: 1px solid var(--black); font-family: 'Inter',sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px; text-decoration: none; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; }
+        .reserve-btn:hover { background: transparent; color: var(--black); }
+        .review-btn-secondary { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 15px 28px; background: transparent; color: var(--black); border: 1px solid var(--border); font-family: 'Inter',sans-serif; font-size: 0.75rem; font-weight: 500; letter-spacing: 1.5px; text-decoration: none; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; }
+        .review-btn-secondary:hover { border-color: var(--black); }
+        /* NEWSLETTER SECTION */
+        .newsletter-section { padding: 80px 25px; background: var(--black); color: var(--white); text-align: center; }
+        .newsletter-container { max-width: 600px; margin: 0 auto; }
+        .newsletter-icon { font-size: 3rem; margin-bottom: 20px; animation: floatGently 3s ease-in-out infinite; display: block; }
+        .newsletter-title { font-family: 'Crimson Text', serif; font-size: clamp(1.8rem,5vw,2.8rem); font-weight: 500; margin-bottom: 15px; color: var(--white); letter-spacing: -0.5px; }
+        .newsletter-subtitle { font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 35px; font-weight: 300; }
+        .newsletter-form { max-width: 450px; margin: 0 auto; }
+        .newsletter-fields { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+        .newsletter-fields input { width: 100%; padding: 14px 18px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: var(--white); font-family: 'Inter',sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.3s; }
+        .newsletter-fields input::placeholder { color: rgba(255,255,255,0.4); }
+        .newsletter-fields input:focus { border-color: var(--accent-gold); }
+        .newsletter-rgpd { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; text-align: left; }
+        .newsletter-rgpd label { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+        .newsletter-btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 17px 40px; background: var(--white); color: var(--black); border: 1px solid var(--white); font-family: 'Inter',sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; }
+        .newsletter-btn:hover { background: transparent; color: var(--white); }
+        .newsletter-message { margin-top: 20px; padding: 20px; text-align: center; font-size: 0.95rem; line-height: 1.6; display: none; }
+        .newsletter-message.success { color: #4ade80; }
+        .newsletter-message.error { color: #f87171; }
         /* FOOTER */
-        footer {
-            background: var(--black);
-            color: var(--white);
-            padding: 60px 25px 35px;
-        }
-
-        .footer-content {
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .footer-top {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            margin-bottom: 50px;
-            padding-bottom: 50px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .footer-section h3 {
-            font-family: 'Crimson Text', serif;
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 20px;
-            color: var(--white);
-            letter-spacing: 0.5px;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section li {
-            margin-bottom: 14px;
-        }
-
-        .footer-section a {
-            color: rgba(255,255,255,0.5);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        .footer-section a:hover {
-            color: var(--white);
-            transform: translateX(3px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-        }
-
-        .footer-bottom p {
-            color: rgba(255,255,255,0.4);
-            font-size: 0.8rem;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        .scroll-to-top {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 48px;
-            height: 48px;
-            background: var(--black);
-            color: var(--white);
-            border: 1px solid var(--black);
-            border-radius: 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            font-weight: 300;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .scroll-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-to-top:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        /* MOBILE OPTIMIZATIONS - ULTRA COMPACT */
+        footer { background: var(--black); color: var(--white); padding: 60px 25px 35px; }
+        .footer-content { max-width: 1280px; margin: 0 auto; }
+        .footer-top { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 50px; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-section h3 { font-family: 'Crimson Text',serif; font-size: 1.1rem; font-weight: 500; margin-bottom: 20px; color: var(--white); }
+        .footer-section ul { list-style: none; }
+        .footer-section li { margin-bottom: 14px; }
+        .footer-section a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.85rem; transition: all 0.3s ease; display: inline-block; font-weight: 300; letter-spacing: 0.5px; }
+        .footer-section a:hover { color: var(--white); transform: translateX(3px); }
+        .footer-bottom { text-align: center; }
+        .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 0.8rem; font-weight: 300; }
+        .scroll-to-top { position: fixed; bottom: 25px; right: 25px; width: 48px; height: 48px; background: var(--black); color: var(--white); border: 1px solid var(--black); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000; }
+        .scroll-to-top.visible { opacity: 1; visibility: visible; }
+        .scroll-to-top:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+        /* MOBILE */
         @media (max-width: 480px) {
-            /* POPUP */
-            .popup-container {
-                margin: 15px;
-            }
-
-            .popup-content {
-                padding: 35px 25px 30px;
-            }
-
-            .popup-title {
-                font-size: 1.5rem;
-                margin-bottom: 12px;
-            }
-
-            .popup-subtitle {
-                font-size: 0.85rem;
-                margin-bottom: 20px;
-                line-height: 1.5;
-            }
-
-            .popup-icon {
-                font-size: 2rem;
-                margin-bottom: 18px;
-            }
-
-            .popup-highlight {
-                padding: 16px 20px;
-                font-size: 0.85rem;
-                margin: 20px 0;
-            }
-
-            .popup-highlight-emoji {
-                font-size: 1.3rem;
-            }
-
-            .popup-cta {
-                padding: 15px 30px;
-                font-size: 0.75rem;
-            }
-
-            .popup-secondary {
-                margin-top: 14px;
-                font-size: 0.8rem;
-            }
-
-            /* HERO */
-            .hero-logo img {
-                height: 70px;
-            }
-
-            .hero-title {
-                font-size: 1.9rem;
-            }
-
-            .hero-subtitle {
-                font-size: 0.9rem;
-            }
-
-            .hero-cta-primary,
-            .hero-cta-secondary {
-                font-size: 0.75rem;
-                padding: 15px 35px;
-            }
-
-            /* WHY SECTION - DRASTIQUEMENT RÉDUIT */
-            .why-section {
-                padding: 40px 20px 35px !important;
-            }
-
-            .section-title {
-                font-size: 1.5rem !important;
-                margin-bottom: 10px !important;
-            }
-
-            .section-title::after {
-                bottom: -8px;
-                width: 35px;
-            }
-
-            .section-subtitle {
-                font-size: 0.8rem !important;
-                margin-bottom: 25px !important;
-                margin-top: 20px !important;
-                line-height: 1.5 !important;
-            }
-
-            .benefits-grid {
-                gap: 18px !important;
-                margin-top: 25px !important;
-            }
-
-            .benefit-card {
-                padding: 25px 20px !important;
-            }
-
-            .benefit-icon {
-                font-size: 2rem !important;
-                margin-bottom: 12px !important;
-            }
-
-            .benefit-title {
-                font-size: 1.1rem !important;
-                margin-bottom: 8px !important;
-            }
-
-            .benefit-description {
-                font-size: 0.8rem !important;
-                line-height: 1.5 !important;
-            }
+            .popup-content { padding: 35px 25px 30px; }
+            .popup-title { font-size: 1.5rem; }
+            .hero-logo img { height: 70px; }
+            .hero-title { font-size: 1.9rem; }
+            .why-section { padding: 40px 20px 35px; }
+            .section-title { font-size: 1.5rem; }
+            .benefits-grid { gap: 18px; margin-top: 25px; }
+            .benefit-card { padding: 25px 20px; }
         }
-
-        /* TABLET */
         @media (min-width: 769px) {
-            .popup-container {
-                max-width: 550px;
-            }
-
-            .popup-content {
-                padding: 50px 45px 45px;
-            }
-
-            .popup-title {
-                font-size: 1.9rem;
-            }
-
-            .popup-subtitle {
-                font-size: 1rem;
-            }
-
-            .popup-highlight {
-                padding: 22px 28px;
-                font-size: 0.95rem;
-            }
-
-            .hero-logo {
-                left: 40px;
-                transform: none;
-            }
-
-            .hero-cta-primary,
-            .hero-cta-secondary {
-                max-width: 350px;
-                padding: 18px 50px;
-                font-size: 0.85rem;
-            }
-
-            .benefits-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 40px;
-            }
-
-            .restaurants-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 35px;
-            }
-
-            .restaurant-image-wrapper {
-                height: 280px;
-            }
-
-            .why-section {
-                padding: 120px 30px;
-            }
-
-            .restaurants-section {
-                padding: 60px 30px 100px;
-            }
+            .popup-container { max-width: 520px; }
+            .popup-content { padding: 50px 45px 45px; }
+            .hero-logo { left: 40px; }
+            .hero-cta-primary, .hero-cta-secondary { max-width: 350px; padding: 18px 50px; font-size: 0.85rem; }
+            .benefits-grid { grid-template-columns: repeat(3,1fr); gap: 40px; }
+            .restaurants-grid { grid-template-columns: repeat(2,1fr); gap: 35px; }
+            .restaurant-image-wrapper { height: 280px; }
+            .why-section { padding: 120px 30px; }
+            .restaurants-section { padding: 60px 30px 100px; }
         }
-
-        /* LARGE DESKTOP */
         @media (min-width: 1025px) {
-            .hero-logo {
-                left: 50px;
-                transform: none;
-            }
-
-            .restaurants-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 40px;
-            }
-
-            .restaurant-image-wrapper {
-                height: 320px;
-            }
+            .hero-logo { left: 50px; }
+            .restaurants-grid { grid-template-columns: repeat(3,1fr); gap: 40px; }
+            .restaurant-image-wrapper { height: 320px; }
         }
     </style>
 </head>
 <body>
-    <!-- SCROLL PROGRESS BAR -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- POPUP LEAD CAPTURE -5% -->
+    <!-- POPUP INFORMATIF - TIRAGE AU SORT -->
     <div class="popup-overlay" id="reviewPopup">
         <div class="popup-container">
             <div class="popup-header-decoration"></div>
             <button class="popup-close" id="closePopup" aria-label="Fermer"></button>
             <div class="popup-content">
-                <div id="lead-form-section">
-                    <div class="popup-icon">🎁</div>
-                    <h2 class="popup-title">Tentez votre chance !</h2>
-                    <p class="popup-subtitle">Chaque semaine, nous tirons au sort plusieurs gagnants parmi nos inscrits. Inscrivez-vous à notre newsletter pour participer !</p>
-                    <form id="leadForm" onsubmit="submitLead(event)" style="text-align:left;margin-top:20px;">
-                        <input type="text" id="leadPrenom" placeholder="Votre prénom" required style="width:100%;padding:12px 16px;margin-bottom:10px;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;border-radius:0;">
-                        <input type="email" id="leadEmail" placeholder="Votre email" required style="width:100%;padding:12px 16px;margin-bottom:10px;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;border-radius:0;">
-                        <input type="tel" id="leadTelephone" placeholder="Votre téléphone" required style="width:100%;padding:12px 16px;margin-bottom:14px;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;border-radius:0;">
-                        <label style="display:flex;align-items:flex-start;gap:8px;margin-bottom:18px;font-size:0.75rem;color:var(--gray-medium);cursor:pointer;">
-                            <input type="checkbox" id="leadRgpd" required style="margin-top:2px;">
-                            <span>J'accepte de recevoir des offres par email et SMS. Désinscription possible à tout moment. <a href="privacy-policy.html" target="_blank" style="color:var(--accent-gold);text-decoration:underline;">Politique de confidentialité</a></span>
-                        </label>
-                        <div class="popup-cta-wrapper">
-                            <button type="submit" class="popup-cta" id="leadSubmitBtn">
-                                <span>Je participe au tirage !</span>
-                            </button>
-                        </div>
-                    </form>
+                <div class="popup-icon">🎁</div>
+                <h2 class="popup-title">Bonne nouvelle !</h2>
+                <p class="popup-subtitle">En vous inscrivant à notre newsletter, vous participez automatiquement à nos <strong>tirages au sort hebdomadaires</strong>.</p>
+                <div class="popup-highlight">
+                    <span style="font-size:1.4rem;flex-shrink:0">🏆</span>
+                    <span>Chaque semaine, nous offrons des repas, réductions et cadeaux à nos abonnés !</span>
                 </div>
-                <div id="lead-success-section" style="display:none;">
-                    <!-- ETAPE 1: Timer + option avis -->
-                    <div id="timer-section">
-                        <div class="popup-icon">⏳</div>
-                        <h2 class="popup-title" style="color:#27ae60;">Merci <span id="leadPrenomDisplay"></span> !</h2>
-                        <p class="popup-subtitle">Votre code promo sera disponible dans :</p>
-                        <div style="text-align:center;margin:25px 0;">
-                            <span id="countdownTimer" style="font-size:2.5rem;font-weight:700;color:var(--accent-gold);font-family:'Crimson Text',serif;letter-spacing:2px;">01:00</span>
-                        </div>
-                        <div style="background:var(--gray-light);padding:18px 22px;margin:20px 0;border-left:2px solid var(--accent-gold);text-align:left;">
-                            <p style="font-size:0.85rem;color:var(--gray-dark);margin:0;"><strong>💬 En attendant :</strong> Partagez votre expérience et aidez-nous à nous améliorer !</p>
-                        </div>
-                        <div class="popup-cta-wrapper">
-                            <a href="#" id="reviewForCodeBtn" class="popup-cta" onclick="reviewForInstantCode(); return false;" style="background:var(--accent-gold);border-color:var(--accent-gold);color:#fff;">
-                                <span>⭐ PARTAGER MON EXPERIENCE</span>
-                            </a>
-                        </div>
-                        <a href="#" class="popup-secondary" onclick="return false;">Je patiente 1 minute</a>
-                    </div>
-                    <!-- ETAPE 2: Code révélé -->
-                    <div id="code-revealed-section" style="display:none;">
-                        <div class="popup-icon">🎉</div>
-                        <h2 class="popup-title" style="color:#27ae60;">Votre code promo !</h2>
-                        <div class="popup-highlight" style="text-align:center;justify-content:center;border-left:2px solid #27ae60;background:#f0faf0;">
-                            <span id="promoCodeDisplay" style="font-size:1.6rem;font-weight:bold;color:#27ae60;letter-spacing:4px;"></span>
-                        </div>
-                        <p class="popup-subtitle">Présentez ce code lors de votre prochaine visite pour <strong>-5% sur l'addition</strong>.</p>
-                        <div class="popup-cta-wrapper">
-                            <a href="#" class="popup-cta" id="popupCta" onclick="closePopup();return false;" style="background:var(--accent-gold);border-color:var(--accent-gold);color:#fff;">
-                                <span>✅ C'est noté, merci !</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                            </div>
+                <button class="popup-cta" id="popupCta">📧  M'inscrire à la newsletter</button>
+                <a class="popup-secondary" id="skipPopup" href="#">Peut-être plus tard</a>
+            </div>
         </div>
     </div>
 
-    <!-- HERO SECTION -->
-    <section class="hero" id="home">
+    <!-- HERO -->
+    <section class="hero">
         <div class="hero-logo">
-            <img src="472282651_1387969249261231_7595495068333774581_n.jpg" alt="Come à la maison">
+            <img src="come-a-la-maison-groupe-come_Plan-de-travail-1.jpg" alt="Come à la maison">
         </div>
         <div class="hero-content">
             <h1 class="hero-title">L'excellence se partage</h1>
             <p class="hero-subtitle">Votre regard affine notre art. Chaque retour d'expérience nourrit notre quête de perfection et inspire ceux qui nous découvrent.</p>
-
             <div class="hero-cta-group">
-                <a href="#restaurants" class="hero-cta-primary" id="mainCta">
-                    Partager mon expérience
-                </a>
-                <a href="#newsletter" class="hero-cta-secondary" id="secondaryCta">
-                    M'inscrire à la newsletter
-                </a>
+                <a href="#restaurants" class="hero-cta-primary" id="mainCta">Partager mon expérience</a>
+                <a href="#newsletter" class="hero-cta-secondary" id="secondaryCta">M'inscrire à la newsletter</a>
             </div>
         </div>
     </section>
 
-    <!-- WHY SECTION - ULTRA COMPACT MOBILE -->
+    <!-- WHY SECTION -->
     <section class="why-section">
         <div class="why-container">
             <h2 class="section-title">Pourquoi votre voix compte</h2>
             <p class="section-subtitle">Votre perspective enrichit notre communauté et guide nos évolutions.</p>
-
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <span class="benefit-icon">✍️</span>
                     <h3 class="benefit-title">Un geste qui compte</h3>
                     <p class="benefit-description">Chaque avis partagé aide notre famille à grandir et à continuer de vous accueillir avec passion.</p>
                 </div>
-
                 <div class="benefit-card">
                     <span class="benefit-icon">💎</span>
                     <h3 class="benefit-title">Influence directe</h3>
                     <p class="benefit-description">Vos retours façonnent notre offre et affinent chaque détail de nos expériences culinaires.</p>
                 </div>
-
                 <div class="benefit-card">
                     <span class="benefit-icon">🌟</span>
                     <h3 class="benefit-title">Communauté inspirante</h3>
@@ -1199,12 +228,15 @@
         </div>
     </section>
 
-    <!-- RESTAURANTS SECTION (HIDDEN BY DEFAULT) -->
-    <section class="restaurants-section visible" id="restaurants">
+    <!-- RESTAURANTS SECTION -->
+    <section class="restaurants-section" id="restaurants">
         <div class="restaurants-container">
-            
-
+            <div class="restaurants-header">
+                <h2 class="restaurants-title">Nos restaurants</h2>
+                <p class="restaurants-subtitle">Sélectionnez votre restaurant et partagez votre expérience</p>
+            </div>
             <div class="restaurants-grid">
+                <!-- Come à la maison -->
                 <div class="restaurant-card">
                     <div class="restaurant-image-wrapper">
                         <img src="come-a-la-maison.jpg" alt="Come à la maison" class="restaurant-image">
@@ -1220,17 +252,12 @@
                         <p class="restaurant-location">Luxembourg</p>
                         <p class="restaurant-description">L'authenticité italienne au cœur de la ville. Saveurs méditerranéennes et accueil chaleureux.</p>
                         <div class="restaurant-btn-group">
-                            <a href="https://www.comealamaison.lu/" target="_blank" class="review-btn-secondary">
-                                Réserver
-                            </a>
-                            <a href="https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE" target="_blank" class="reserve-btn">
-                                <span class="review-btn-emoji">🌟</span>
-                                <span>Partager mon avis</span>
-                            </a>
+                            <a href="https://www.comealamaison.lu/" class="reserve-btn" target="_blank">Réserver</a>
+                            <a href="https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE" class="review-btn-secondary" target="_blank"><span class="review-btn-emoji">🌟</span><span>Partager mon avis</span></a>
                         </div>
                     </div>
                 </div>
-
+                <!-- Brasserie des Nations -->
                 <div class="restaurant-card">
                     <div class="restaurant-image-wrapper">
                         <img src="brasserie-des-nations.jpg" alt="Brasserie des Nations" class="restaurant-image">
@@ -1239,24 +266,19 @@
                     <div class="restaurant-info">
                         <div class="restaurant-logo-wrapper">
                             <div class="restaurant-logo-container">
-                                <img src="611644101_17843493915670666_4965556442638396968_n.jpg" alt="Brasserie des Nations Logo">
+                                <img src="123747115_366375771279539_5404328722792594066_n.jpg" alt="Brasserie des Nations Logo">
                             </div>
                         </div>
                         <h3 class="restaurant-name">Brasserie des Nations</h3>
                         <p class="restaurant-location">Luxembourg</p>
                         <p class="restaurant-description">Atmosphère conviviale, cuisine généreuse et service impeccable. L'excellence à chaque visite.</p>
                         <div class="restaurant-btn-group">
-                            <a href="https://www.google.com/search?q=brasserie+des+nations" target="_blank" class="review-btn-secondary">
-                                Réserver
-                            </a>
-                            <a href="https://search.google.com/local/writereview?placeid=ChIJGUyhu9RIlUcRkvtPLgshxR4" target="_blank" class="reserve-btn">
-                                <span class="review-btn-emoji">🌟</span>
-                                <span>Partager mon avis</span>
-                            </a>
+                            <a href="https://www.google.com/search?q=brasserie+des+nations" class="reserve-btn" target="_blank">Réserver</a>
+                            <a href="https://search.google.com/local/writereview?placeid=ChIJGUyhu9RIlUcRkvtPLgshxR4" class="review-btn-secondary" target="_blank"><span class="review-btn-emoji">🌟</span><span>Partager mon avis</span></a>
                         </div>
                     </div>
                 </div>
-
+                <!-- Ceruzzi -->
                 <div class="restaurant-card">
                     <div class="restaurant-image-wrapper">
                         <img src="Ceruzzi.jpg" alt="Ceruzzi" class="restaurant-image">
@@ -1272,17 +294,12 @@
                         <p class="restaurant-location">Luxembourg</p>
                         <p class="restaurant-description">Délices italiens revisités avec passion. Un voyage culinaire authentique à chaque bouchée.</p>
                         <div class="restaurant-btn-group">
-                            <a href="https://ceruzzi.lu/" target="_blank" class="review-btn-secondary">
-                                Réserver
-                            </a>
-                            <a href="https://search.google.com/local/writereview?placeid=ChIJF62EKABJlUcRZW5S26CjnoI" target="_blank" class="reserve-btn">
-                                <span class="review-btn-emoji">🌟</span>
-                                <span>Partager mon avis</span>
-                            </a>
+                            <a href="https://ceruzzi.lu/" class="reserve-btn" target="_blank">Réserver</a>
+                            <a href="https://search.google.com/local/writereview?placeid=ChIJF62EKABJlUcRZW5S26CjnoI" class="review-btn-secondary" target="_blank"><span class="review-btn-emoji">🌟</span><span>Partager mon avis</span></a>
                         </div>
                     </div>
                 </div>
-
+                <!-- Il Mercato -->
                 <div class="restaurant-card">
                     <div class="restaurant-image-wrapper">
                         <img src="mercato.jpg" alt="Il Mercato" class="restaurant-image">
@@ -1291,24 +308,19 @@
                     <div class="restaurant-info">
                         <div class="restaurant-logo-wrapper">
                             <div class="restaurant-logo-container">
-                                <img src="446215405_760611436142259_6999356268202875394_n.jpg" alt="Il Mercato Logo">
+                                <img src="472282651_1387969249261231_7595495068333774581_n.jpg" alt="Il Mercato Logo">
                             </div>
                         </div>
                         <h3 class="restaurant-name">Il Mercato</h3>
                         <p class="restaurant-location">Luxembourg</p>
                         <p class="restaurant-description">Marché urbain à l'italienne. Fraîcheur, qualité et authenticité pour une expérience inoubliable.</p>
                         <div class="restaurant-btn-group">
-                            <a href="https://ilmercato.lu/" target="_blank" class="review-btn-secondary">
-                                Réserver
-                            </a>
-                            <a href="https://search.google.com/local/writereview?placeid=ChIJtcsSWQNPlUcR9YgqldycRRA" target="_blank" class="reserve-btn">
-                                <span class="review-btn-emoji">🌟</span>
-                                <span>Partager mon avis</span>
-                            </a>
+                            <a href="https://ilmercato.lu/" class="reserve-btn" target="_blank">Réserver</a>
+                            <a href="https://search.google.com/local/writereview?placeid=ChIJtcsSWQNPlUcR9YgqldycRRA" class="review-btn-secondary" target="_blank"><span class="review-btn-emoji">🌟</span><span>Partager mon avis</span></a>
                         </div>
                     </div>
                 </div>
-
+                <!-- La Rôtisserie Ardennaise -->
                 <div class="restaurant-card">
                     <div class="restaurant-image-wrapper">
                         <img src="Rotisserie.jpg" alt="La Rôtisserie Ardennaise" class="restaurant-image">
@@ -1317,82 +329,88 @@
                     <div class="restaurant-info">
                         <div class="restaurant-logo-wrapper">
                             <div class="restaurant-logo-container">
-                                <img src="123747115_366375771279539_5404328722792594066_n.jpg" alt="La Rôtisserie Ardennaise Logo">
+                                <img src="611644101_17843493915670666_4965556442638396968_n.jpg" alt="La Rôtisserie Ardennaise Logo">
                             </div>
                         </div>
                         <h3 class="restaurant-name">La Rôtisserie Ardennaise</h3>
                         <p class="restaurant-location">Luxembourg</p>
                         <p class="restaurant-description">Traditions des Ardennes, excellence gastronomique. Viandes sélectionnées et préparées avec soin.</p>
                         <div class="restaurant-btn-group">
-                            <a href="https://www.rotisserie-ardennaise.com/" target="_blank" class="review-btn-secondary">
-                                Réserver
-                            </a>
-                            <a href="https://search.google.com/local/writereview?placeid=ChIJv_ZOGytJlUcRp1K0RUL2MKQ" target="_blank" class="reserve-btn">
-                                <span class="review-btn-emoji">🌟</span>
-                                <span>Partager mon avis</span>
-                            </a>
+                            <a href="https://www.rotisserie-ardennaise.com/" class="reserve-btn" target="_blank">Réserver</a>
+                            <a href="https://search.google.com/local/writereview?placeid=ChIJv_ZOGytJlUcRp1K0RUL2MKQ" class="review-btn-secondary" target="_blank"><span class="review-btn-emoji">🌟</span><span>Partager mon avis</span></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
 
-    <!-- MENTION LEGALE -->
-    <div style="text-align:center;padding:8px 20px;opacity:0.6;font-size:11px;color:#666;">
-                    Tirage au sort hebdomadaire soumis à conditions. Vos données sont collectées conformément au RGPD pour des communications marketing. Durée de conservation : 3 ans. <a href="privacy-policy.html" style="color:#D4AF37;text-decoration:underline;">Politique de confidentialité</a>
-    </div>
+    <!-- NEWSLETTER SECTION -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="newsletter-container">
+            <span class="newsletter-icon">📧</span>
+            <h2 class="newsletter-title">Inscrivez-vous à notre newsletter</h2>
+            <p class="newsletter-subtitle">Recevez nos offres exclusives et participez automatiquement à nos <strong style="color:var(--accent-gold)">tirages au sort hebdomadaires</strong>. Chaque semaine, des repas, réductions et cadeaux à gagner !</p>
+            <form class="newsletter-form" id="newsletterForm" onsubmit="submitNewsletter(event)">
+                <div class="newsletter-fields">
+                    <input type="text" id="nlPrenom" placeholder="Votre prénom" required>
+                    <input type="email" id="nlEmail" placeholder="Votre email" required>
+                    <input type="tel" id="nlTelephone" placeholder="Votre téléphone" required>
+                </div>
+                <div class="newsletter-rgpd">
+                    <input type="checkbox" id="nlRgpd" required style="margin-top:2px;flex-shrink:0">
+                    <label for="nlRgpd">J'accepte de recevoir des offres par email et SMS. Désinscription possible à tout moment. <a href="privacy-policy.html" style="color:rgba(255,255,255,0.6)">Politique de confidentialité</a></label>
+                </div>
+                <button type="submit" class="newsletter-btn" id="nlSubmitBtn"><span>Je m'inscris au tirage !</span></button>
+            </form>
+            <div class="newsletter-message" id="nlMessage"></div>
+        </div>
+    </section>
 
-    <!-- COPYRIGHT -->
-    <div style="text-align: center; padding: 20px; background-color: #f8f8f8; color: #666;">
-        <p style="margin: 0; font-size: 14px;">© 2026 Come à la maison & co. Tous droits réservés. | <a href="privacy-policy.html" style="color:#D4AF37;text-decoration:underline;">Politique de confidentialité</a></p>
-    </div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-bottom">
+                <p>Tirage au sort hebdomadaire soumis à conditions. Vos données sont collectées conformément au RGPD. Durée de conservation : 3 ans. <a href="privacy-policy.html">Politique de confidentialité</a></p>
+                <p style="margin-top:12px">&copy; 2026 Come à la maison & co. Tous droits réservés. | <a href="privacy-policy.html">Politique de confidentialité</a></p>
+            </div>
+        </div>
+    </footer>
 
-
-        <button class="scroll-to-top" id="scrollToTop" aria-label="Retour en haut">↑</button>
+    <button class="scroll-to-top" id="scrollToTop">↑</button>
 
     <script>
-                // Generate unique promo code once
-        var _pch = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-        window._uniquePromoCode = 'PROMO';
-        for (var _pi = 0; _pi < 6; _pi++) window._uniquePromoCode += _pch.charAt(Math.floor(Math.random() * _pch.length));
+        // Apps Script URL
+        var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-GBbyySuEZZ-HA81xv_BjcedRA4CmvrP19-wOXjsr6hldkrhmEo2l7V-J67WEs4250g/exec';
+
         // Scroll Progress Bar
-        const scrollProgress = document.getElementById('scrollProgress');
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const progress = (scrollTop / scrollHeight) * 100;
-            scrollProgress.style.width = progress + '%';
+        var scrollProgress = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', function() {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            scrollProgress.style.width = (scrollTop / scrollHeight * 100) + '%';
         });
 
-               // Lead Capture - Apps Script URL
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-GBbyySuEZZ-HA81xv_BjcedRA4CmvrP19-wOXjsr6hldkrhmEo2l7V-J67WEs4250g/exec';
-
-            // Anti-fraude : Fingerprint navigateur (canvas)
+        // Anti-fraude : Fingerprint
         function getFingerprint() {
             try {
                 var canvas = document.createElement('canvas');
                 var ctx = canvas.getContext('2d');
-                ctx.textBaseline = 'top';
-                ctx.font = '14px Arial';
+                ctx.textBaseline = 'top'; ctx.font = '14px Arial';
                 ctx.fillText('fingerprint', 2, 2);
                 ctx.fillStyle = 'rgba(102,204,0,0.7)';
                 ctx.fillRect(50, 50, 60, 60);
                 var dataUrl = canvas.toDataURL();
                 var hash = 0;
                 for (var i = 0; i < dataUrl.length; i++) {
-                    var char = dataUrl.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
+                    hash = ((hash << 5) - hash) + dataUrl.charCodeAt(i);
                     hash = hash & hash;
                 }
                 return Math.abs(hash).toString(36);
-            } catch(e) {
-                return 'unknown';
-            }
+            } catch(e) { return 'unknown'; }
         }
 
-        // Anti-fraude : CookieId persistant (localStorage)
+        // Anti-fraude : CookieId
         function getCookieId() {
             var id = localStorage.getItem('_devId');
             if (!id) {
@@ -1402,152 +420,60 @@
             return id;
         }
 
-        // Anti-fraude : Recuperer IP publique
+        // IP
         var userIP = '';
-        fetch('https://api.ipify.org?format=json')
-            .then(function(r) { return r.json(); })
-            .then(function(d) { userIP = d.ip || ''; })
-            .catch(function() { userIP = ''; });
+        fetch('https://api.ipify.org?format=json').then(function(r){return r.json();}).then(function(d){userIP=d.ip||'';}).catch(function(){userIP='';});
 
-        function submitLead(e) {
-            e.preventDefault();
-            var btn = document.getElementById('leadSubmitBtn');
-            btn.disabled = true; btn.querySelector('span').textContent = 'CHARGEMENT...'; btn.style.opacity = '0.7'; btn.style.cursor = 'wait';
-            var prenom = document.getElementById('leadPrenom').value;
-            var email = document.getElementById('leadEmail').value;
-            var telephone = document.getElementById('leadTelephone').value;
-
-            // Utiliser GET + JSONP pour contourner CORS et lire la reponse serveur
-            var callbackName = 'leadCallback_' + Date.now();
-            window[callbackName] = function(response) {
-                // Nettoyer
-                delete window[callbackName];
-                var scriptTag = document.getElementById('leadScript');
-                if (scriptTag) scriptTag.remove();
-
-                if (response.status === 'success') {
-                                        // Message de confirmation simple
-                    var formSection = document.getElementById('lead-form-section');
-                    formSection.innerHTML = '<div style="text-align:center;padding:40px 20px;"><div style="font-size:3rem;margin-bottom:20px;">\u2705</div><h2 class="popup-title" style="color:#27ae60;">Merci ' + prenom + ' !</h2><p class="popup-subtitle">Vous \u00eates bien inscrit(e) \u00e0 notre newsletter.<br>Vous participez d\u00e9sormais \u00e0 nos tirages au sort hebdomadaires !</p></div>';
-                    localStorage.setItem('leadCaptured', 'true');
-                    document.getElementById('skipPopup').style.display = 'none';
-                    setTimeout(function() { document.getElementById('reviewPopup').classList.remove('active'); document.body.style.overflow = ''; }, 3000);
-                    // Doublon => afficher un message d'erreur
-                    btn.querySelector('span').textContent = 'Je participe au tirage !';
-                    btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
-                    var errorMsg = document.getElementById('leadErrorMsg');
-                    if (!errorMsg) {
-                        errorMsg = document.createElement('p');
-                        errorMsg.id = 'leadErrorMsg';
-                        errorMsg.style.cssText = 'color:#e74c3c;font-size:0.85rem;margin-top:10px;text-align:center;';
-                        document.getElementById('leadForm').appendChild(errorMsg);
-                    }
-                    if (response.field === 'email') {
-                        errorMsg.textContent = 'Cet email a deja ete utilise pour obtenir un code promo.';
-                    } else if (response.field === 'telephone') {
-                        errorMsg.textContent = 'Ce numero de telephone a deja ete utilise.';
-                    } else {
-                        errorMsg.textContent = 'Vous avez deja beneficie de cette offre.';
-                    }
-                } else {
-                    btn.querySelector('span').textContent = 'Je participe au tirage !';
-                    btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
-                    alert('Une erreur est survenue. Veuillez reessayer.');
-                }
-            };
-
-            // Creer le script JSONP
-            var params = 'action=register'
-                + '&prenom=' + encodeURIComponent(prenom)
-                + '&email=' + encodeURIComponent(email)
-                + '&telephone=' + encodeURIComponent(telephone)
-                + '&code=' + encodeURIComponent(window._uniquePromoCode || 'PROMO')
-                + '&source=popup-site'
-            + '&fingerprint=' + encodeURIComponent(getFingerprint())
-            + '&ip=' + encodeURIComponent(userIP)
-            + '&cookieId=' + encodeURIComponent(getCookieId())
-                + '&callback=' + callbackName;
-            var script = document.createElement('script');
-            script.id = 'leadScript';
-            script.src = APPS_SCRIPT_URL + '?' + params;
-            script.onerror = function() {
-                delete window[callbackName];
-                script.remove();
-                btn.querySelector('span').textContent = 'Je participe au tirage !';
-                btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
-                alert('Erreur de connexion. Veuillez reessayer.');
-            };
-            document.body.appendChild(script);
-        }
-        
-        // Popup functionality
-        const popup = document.getElementById('reviewPopup');
-        const closeBtn = document.getElementById('closePopup');
-        const skipBtn = document.getElementById('skipPopup');
-        const popupCta = document.getElementById('popupCta');
+        // POPUP - Informatif uniquement
+        var popup = document.getElementById('reviewPopup');
+        var closeBtn = document.getElementById('closePopup');
+        var skipBtn = document.getElementById('skipPopup');
+        var popupCta = document.getElementById('popupCta');
 
         window.addEventListener('load', function() {
-if (new URLSearchParams(window.location.search).get('reset') === 'true') { localStorage.removeItem('leadCaptured'); } if (!localStorage.getItem('leadCaptured')) {
+            if (new URLSearchParams(window.location.search).get('reset') === 'true') {
+                localStorage.removeItem('leadCaptured');
+            }
+            // Afficher le popup apres 5s si pas encore inscrit
+            if (!localStorage.getItem('leadCaptured')) {
                 setTimeout(function() {
                     popup.classList.add('active');
+                    document.body.style.overflow = 'hidden';
                 }, 5000);
             }
         });
 
         function closePopup() {
             popup.classList.remove('active');
+            document.body.style.overflow = '';
         }
 
         closeBtn.addEventListener('click', closePopup);
-        skipBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            closePopup();
-        });
+        skipBtn.addEventListener('click', function(e) { e.preventDefault(); closePopup(); });
+        popup.addEventListener('click', function(e) { if (e.target === popup) closePopup(); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closePopup(); });
 
+        // Bouton popup CTA => scroll vers la section newsletter
         popupCta.addEventListener('click', function() {
             closePopup();
-            showRestaurants();
-        });
-
-            // Bouton Laisser un avis => code instantane + ouvre Google avis dans nouvel onglet
-    var reviewBtn = document.getElementById('reviewForCodeBtn');
-    if (reviewBtn) {
-        reviewBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            reviewForInstantCode();
-        });
-    }
-
-        popup.addEventListener('click', function(e) {
-            if (e.target === popup) {
-                closePopup();
+            var nlSection = document.getElementById('newsletter');
+            if (nlSection) {
+                setTimeout(function() {
+                    nlSection.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
             }
         });
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && popup.classList.contains('active')) {
-                closePopup();
-            }
-        });
-
-        // Show restaurants section with optimized mobile scroll
-        const restaurantsSection = document.getElementById('restaurants');
-        const mainCta = document.getElementById('mainCta');
-        const secondaryCta = document.getElementById('secondaryCta');
+        // Bouton hero PARTAGER MON EXPERIENCE => show restaurants
+        var mainCta = document.getElementById('mainCta');
+        var restaurantsSection = document.getElementById('restaurants');
 
         function showRestaurants() {
             restaurantsSection.classList.add('visible');
-            // Attendre que la section soit visible avant de scroller
             setTimeout(function() {
-                // Sur mobile, scroller avec offset réduit pour voir toute la première carte
-                const isMobile = window.innerWidth <= 768;
-                const offset = isMobile ? 10 : 20;
-                const offsetPosition = restaurantsSection.offsetTop - offset;
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                var isMobile = window.innerWidth <= 768;
+                var offset = isMobile ? 10 : 20;
+                window.scrollTo({ top: restaurantsSection.offsetTop - offset, behavior: 'smooth' });
             }, 100);
         }
 
@@ -1556,392 +482,99 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
             showRestaurants();
         });
 
+        // Bouton hero M'INSCRIRE A LA NEWSLETTER => scroll vers #newsletter
+        var secondaryCta = document.getElementById('secondaryCta');
         secondaryCta.addEventListener('click', function(e) {
             e.preventDefault();
-            showRestaurants();
-        });
-
-        // Also show restaurants when clicking any anchor link to #restaurants
-        document.querySelectorAll('a[href="#restaurants"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                showRestaurants();
-            });
-        });
-
-        // Scroll to Top Button
-        const scrollToTopBtn = document.getElementById('scrollToTop');
-
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 400) {
-                scrollToTopBtn.classList.add('visible');
-            } else {
-                scrollToTopBtn.classList.remove('visible');
+            var nlSection = document.getElementById('newsletter');
+            if (nlSection) {
+                nlSection.scrollIntoView({ behavior: 'smooth' });
             }
         });
 
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+        // Liens #restaurants dans la page
+        document.querySelectorAll('a[href="#restaurants"]').forEach(function(link) {
+            link.addEventListener('click', function(e) { e.preventDefault(); showRestaurants(); });
         });
 
-                // ========== TIMER & EMAIL PROMO ==========
-        var countdownInterval = null;
+        // Scroll to Top
+        var scrollToTopBtn = document.getElementById('scrollToTop');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 400) scrollToTopBtn.classList.add('visible');
+            else scrollToTopBtn.classList.remove('visible');
+        });
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-        function startCountdown() {
-            var timeLeft = 60; // 1 minute en secondes
-            var timerEl = document.getElementById('countdownTimer');
-            countdownInterval = setInterval(function() {
-                timeLeft--;
-                var min = Math.floor(timeLeft / 60);
-                var sec = timeLeft % 60;
-                timerEl.textContent = (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec;
-                if (timeLeft <= 0) {
-                    clearInterval(countdownInterval);
-                    // code deverrouille
-                    revealCode();
+        // NEWSLETTER FORM SUBMIT
+        function submitNewsletter(e) {
+            e.preventDefault();
+            var btn = document.getElementById('nlSubmitBtn');
+            var msgDiv = document.getElementById('nlMessage');
+            btn.disabled = true;
+            btn.querySelector('span').textContent = 'CHARGEMENT...';
+            btn.style.opacity = '0.7';
+
+            var prenom = document.getElementById('nlPrenom').value;
+            var email = document.getElementById('nlEmail').value;
+            var telephone = document.getElementById('nlTelephone').value;
+
+            var cbName = 'nlCB_' + Date.now();
+            window[cbName] = function(response) {
+                delete window[cbName];
+                var s = document.getElementById('nlScript');
+                if (s) s.remove();
+
+                if (response.status === 'success') {
+                    document.getElementById('newsletterForm').style.display = 'none';
+                    msgDiv.className = 'newsletter-message success';
+                    msgDiv.style.display = 'block';
+                    msgDiv.innerHTML = '<div style="font-size:2.5rem;margin-bottom:15px">✅</div><strong>Merci ' + prenom + ' !</strong><br>Vous êtes bien inscrit(e) à notre newsletter.<br>Vous participez désormais à nos tirages au sort hebdomadaires !';
+                    localStorage.setItem('leadCaptured', 'true');
+                    return;
                 }
-            }, 1000);
-        }
-
-                    function reviewForInstantCode() {
-            if (window._reviewCodeDone) return;
-            window._reviewCodeDone = true;
-            window.open('https://search.google.com/local/writereview?placeid=ChIJDbJfDShJlUcRehDaRWQNDnE', '_blank');
-        }
-
-        function revealCode() {
-            document.getElementById('timer-section').style.display = 'none';
-            document.getElementById('code-revealed-section').style.display = 'block';
-            var ch = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-            var code = 'PROMO';
-            for (var i = 0; i < 6; i++) code += ch.charAt(Math.floor(Math.random() * ch.length));
-            var el = document.getElementById('promoCodeDisplay');
-            if (el) el.textContent = window._uniquePromoCode;
-                    sendPromoEmail(false);
-        }
-
-        function sendPromoEmail(instant) {
-            var email = window._leadEmail || '';
-            var prenom = window._leadPrenom || '';
-            if (!email) return;
-            var params = 'action=sendpromo' + '&email=' + encodeURIComponent(email) + '&prenom=' + encodeURIComponent(prenom) + '&code=' + encodeURIComponent(window._uniquePromoCode || 'PROMO') + '&instant=' + (instant ? 'true' : 'false');
-            var script = document.createElement('script');
-            script.src = APPS_SCRIPT_URL + '?' + params + '&callback=promoEmailSent';
-            document.body.appendChild(script);
-        }
-        window.promoEmailSent = function() {};     </script>
-        <script>
-    // Override: remove review popup, redirect directly to Google
-    document.querySelectorAll('.review-btn-secondary').forEach(function(link) {
-        link.replaceWith(link.cloneNode(true));
-    });
-    document.querySelectorAll('.review-btn-secondary').forEach(function(link) {
-        link.setAttribute('target', '_blank');
-    });
-                    // Override: bouton PARTAGER MON EXPERIENCE => section restaurants
-    var reviewForCodeBtn = document.getElementById('reviewForCodeBtn');
-    if (reviewForCodeBtn) {
-        reviewForCodeBtn.replaceWith(reviewForCodeBtn.cloneNode(true));
-        var newBtn = document.getElementById('reviewForCodeBtn');
-        if (newBtn) {
-            newBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('reviewPopup').classList.remove('active');
-                document.body.style.overflow = '';
-                var restSection = document.getElementById('restaurants');
-                if (restSection) {
-                    restSection.classList.add('visible');
-                    setTimeout(function() {
-                        restSection.scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
+                if (response.status === 'duplicate') {
+                    msgDiv.className = 'newsletter-message error';
+                    msgDiv.style.display = 'block';
+                    if (response.field === 'email') msgDiv.textContent = 'Cet email est déjà inscrit.';
+                    else if (response.field === 'telephone') msgDiv.textContent = 'Ce numéro est déjà inscrit.';
+                    else msgDiv.textContent = 'Vous êtes déjà inscrit(e).';
+                    btn.querySelector('span').textContent = 'Je m\'inscris au tirage !';
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    return;
                 }
-            });
-        }
-        
-</script>
-    <script>
-window.submitLead = function(e) {
-    e.preventDefault();
-    var btn = document.getElementById('leadSubmitBtn');
-    btn.disabled = true;
-    btn.querySelector('span').textContent = 'CHARGEMENT...';
-    btn.style.opacity = '0.7';
-    btn.style.cursor = 'wait';
-    var prenom = document.getElementById('leadPrenom').value;
-    var email = document.getElementById('leadEmail').value;
-    var telephone = document.getElementById('leadTelephone').value;
-    var callbackName = 'leadCB_' + Date.now();
-    window[callbackName] = function(response) {
-        delete window[callbackName];
-        var scriptTag = document.getElementById('leadScript');
-        if (scriptTag) scriptTag.remove();
-        if (response.status === 'success') {
-            var formSection = document.getElementById('lead-form-section');
-            formSection.innerHTML = '<div style="text-align:center;padding:40px 20px;"><div style="font-size:3rem;margin-bottom:20px;">\u2705</div><h2 class="popup-title" style="color:#27ae60;">Merci ' + prenom + ' !</h2><p class="popup-subtitle">Vous \u00eates bien inscrit(e) \u00e0 notre newsletter.<br>Vous participez d\u00e9sormais \u00e0 nos tirages au sort hebdomadaires !</p></div>';
-            localStorage.setItem('leadCaptured', 'true');
-            var skipEl = document.getElementById('skipPopup');
-            if (skipEl) skipEl.style.display = 'none';
-            setTimeout(function() {
-                var popup = document.getElementById('reviewPopup');
-                if (popup) popup.classList.remove('active');
-                document.body.style.overflow = '';
-            }, 3000);
-            return;
-        }
-        if (response.status === 'duplicate') {
-            btn.querySelector('span').textContent = 'Je participe au tirage !';
-            btn.disabled = false;
-            btn.style.opacity = '1';
-            btn.style.cursor = 'pointer';
-            var errorMsg = document.getElementById('leadErrorMsg');
-            if (!errorMsg) {
-                errorMsg = document.createElement('p');
-                errorMsg.id = 'leadErrorMsg';
-                errorMsg.style.cssText = 'color:#e74c3c;font-size:0.85rem;margin-top:10px;text-align:center;';
-                document.getElementById('leadForm').appendChild(errorMsg);
-            }
-            if (response.field === 'email') {
-                errorMsg.textContent = 'Cet email est deja inscrit.';
-            } else if (response.field === 'telephone') {
-                errorMsg.textContent = 'Ce numero est deja inscrit.';
-            } else {
-                errorMsg.textContent = 'Vous etes deja inscrit(e).';
-            }
-            return;
-        }
-        btn.querySelector('span').textContent = 'Je participe au tirage !';
-        btn.disabled = false;
-        btn.style.opacity = '1';
-        btn.style.cursor = 'pointer';
-        alert('Une erreur est survenue. Veuillez reessayer.');
-    };
-    var params = 'action=register'
-        + '&prenom=' + encodeURIComponent(prenom)
-        + '&email=' + encodeURIComponent(email)
-        + '&telephone=' + encodeURIComponent(telephone)
-        + '&code=' + encodeURIComponent(window._uniquePromoCode || 'PROMO')
-        + '&source=popup-site'
-        + '&fingerprint=' + encodeURIComponent(getFingerprint())
-        + '&ip=' + encodeURIComponent(userIP)
-        + '&cookieId=' + encodeURIComponent(getCookieId())
-        + '&callback=' + callbackName;
-    var script = document.createElement('script');
-    script.id = 'leadScript';
-    script.src = APPS_SCRIPT_URL + '?' + params;
-    script.onerror = function() {
-        delete window[callbackName];
-        script.remove();
-        btn.querySelector('span').textContent = 'Je participe au tirage !';
-        btn.disabled = false;
-        btn.style.opacity = '1';
-        btn.style.cursor = 'pointer';
-        alert('Erreur de connexion. Veuillez reessayer.');
-    };
-    document.body.appendChild(script);
-};
-var leadForm = document.getElementById('leadForm');
-if (leadForm) { leadForm.onsubmit = window.submitLead; }
-</script>
-    <style>
-/* NEWSLETTER SECTION */
-.newsletter-section {
-    padding: 80px 25px;
-    background: var(--black);
-    color: var(--white);
-    text-align: center;
-}
-.newsletter-container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-.newsletter-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    animation: floatGently 3s ease-in-out infinite;
-}
-.newsletter-title {
-    font-family: 'Crimson Text', serif;
-    font-size: clamp(1.8rem, 5vw, 2.8rem);
-    font-weight: 500;
-    margin-bottom: 15px;
-    color: var(--white);
-    letter-spacing: -0.5px;
-}
-.newsletter-subtitle {
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.7);
-    line-height: 1.7;
-    margin-bottom: 35px;
-    font-weight: 300;
-}
-.newsletter-form {
-    max-width: 450px;
-    margin: 0 auto;
-}
-.newsletter-fields {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 16px;
-}
-.newsletter-fields input {
-    width: 100%;
-    padding: 14px 18px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.08);
-    color: var(--white);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    outline: none;
-    border-radius: 0;
-    transition: border-color 0.3s;
-}
-.newsletter-fields input::placeholder {
-    color: rgba(255,255,255,0.4);
-}
-.newsletter-fields input:focus {
-    border-color: var(--accent-gold);
-}
-.newsletter-rgpd {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 20px;
-    text-align: left;
-}
-.newsletter-rgpd label {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.5);
-    line-height: 1.5;
-}
-.newsletter-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 17px 40px;
-    background: var(--white);
-    color: var(--black);
-    border: 1px solid var(--white);
-    font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    border-radius: 0;
-}
-.newsletter-btn:hover {
-    background: transparent;
-    color: var(--white);
-}
-.newsletter-message {
-    margin-top: 20px;
-    padding: 20px;
-    text-align: center;
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-.newsletter-message.success {
-    color: #4ade80;
-}
-.newsletter-message.error {
-    color: #f87171;
-}
-</style>
-    <script>
-/* Disable popup auto-open */
-window.addEventListener('load', function() {
-    var popup = document.getElementById('reviewPopup');
-    if (popup) popup.classList.remove('active');
-    document.body.style.overflow = '';
-});
+                btn.querySelector('span').textContent = 'Je m\'inscris au tirage !';
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                alert('Une erreur est survenue. Veuillez réessayer.');
+            };
 
-/* Override secondaryCta to scroll to newsletter */
-var secCta = document.getElementById('secondaryCta');
-if (secCta) {
-    secCta.replaceWith(secCta.cloneNode(true));
-    var newSecCta = document.getElementById('secondaryCta');
-    newSecCta.addEventListener('click', function(e) {
-        e.preventDefault();
-        var nlSection = document.getElementById('newsletter');
-        if (nlSection) {
-            nlSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-}
+            var params = 'action=register'
+                + '&prenom=' + encodeURIComponent(prenom)
+                + '&email=' + encodeURIComponent(email)
+                + '&telephone=' + encodeURIComponent(telephone)
+                + '&code=NL'
+                + '&source=newsletter-section'
+                + '&fingerprint=' + encodeURIComponent(getFingerprint())
+                + '&ip=' + encodeURIComponent(userIP)
+                + '&cookieId=' + encodeURIComponent(getCookieId())
+                + '&callback=' + cbName;
 
-/* Newsletter form submit */
-function submitNewsletter(e) {
-    e.preventDefault();
-    var btn = document.getElementById('nlSubmitBtn');
-    var msgDiv = document.getElementById('nlMessage');
-    btn.disabled = true;
-    btn.querySelector('span').textContent = 'CHARGEMENT...';
-    btn.style.opacity = '0.7';
-    var prenom = document.getElementById('nlPrenom').value;
-    var email = document.getElementById('nlEmail').value;
-    var telephone = document.getElementById('nlTelephone').value;
-    var cbName = 'nlCB_' + Date.now();
-    window[cbName] = function(response) {
-        delete window[cbName];
-        var s = document.getElementById('nlScript');
-        if (s) s.remove();
-        if (response.status === 'success') {
-            document.getElementById('newsletterForm').style.display = 'none';
-            msgDiv.className = 'newsletter-message success';
-            msgDiv.style.display = 'block';
-            msgDiv.innerHTML = '<div style="font-size:2.5rem;margin-bottom:15px;">\u2705</div><strong>Merci ' + prenom + ' !</strong><br>Vous \u00eates bien inscrit(e) \u00e0 notre newsletter.<br>Vous participez d\u00e9sormais \u00e0 nos tirages au sort hebdomadaires !';
-            localStorage.setItem('leadCaptured', 'true');
-            return;
+            var sc = document.createElement('script');
+            sc.id = 'nlScript';
+            sc.src = APPS_SCRIPT_URL + '?' + params;
+            sc.onerror = function() {
+                delete window[cbName];
+                sc.remove();
+                btn.querySelector('span').textContent = 'Je m\'inscris au tirage !';
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                alert('Erreur de connexion. Veuillez réessayer.');
+            };
+            document.body.appendChild(sc);
         }
-        if (response.status === 'duplicate') {
-            msgDiv.className = 'newsletter-message error';
-            msgDiv.style.display = 'block';
-            if (response.field === 'email') {
-                msgDiv.textContent = 'Cet email est d\u00e9j\u00e0 inscrit.';
-            } else if (response.field === 'telephone') {
-                msgDiv.textContent = 'Ce num\u00e9ro est d\u00e9j\u00e0 inscrit.';
-            } else {
-                msgDiv.textContent = 'Vous \u00eates d\u00e9j\u00e0 inscrit(e).';
-            }
-            btn.querySelector('span').textContent = 'Je participe au tirage !';
-            btn.disabled = false;
-            btn.style.opacity = '1';
-            return;
-        }
-        btn.querySelector('span').textContent = 'Je participe au tirage !';
-        btn.disabled = false;
-        btn.style.opacity = '1';
-        alert('Une erreur est survenue. Veuillez r\u00e9essayer.');
-    };
-    var params = 'action=register'
-        + '&prenom=' + encodeURIComponent(prenom)
-        + '&email=' + encodeURIComponent(email)
-        + '&telephone=' + encodeURIComponent(telephone)
-        + '&code=' + encodeURIComponent(window._uniquePromoCode || 'NL')
-        + '&source=newsletter-section'
-        + '&fingerprint=' + encodeURIComponent(getFingerprint())
-        + '&ip=' + encodeURIComponent(userIP)
-        + '&cookieId=' + encodeURIComponent(getCookieId())
-        + '&callback=' + cbName;
-    var sc = document.createElement('script');
-    sc.id = 'nlScript';
-    sc.src = APPS_SCRIPT_URL + '?' + params;
-    sc.onerror = function() {
-        delete window[cbName];
-        sc.remove();
-        btn.querySelector('span').textContent = 'Je participe au tirage !';
-        btn.disabled = false;
-        btn.style.opacity = '1';
-        alert('Erreur de connexion. Veuillez r\u00e9essayer.');
-    };
-    document.body.appendChild(sc);
-}
-</script>
+    </script>
 </body>
 </html>
