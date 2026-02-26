@@ -1097,8 +1097,8 @@
             <div class="popup-content">
                 <div id="lead-form-section">
                     <div class="popup-icon">🎁</div>
-                    <h2 class="popup-title">-5% sur votre addition !</h2>
-                    <p class="popup-subtitle">Inscrivez-vous à la newsletter pour recevoir votre code promo exclusif.</p>
+                    <h2 class="popup-title">Tentez votre chance !</h2>
+                    <p class="popup-subtitle">Chaque semaine, nous tirons au sort un gagnant parmi nos inscrits. Inscrivez-vous à notre newsletter pour participer !</p>
                     <form id="leadForm" onsubmit="submitLead(event)" style="text-align:left;margin-top:20px;">
                         <input type="text" id="leadPrenom" placeholder="Votre prénom" required style="width:100%;padding:12px 16px;margin-bottom:10px;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;border-radius:0;">
                         <input type="email" id="leadEmail" placeholder="Votre email" required style="width:100%;padding:12px 16px;margin-bottom:10px;border:1px solid var(--border);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;border-radius:0;">
@@ -1109,7 +1109,7 @@
                         </label>
                         <div class="popup-cta-wrapper">
                             <button type="submit" class="popup-cta" id="leadSubmitBtn">
-                                <span>Je récupère mon -5%</span>
+                                <span>Je participe au tirage !</span>
                             </button>
                         </div>
                     </form>
@@ -1341,7 +1341,7 @@
 
     <!-- MENTION LEGALE -->
     <div style="text-align:center;padding:8px 20px;opacity:0.6;font-size:11px;color:#666;">
-                    Offre -5% soumise à conditions. Vos données sont collectées conformément au RGPD pour des communications marketing. Durée de conservation : 3 ans. <a href="privacy-policy.html" style="color:#D4AF37;text-decoration:underline;">Politique de confidentialité</a>
+                    Tirage au sort hebdomadaire soumis à conditions. Vos données sont collectées conformément au RGPD pour des communications marketing. Durée de conservation : 3 ans. <a href="privacy-policy.html" style="color:#D4AF37;text-decoration:underline;">Politique de confidentialité</a>
     </div>
 
     <!-- COPYRIGHT -->
@@ -1435,7 +1435,7 @@
                     document.getElementById('skipPopup').style.display = 'none';
                 } else if (response.status === 'duplicate') {
                     // Doublon => afficher un message d'erreur
-                    btn.querySelector('span').textContent = 'Je recupere mon -5%';
+                    btn.querySelector('span').textContent = 'Je participe au tirage !';
                     btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
                     var errorMsg = document.getElementById('leadErrorMsg');
                     if (!errorMsg) {
@@ -1452,7 +1452,7 @@
                         errorMsg.textContent = 'Vous avez deja beneficie de cette offre.';
                     }
                 } else {
-                    btn.querySelector('span').textContent = 'Je recupere mon -5%';
+                    btn.querySelector('span').textContent = 'Je participe au tirage !';
                     btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
                     alert('Une erreur est survenue. Veuillez reessayer.');
                 }
@@ -1475,7 +1475,7 @@
             script.onerror = function() {
                 delete window[callbackName];
                 script.remove();
-                btn.querySelector('span').textContent = 'Je recupere mon -5%';
+                btn.querySelector('span').textContent = 'Je participe au tirage !';
                 btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
                 alert('Erreur de connexion. Veuillez reessayer.');
             };
@@ -1669,5 +1669,101 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
         }
     }
     </script>
+
+    <script>
+// === OVERRIDE: Popup newsletter concours - pas de timer, pas de code promo ===
+(function() {
+    // Cacher les sections timer et code promo
+    var successSection = document.getElementById('lead-success-section');
+    var codeSection = document.getElementById('code-revealed-section');
+    
+    // Override submitLead pour simplifier le comportement apres inscription
+    var originalSubmitLead = window.submitLead;
+    window.submitLead = function(e) {
+        e.preventDefault();
+        var btn = document.getElementById('leadSubmitBtn');
+        btn.disabled = true;
+        btn.querySelector('span').textContent = 'CHARGEMENT...';
+        btn.style.opacity = '0.7';
+        btn.style.cursor = 'wait';
+        var prenom = document.getElementById('leadPrenom').value;
+        var email = document.getElementById('leadEmail').value;
+        var telephone = document.getElementById('leadTelephone').value;
+        var callbackName = 'leadCallback_' + Date.now();
+        window[callbackName] = function(response) {
+            delete window[callbackName];
+            var scriptTag = document.getElementById('leadScript');
+            if (scriptTag) scriptTag.remove();
+            if (response.status === 'success') {
+                localStorage.setItem('leadCaptured', 'true');
+                // Afficher message de confirmation simple
+                var formSection = document.getElementById('lead-form-section');
+                formSection.innerHTML = '<div style="text-align:center;padding:40px 20px;">' +
+                    '<div style="font-size:3rem;margin-bottom:20px;">\u2705</div>' +
+                    '<h2 class="popup-title" style="color:#27ae60;">Merci ' + prenom + ' !</h2>' +
+                    '<p class="popup-subtitle">Vous \u00eates bien inscrit(e) \u00e0 notre newsletter.<br>Vous participez d\u00e9sormais \u00e0 nos tirages au sort hebdomadaires !</p>' +
+                    '</div>';
+                document.getElementById('skipPopup').style.display = 'none';
+                // Fermer le popup apres 3 secondes
+                setTimeout(function() {
+                    document.getElementById('reviewPopup').classList.remove('active');
+                    document.body.style.overflow = '';
+                }, 3000);
+            } else if (response.status === 'duplicate') {
+                btn.querySelector('span').textContent = 'Je participe au tirage !';
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+                var errorMsg = document.getElementById('leadErrorMsg');
+                if (!errorMsg) {
+                    errorMsg = document.createElement('p');
+                    errorMsg.id = 'leadErrorMsg';
+                    errorMsg.style.cssText = 'color:#e74c3c;font-size:0.85rem;margin-top:10px;text-align:center;';
+                    document.getElementById('leadForm').appendChild(errorMsg);
+                }
+                if (response.field === 'email') {
+                    errorMsg.textContent = 'Cet email est d\u00e9j\u00e0 inscrit \u00e0 notre newsletter.';
+                } else if (response.field === 'telephone') {
+                    errorMsg.textContent = 'Ce num\u00e9ro est d\u00e9j\u00e0 inscrit.';
+                } else {
+                    errorMsg.textContent = 'Vous \u00eates d\u00e9j\u00e0 inscrit(e) \u00e0 notre newsletter.';
+                }
+            } else {
+                btn.querySelector('span').textContent = 'Je participe au tirage !';
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+                alert('Une erreur est survenue. Veuillez reessayer.');
+            }
+        };
+        var params = 'action=register' +
+            '&prenom=' + encodeURIComponent(prenom) +
+            '&email=' + encodeURIComponent(email) +
+            '&telephone=' + encodeURIComponent(telephone) +
+            '&code=NEWSLETTER' +
+            '&source=popup-concours' +
+            '&fingerprint=' + encodeURIComponent(getFingerprint()) +
+            '&ip=' + encodeURIComponent(userIP) +
+            '&cookieId=' + encodeURIComponent(getCookieId()) +
+            '&callback=' + callbackName;
+        var script = document.createElement('script');
+        script.id = 'leadScript';
+        script.src = APPS_SCRIPT_URL + '?' + params;
+        script.onerror = function() {
+            delete window[callbackName];
+            script.remove();
+            btn.querySelector('span').textContent = 'Je participe au tirage !';
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            btn.style.cursor = 'pointer';
+            alert('Erreur de connexion. Veuillez reessayer.');
+        };
+        document.body.appendChild(script);
+    };
+    // Cacher les sections inutiles (timer, code promo)
+    if (successSection) successSection.style.display = 'none !important';
+    if (codeSection) codeSection.style.display = 'none !important';
+})();
+</script>
 </body>
 </html>
