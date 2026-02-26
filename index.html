@@ -1648,6 +1648,26 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
     if (reviewOverlay) reviewOverlay.style.display = 'none';
     // Override openReviewPopup to just open Google directly
     window.openReviewPopup = function(url) { window.open(url, '_blank'); };
+                // Override: bouton PARTAGER MON EXPERIENCE => section restaurants
+    var reviewForCodeBtn = document.getElementById('reviewForCodeBtn');
+    if (reviewForCodeBtn) {
+        reviewForCodeBtn.replaceWith(reviewForCodeBtn.cloneNode(true));
+        var newBtn = document.getElementById('reviewForCodeBtn');
+        if (newBtn) {
+            newBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('reviewPopup').classList.remove('active');
+                document.body.style.overflow = '';
+                var restSection = document.getElementById('restaurants');
+                if (restSection) {
+                    restSection.classList.add('visible');
+                    setTimeout(function() {
+                        restSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                }
+            });
+        }
+    }
     </script>
 </body>
 </html>
