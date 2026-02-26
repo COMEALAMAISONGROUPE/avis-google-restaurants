@@ -1636,5 +1636,18 @@ if (new URLSearchParams(window.location.search).get('reset') === 'true') { local
         }
         window.promoEmailSent = function() {}; /* ========== REVIEW POPUP ========== */ var currentReviewUrl = ''; var selectedStars = 0; function openReviewPopup(url) { currentReviewUrl = url; selectedStars = 0; document.querySelectorAll('.review-iframe-star').forEach(function(s) { s.classList.remove('active'); s.style.filter = ''; s.style.opacity = ''; }); document.getElementById('reviewTextarea').value = ''; document.getElementById('reviewIframeOverlay').classList.add('active'); document.body.style.overflow = 'hidden'; } function closeReviewPopup() { document.getElementById('reviewIframeOverlay').classList.remove('active'); document.body.style.overflow = ''; } document.getElementById('reviewIframeClose').addEventListener('click', closeReviewPopup); document.getElementById('reviewIframeOverlay').addEventListener('click', function(e) { if (e.target === this) closeReviewPopup(); }); document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && document.getElementById('reviewIframeOverlay').classList.contains('active')) { closeReviewPopup(); } }); /* Star rating */ document.querySelectorAll('.review-iframe-star').forEach(function(star) { star.addEventListener('click', function() { selectedStars = parseInt(this.getAttribute('data-star')); document.querySelectorAll('.review-iframe-star').forEach(function(s, i) { if (i < selectedStars) { s.classList.add('active'); } else { s.classList.remove('active'); } }); }); star.addEventListener('mouseenter', function() { var val = parseInt(this.getAttribute('data-star')); document.querySelectorAll('.review-iframe-star').forEach(function(s, i) { if (i < val) { s.style.filter = 'grayscale(0)'; s.style.opacity = '1'; } else { s.style.filter = ''; s.style.opacity = ''; } }); }); star.addEventListener('mouseleave', function() { document.querySelectorAll('.review-iframe-star').forEach(function(s, i) { if (!s.classList.contains('active')) { s.style.filter = ''; s.style.opacity = ''; } }); }); }); function submitReviewPopup() { if (selectedStars === 0) { alert('Veuillez selectionner une note'); return; } window.open(currentReviewUrl, '_blank'); closeReviewPopup(); } function openGoogleReviewDirect(e) { e.preventDefault(); window.open(currentReviewUrl, '_blank'); closeReviewPopup(); } /* Intercept all review-btn-secondary clicks to open popup */ document.querySelectorAll('.review-btn-secondary').forEach(function(link) { link.addEventListener('click', function(e) { e.preventDefault(); var url = this.getAttribute('href'); if (url && url.indexOf('writereview') !== -1) { openReviewPopup(url); } }); });
     </script>
+        <script>
+    // Override: remove review popup, redirect directly to Google
+    document.querySelectorAll('.review-btn-secondary').forEach(function(link) {
+        link.replaceWith(link.cloneNode(true));
+    });
+    document.querySelectorAll('.review-btn-secondary').forEach(function(link) {
+        link.setAttribute('target', '_blank');
+    });
+    var reviewOverlay = document.getElementById('reviewIframeOverlay');
+    if (reviewOverlay) reviewOverlay.style.display = 'none';
+    // Override openReviewPopup to just open Google directly
+    window.openReviewPopup = function(url) { window.open(url, '_blank'); };
+    </script>
 </body>
 </html>
