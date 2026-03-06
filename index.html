@@ -106,7 +106,8 @@
         .review-btn-secondary { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 15px 28px; background: transparent; color: var(--black); border: 1px solid var(--border); font-family: 'Inter',sans-serif; font-size: 0.75rem; font-weight: 500; letter-spacing: 1.5px; text-decoration: none; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; }
         .review-btn-secondary:hover { border-color: var(--black); }
         /* NEWSLETTER SECTION */
-        .newsletter-section { padding: 80px 25px; background: var(--black); color: var(--white); text-align: center; }
+        .newsletter-section { padding: 80px 25px; background: var(--black); color: var(--white); text-align: center; display: none; animation: fadeIn 0.5s ease; }
+        .newsletter-section.visible { display: block; }
         .newsletter-container { max-width: 600px; margin: 0 auto; }
         .newsletter-icon { font-size: 3rem; margin-bottom: 20px; animation: floatGently 3s ease-in-out infinite; display: block; }
         .newsletter-title { font-family: 'Crimson Text', serif; font-size: clamp(1.8rem,5vw,2.8rem); font-weight: 500; margin-bottom: 15px; color: var(--white); letter-spacing: -0.5px; }
@@ -456,12 +457,9 @@
         // Bouton popup CTA => scroll vers la section newsletter
         popupCta.addEventListener('click', function() {
             closePopup();
-            var nlSection = document.getElementById('newsletter');
-            if (nlSection) {
-                setTimeout(function() {
-                    nlSection.scrollIntoView({ behavior: 'smooth' });
-                }, 300);
-            }
+            setTimeout(function() {
+                showNewsletter();
+            }, 300);
         });
 
         // Bouton hero PARTAGER MON EXPERIENCE => show restaurants
@@ -477,6 +475,18 @@
             }, 100);
         }
 
+        // Bouton hero M'INSCRIRE A LA NEWSLETTER => show newsletter
+        var newsletterSection = document.getElementById('newsletter');
+
+        function showNewsletter() {
+            newsletterSection.classList.add('visible');
+            setTimeout(function() {
+                var isMobile = window.innerWidth <= 768;
+                var offset = isMobile ? 10 : 20;
+                window.scrollTo({ top: newsletterSection.offsetTop - offset, behavior: 'smooth' });
+            }, 100);
+        }
+
         mainCta.addEventListener('click', function(e) {
             e.preventDefault();
             showRestaurants();
@@ -486,15 +496,17 @@
         var secondaryCta = document.getElementById('secondaryCta');
         secondaryCta.addEventListener('click', function(e) {
             e.preventDefault();
-            var nlSection = document.getElementById('newsletter');
-            if (nlSection) {
-                nlSection.scrollIntoView({ behavior: 'smooth' });
-            }
+            showNewsletter();
         });
 
         // Liens #restaurants dans la page
         document.querySelectorAll('a[href="#restaurants"]').forEach(function(link) {
             link.addEventListener('click', function(e) { e.preventDefault(); showRestaurants(); });
+        });
+
+        // Liens #newsletter dans la page
+        document.querySelectorAll('a[href="#newsletter"]').forEach(function(link) {
+            link.addEventListener('click', function(e) { e.preventDefault(); showNewsletter(); });
         });
 
         // Scroll to Top
