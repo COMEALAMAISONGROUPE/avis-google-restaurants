@@ -106,21 +106,21 @@
         .review-btn-secondary { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 15px 28px; background: transparent; color: var(--black); border: 1px solid var(--border); font-family: 'Inter',sans-serif; font-size: 0.75rem; font-weight: 500; letter-spacing: 1.5px; text-decoration: none; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; }
         .review-btn-secondary:hover { border-color: var(--black); }
         /* NEWSLETTER SECTION */
-        .newsletter-section { padding: 80px 25px; background: var(--black); color: var(--white); text-align: center; display: none; animation: fadeIn 0.5s ease; }
+        .newsletter-section { padding: 80px 25px; background: var(--gray-light); color: var(--black); text-align: center; display: none; animation: fadeIn 0.5s ease; }
         .newsletter-section.visible { display: block; }
         .newsletter-container { max-width: 600px; margin: 0 auto; }
         .newsletter-icon { font-size: 3rem; margin-bottom: 20px; animation: floatGently 3s ease-in-out infinite; display: block; }
-        .newsletter-title { font-family: 'Crimson Text', serif; font-size: clamp(1.8rem,5vw,2.8rem); font-weight: 500; margin-bottom: 15px; color: var(--white); letter-spacing: -0.5px; }
-        .newsletter-subtitle { font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 35px; font-weight: 300; }
+        .newsletter-title { font-family: 'Crimson Text', serif; font-size: clamp(1.8rem,5vw,2.8rem); font-weight: 500; margin-bottom: 15px; color: var(--black); letter-spacing: -0.5px; }
+        .newsletter-subtitle { font-size: 0.95rem; color: var(--gray-medium); line-height: 1.7; margin-bottom: 35px; font-weight: 300; }
         .newsletter-form { max-width: 450px; margin: 0 auto; }
         .newsletter-fields { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
-        .newsletter-fields input { width: 100%; padding: 14px 18px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: var(--white); font-family: 'Inter',sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.3s; }
-        .newsletter-fields input::placeholder { color: rgba(255,255,255,0.4); }
+        .newsletter-fields input { width: 100%; padding: 14px 18px; border: 1px solid var(--border); background: var(--white); color: var(--black); font-family: 'Inter',sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.3s; }
+        .newsletter-fields input::placeholder { color: var(--gray-medium); }
         .newsletter-fields input:focus { border-color: var(--accent-gold); }
         .newsletter-rgpd { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; text-align: left; }
-        .newsletter-rgpd label { font-size: 0.78rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
-        .newsletter-btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 17px 40px; background: var(--white); color: var(--black); border: 1px solid var(--white); font-family: 'Inter',sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; }
-        .newsletter-btn:hover { background: transparent; color: var(--white); }
+        .newsletter-rgpd label { font-size: 0.78rem; color: var(--gray-medium); line-height: 1.5; }
+        .newsletter-btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 17px 40px; background: var(--black); color: var(--white); border: 1px solid var(--black); font-family: 'Inter',sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; }
+        .newsletter-btn:hover { background: transparent; color: var(--black); }
         .newsletter-message { margin-top: 20px; padding: 20px; text-align: center; font-size: 0.95rem; line-height: 1.6; display: none; }
         .newsletter-message.success { color: #4ade80; }
         .newsletter-message.error { color: #f87171; }
@@ -135,6 +135,8 @@
         .footer-section a:hover { color: var(--white); transform: translateX(3px); }
         .footer-bottom { text-align: center; }
         .footer-bottom p { color: rgba(255,255,255,0.4); font-size: 0.8rem; font-weight: 300; }
+        .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; transition: all 0.3s ease; }
+        .footer-bottom a:hover { color: var(--white); }
         .scroll-to-top { position: fixed; bottom: 25px; right: 25px; width: 48px; height: 48px; background: var(--black); color: var(--white); border: 1px solid var(--black); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000; }
         .scroll-to-top.visible { opacity: 1; visibility: visible; }
         .scroll-to-top:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
@@ -360,7 +362,7 @@
                 </div>
                 <div class="newsletter-rgpd">
                     <input type="checkbox" id="nlRgpd" required style="margin-top:2px;flex-shrink:0">
-                    <label for="nlRgpd">J'accepte de recevoir des offres par email et SMS. Désinscription possible à tout moment. <a href="privacy-policy.html" style="color:rgba(255,255,255,0.6)">Politique de confidentialité</a></label>
+                    <label for="nlRgpd">J'accepte de recevoir des offres par email et SMS. Désinscription possible à tout moment. <a href="privacy-policy.html" style="color:var(--accent-gold)">Politique de confidentialité</a></label>
                 </div>
                 <button type="submit" class="newsletter-btn" id="nlSubmitBtn"><span>Je m'inscris au tirage !</span></button>
             </form>
