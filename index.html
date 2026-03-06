@@ -48,6 +48,14 @@
         .popup-cta:hover { background: transparent; color: var(--black); }
         .popup-secondary { display: block; margin-top: 14px; padding: 8px; font-size: 0.85rem; color: var(--gray-medium); cursor: pointer; transition: color 0.3s ease; }
         .popup-secondary:hover { color: var(--black); }
+                /* POPUP - BOUTONS PARTAGER & DIVIDER */
+        .popup-cta-share { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 19px 40px; background: linear-gradient(135deg, #C5A572, #D4B896); color: #fff; border: none; border-radius: 2px; font-family: 'Inter',sans-serif; font-size: 0.88rem; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; cursor: pointer; transition: all 0.4s ease; text-decoration: none; box-shadow: 0 4px 18px rgba(197,165,114,0.45); animation: pulseGold 2.5s ease-in-out infinite; }
+        .popup-cta-share:hover { background: linear-gradient(135deg, #B8956A, #C5A572); transform: translateY(-2px); box-shadow: 0 6px 25px rgba(197,165,114,0.55); }
+        @keyframes pulseGold { 0%,100% { box-shadow: 0 4px 18px rgba(197,165,114,0.45); } 50% { box-shadow: 0 4px 30px rgba(197,165,114,0.7); } }
+        .popup-timer { display: block; text-align: center; font-size: 0.78rem; color: var(--gray-medium); margin-top: 10px; letter-spacing: 0.5px; font-weight: 300; font-style: italic; }
+        .popup-divider { display: flex; align-items: center; gap: 15px; margin: 18px 0; color: var(--gray-medium); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; }
+        .popup-divider::before, .popup-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+        .popup-highlight-bottom { margin-top: 18px; margin-bottom: 0; opacity: 0.85; font-size: 0.82rem; }
         /* HERO */
         .hero { margin-top: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 40px 20px; }
         .hero::before { content: ''; position: absolute; inset: 0; background-image: url('Severin.jpg'); background-size: cover; background-position: center; z-index: 0; filter: brightness(0.8) grayscale(0.1); }
@@ -178,15 +186,18 @@
             <div class="popup-header-decoration"></div>
             <button class="popup-close" id="closePopup" aria-label="Fermer"></button>
             <div class="popup-content">
-                <div class="popup-icon">🎁</div>
-                <h2 class="popup-title">Bonne nouvelle !</h2>
-                <p class="popup-subtitle">En vous inscrivant à notre newsletter, vous participez automatiquement à nos <strong>tirages au sort hebdomadaires</strong>.</p>
-                <div class="popup-highlight">
-                    <span style="font-size:1.4rem;flex-shrink:0">🏆</span>
-                    <span>Chaque semaine, nous offrons des repas, réductions et cadeaux à nos abonnés !</span>
-                </div>
-                <button class="popup-cta" id="popupCta">📧  M'inscrire à la newsletter</button>
+                <div class="popup-icon">✨</div>
+                <h2 class="popup-title">À vous de jouer !</h2>
+                <p class="popup-subtitle">Votre expérience inspire notre communauté.<br>Un simple avis peut faire toute la différence.</p>
+                <a href="#restaurants" class="popup-cta-share" id="popupShareCta" onclick="document.getElementById('reviewPopup').classList.remove('active');document.body.style.overflow='auto';">⭐  Partager mon expérience</a>
+                <span class="popup-timer">30 secondes</span>
+                <div class="popup-divider"><span>et/ou</span></div>
+                <button class="popup-cta" id="popupCta">📧  M’inscrire à la newsletter</button>
                 <a class="popup-secondary" id="skipPopup" href="#">Peut-être plus tard</a>
+                <div class="popup-highlight popup-highlight-bottom">
+                    <span style="font-size:1.4rem;flex-shrink:0">🎁</span>
+                    <span>Chaque semaine, nous offrons des repas, réductions et cadeaux à nos clients fidèles !</span>
+                </div>
             </div>
         </div>
     </div>
